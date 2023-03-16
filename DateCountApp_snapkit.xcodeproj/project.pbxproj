@@ -1,0 +1,407 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		00BFE7EB29C329F900C279FD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BFE7EA29C329F900C279FD /* AppDelegate.swift */; };
+		00BFE7ED29C329F900C279FD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BFE7EC29C329F900C279FD /* SceneDelegate.swift */; };
+		00BFE7EF29C329F900C279FD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BFE7EE29C329F900C279FD /* ViewController.swift */; };
+		00BFE7F429C329FB00C279FD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 00BFE7F329C329FB00C279FD /* Assets.xcassets */; };
+		00BFE7F729C329FB00C279FD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 00BFE7F529C329FB00C279FD /* LaunchScreen.storyboard */; };
+		00BFE7FF29C3377D00C279FD /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BFE7FE29C3377D00C279FD /* LoginVC.swift */; };
+		DF2959A34F147E70CC85E719 /* libPods-DateCountApp_snapkit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 42073FBC95E00FA1C06CF06F /* libPods-DateCountApp_snapkit.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		00BFE7E729C329F900C279FD /* DateCountApp_snapkit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DateCountApp_snapkit.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		00BFE7EA29C329F900C279FD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		00BFE7EC29C329F900C279FD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		00BFE7EE29C329F900C279FD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		00BFE7F329C329FB00C279FD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		00BFE7F629C329FB00C279FD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		00BFE7F829C329FB00C279FD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		00BFE7FE29C3377D00C279FD /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
+		1D92F8D0A6991CDFE98FC893 /* Pods-DateCountApp_snapkit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DateCountApp_snapkit.release.xcconfig"; path = "Target Support Files/Pods-DateCountApp_snapkit/Pods-DateCountApp_snapkit.release.xcconfig"; sourceTree = "<group>"; };
+		42073FBC95E00FA1C06CF06F /* libPods-DateCountApp_snapkit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DateCountApp_snapkit.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6493818DC1D5FD8BF1F7EDA1 /* Pods-DateCountApp_snapkit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DateCountApp_snapkit.debug.xcconfig"; path = "Target Support Files/Pods-DateCountApp_snapkit/Pods-DateCountApp_snapkit.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		00BFE7E429C329F900C279FD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DF2959A34F147E70CC85E719 /* libPods-DateCountApp_snapkit.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		00BFE7DE29C329F900C279FD = {
+			isa = PBXGroup;
+			children = (
+				00BFE7E929C329F900C279FD /* DateCountApp_snapkit */,
+				00BFE7E829C329F900C279FD /* Products */,
+				49C6227438E1A9D9EF5E27C8 /* Pods */,
+				65AD847CB551737E10CA7AB5 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		00BFE7E829C329F900C279FD /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				00BFE7E729C329F900C279FD /* DateCountApp_snapkit.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		00BFE7E929C329F900C279FD /* DateCountApp_snapkit */ = {
+			isa = PBXGroup;
+			children = (
+				00BFE7EA29C329F900C279FD /* AppDelegate.swift */,
+				00BFE7EC29C329F900C279FD /* SceneDelegate.swift */,
+				00BFE7EE29C329F900C279FD /* ViewController.swift */,
+				00BFE7F329C329FB00C279FD /* Assets.xcassets */,
+				00BFE7F529C329FB00C279FD /* LaunchScreen.storyboard */,
+				00BFE7F829C329FB00C279FD /* Info.plist */,
+				00BFE7FE29C3377D00C279FD /* LoginVC.swift */,
+			);
+			path = DateCountApp_snapkit;
+			sourceTree = "<group>";
+		};
+		49C6227438E1A9D9EF5E27C8 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				6493818DC1D5FD8BF1F7EDA1 /* Pods-DateCountApp_snapkit.debug.xcconfig */,
+				1D92F8D0A6991CDFE98FC893 /* Pods-DateCountApp_snapkit.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		65AD847CB551737E10CA7AB5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				42073FBC95E00FA1C06CF06F /* libPods-DateCountApp_snapkit.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		00BFE7E629C329F900C279FD /* DateCountApp_snapkit */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 00BFE7FB29C329FB00C279FD /* Build configuration list for PBXNativeTarget "DateCountApp_snapkit" */;
+			buildPhases = (
+				EDFB4C02D82499879CE4C788 /* [CP] Check Pods Manifest.lock */,
+				00BFE7E329C329F900C279FD /* Sources */,
+				00BFE7E429C329F900C279FD /* Frameworks */,
+				00BFE7E529C329F900C279FD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DateCountApp_snapkit;
+			productName = DateCountApp_snapkit;
+			productReference = 00BFE7E729C329F900C279FD /* DateCountApp_snapkit.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		00BFE7DF29C329F900C279FD /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1420;
+				LastUpgradeCheck = 1420;
+				TargetAttributes = {
+					00BFE7E629C329F900C279FD = {
+						CreatedOnToolsVersion = 14.2;
+					};
+				};
+			};
+			buildConfigurationList = 00BFE7E229C329F900C279FD /* Build configuration list for PBXProject "DateCountApp_snapkit" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 00BFE7DE29C329F900C279FD;
+			productRefGroup = 00BFE7E829C329F900C279FD /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				00BFE7E629C329F900C279FD /* DateCountApp_snapkit */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		00BFE7E529C329F900C279FD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				00BFE7F729C329FB00C279FD /* LaunchScreen.storyboard in Resources */,
+				00BFE7F429C329FB00C279FD /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		EDFB4C02D82499879CE4C788 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-DateCountApp_snapkit-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		00BFE7E329C329F900C279FD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				00BFE7EF29C329F900C279FD /* ViewController.swift in Sources */,
+				00BFE7EB29C329F900C279FD /* AppDelegate.swift in Sources */,
+				00BFE7FF29C3377D00C279FD /* LoginVC.swift in Sources */,
+				00BFE7ED29C329F900C279FD /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		00BFE7F529C329FB00C279FD /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				00BFE7F629C329FB00C279FD /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		00BFE7F929C329FB00C279FD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		00BFE7FA29C329FB00C279FD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		00BFE7FC29C329FB00C279FD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6493818DC1D5FD8BF1F7EDA1 /* Pods-DateCountApp_snapkit.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 56F34CN49K;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = DateCountApp_snapkit/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.DateCountApp-snapkit";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		00BFE7FD29C329FB00C279FD /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1D92F8D0A6991CDFE98FC893 /* Pods-DateCountApp_snapkit.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 56F34CN49K;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = DateCountApp_snapkit/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.DateCountApp-snapkit";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		00BFE7E229C329F900C279FD /* Build configuration list for PBXProject "DateCountApp_snapkit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				00BFE7F929C329FB00C279FD /* Debug */,
+				00BFE7FA29C329FB00C279FD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		00BFE7FB29C329FB00C279FD /* Build configuration list for PBXNativeTarget "DateCountApp_snapkit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				00BFE7FC29C329FB00C279FD /* Debug */,
+				00BFE7FD29C329FB00C279FD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 00BFE7DF29C329F900C279FD /* Project object */;
+}
