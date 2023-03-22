@@ -5,14 +5,12 @@ import SnapKit
 class LoginVC: UIViewController {
     
     private let containerview = UIView()
-    
     private var idField = UITextField()
     private var passField = UITextField()
     private var loginLabel = UILabel()
     private var subLabel = UILabel()
     private let loginButton = UIButton()
     private let signUpButton = UIButton()
-    
     private var scrollView = UIScrollView()
     
     private func setLayout(){
@@ -43,7 +41,7 @@ class LoginVC: UIViewController {
         loginLabel.font = .boldSystemFont(ofSize: 40)
         loginLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(containerview.snp.top).inset(20)
+            make.top.equalTo(containerview.snp.top).inset(50)
             make.left.equalTo(containerview.snp.left).inset(30)
         }
         
@@ -91,22 +89,25 @@ class LoginVC: UIViewController {
         signUpButton.setTitleColor(.blue, for: .normal)
         signUpButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(loginButton.snp.bottom).offset(250)
+            make.top.equalTo(loginButton.snp.bottom).offset(40)
             make.left.equalTo(containerview.snp.left).offset(20)
-            make.bottom.equalTo(containerview).offset(10)
+            make.bottom.equalTo(containerview).offset(0)
             
         }
         
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        //현재뷰(자신) 에게 노티피케이션 할당.
-        //그떄 호출할 함수는 keyboardWillShow
-        //이 노티피케이션의 이름은 ...? 이건뭐지....
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        setNotificationKeyboard()
         setLayout()
+    }
+    
+    //현재뷰(자신) 에게 노티피케이션 할당.
+    //그떄 호출할 함수는 keyboardWillShow
+    //이 노티피케이션의 이름은 ...? 이건뭐지....
+    private func setNotificationKeyboard(){
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -118,22 +119,29 @@ class LoginVC: UIViewController {
     
     @objc private func keyboardWillShow(_ notification: Notification) {
         //이 아래코드가 뭘까... userInfo가 갑자기 왜나오는거지...?
-        guard let userInfo = notification.userInfo, let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else {
-                return
+        //bottom에 두니깐 하단부에 키보드 크기만큼 공간을 늘려버리는 느낌
+        //만약 top에 keyboard사이즈를 넣어버리면,상단에 키보드크기만큼 공간이 늘어남.
+        
+        guard let userInfo = notification.userInfo,
+              let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else {
+            return
         }
         
-        let contentInset = UIEdgeInsets(
-            top: 0.0,
-            left: 0.0,
-            bottom: keyboardFrame.size.height,
-            right: 0.0)
-        scrollView.contentInset = contentInset
-        scrollView.scrollIndicatorInsets = contentInset
+        scrollView.contentInset.bottom = keyboardFrame.size.height
+        
+        //@@@@@@@@@@@@@ 이게 뭘말하는건지 모르겠다.
+        let firstResponder = UIResponder.currentFirstResponder
+        
+        if let textView = firstResponder as? UITextView {
+            scrollView.scrollRectToVisible(textView.frame, animated: true)
+        }
+        
     }
     @objc private func keyboardWillHide() {
         let contentInset = UIEdgeInsets.zero
         scrollView.contentInset = contentInset
         scrollView.scrollIndicatorInsets = contentInset
+        
     }
     override func viewDidLoad() {
         super.viewDidLoad()
