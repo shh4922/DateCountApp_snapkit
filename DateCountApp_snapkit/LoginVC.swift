@@ -14,7 +14,12 @@ class LoginVC: UIViewController {
     private var scrollView = UIScrollView()
     
     private func setLayout(){
-        navigationController?.navigationBar.prefersLargeTitles = true
+        //라지 타이틀 추가
+//        navigationController?.navigationBar.prefersLargeTitles = true
+        
+        
+//        self.navigationController?.topViewController?.title = "로그인"
+        self.navigationItem.title = "로그인"
         self.view.backgroundColor = .white
         view.addSubview(scrollView)
     
@@ -79,6 +84,7 @@ class LoginVC: UIViewController {
         loginButton.layer.cornerRadius = 5
         loginButton.setTitle("login", for: .normal)
         loginButton.setTitleColor(.white, for: .normal)
+        
         loginButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalTo(passField.snp.bottom).offset(40)
@@ -87,6 +93,7 @@ class LoginVC: UIViewController {
         
         signUpButton.setTitle("create your account", for: .normal)
         signUpButton.setTitleColor(.blue, for: .normal)
+        signUpButton.addTarget(self, action: #selector(moveToSignup), for: .touchUpInside)
         signUpButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalTo(loginButton.snp.bottom).offset(40)
@@ -100,6 +107,15 @@ class LoginVC: UIViewController {
         super.viewWillAppear(animated)
         setNotificationKeyboard()
         setLayout()
+    }
+    
+    
+    @objc private func moveToSignup(sender : UIButton){
+        //present 방식
+
+        let signUpVC = SignUpVC() //modalTransitionStyle은 원하는 거 선택 <- 검색해서 찾아보세요~
+        //modalPresentationStyle의 다양한 방식이 있으니 검색 ㄱㄱ
+        self.navigationController?.pushViewController(signUpVC, animated: true)
     }
     
     //현재뷰(자신) 에게 노티피케이션 할당.
@@ -123,24 +139,27 @@ class LoginVC: UIViewController {
         //만약 top에 keyboard사이즈를 넣어버리면,상단에 키보드크기만큼 공간이 늘어남.
         
         guard let userInfo = notification.userInfo,
-              let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else {
-            return
+            let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else {
+                return
         }
         
-        scrollView.contentInset.bottom = keyboardFrame.size.height
         
-        //@@@@@@@@@@@@@ 이게 뭘말하는건지 모르겠다.
-        let firstResponder = UIResponder.currentFirstResponder
         
-        if let textView = firstResponder as? UITextView {
-            scrollView.scrollRectToVisible(textView.frame, animated: true)
-        }
+        let contentInset = UIEdgeInsets(
+            top: 0.0,
+            left: 0.0,
+            bottom: keyboardFrame.size.height,
+            right: 0.0)
         
+        scrollView.contentInset = contentInset
+        scrollView.scrollIndicatorInsets = contentInset
     }
+    
     @objc private func keyboardWillHide() {
         let contentInset = UIEdgeInsets.zero
         scrollView.contentInset = contentInset
         scrollView.scrollIndicatorInsets = contentInset
+        
         
     }
     override func viewDidLoad() {

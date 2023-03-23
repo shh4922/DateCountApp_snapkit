@@ -7,16 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		00B45C3229CC29740030CD02 /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B45C3129CC29740030CD02 /* SignUpVC.swift */; };
 		00BFE7EB29C329F900C279FD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BFE7EA29C329F900C279FD /* AppDelegate.swift */; };
 		00BFE7ED29C329F900C279FD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BFE7EC29C329F900C279FD /* SceneDelegate.swift */; };
 		00BFE7EF29C329F900C279FD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BFE7EE29C329F900C279FD /* ViewController.swift */; };
 		00BFE7F429C329FB00C279FD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 00BFE7F329C329FB00C279FD /* Assets.xcassets */; };
 		00BFE7F729C329FB00C279FD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 00BFE7F529C329FB00C279FD /* LaunchScreen.storyboard */; };
 		00BFE7FF29C3377D00C279FD /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BFE7FE29C3377D00C279FD /* LoginVC.swift */; };
+		00D6D10229CC582200725D65 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 00D6D10129CC582200725D65 /* GoogleService-Info.plist */; };
 		DF2959A34F147E70CC85E719 /* libPods-DateCountApp_snapkit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 42073FBC95E00FA1C06CF06F /* libPods-DateCountApp_snapkit.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		00B45C3129CC29740030CD02 /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
 		00BFE7E729C329F900C279FD /* DateCountApp_snapkit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DateCountApp_snapkit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		00BFE7EA29C329F900C279FD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		00BFE7EC29C329F900C279FD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -25,6 +28,7 @@
 		00BFE7F629C329FB00C279FD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		00BFE7F829C329FB00C279FD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00BFE7FE29C3377D00C279FD /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
+		00D6D10129CC582200725D65 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Desktop/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1D92F8D0A6991CDFE98FC893 /* Pods-DateCountApp_snapkit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DateCountApp_snapkit.release.xcconfig"; path = "Target Support Files/Pods-DateCountApp_snapkit/Pods-DateCountApp_snapkit.release.xcconfig"; sourceTree = "<group>"; };
 		42073FBC95E00FA1C06CF06F /* libPods-DateCountApp_snapkit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DateCountApp_snapkit.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6493818DC1D5FD8BF1F7EDA1 /* Pods-DateCountApp_snapkit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DateCountApp_snapkit.debug.xcconfig"; path = "Target Support Files/Pods-DateCountApp_snapkit/Pods-DateCountApp_snapkit.debug.xcconfig"; sourceTree = "<group>"; };
@@ -63,6 +67,7 @@
 		00BFE7E929C329F900C279FD /* DateCountApp_snapkit */ = {
 			isa = PBXGroup;
 			children = (
+				00D6D10129CC582200725D65 /* GoogleService-Info.plist */,
 				00BFE7EA29C329F900C279FD /* AppDelegate.swift */,
 				00BFE7EC29C329F900C279FD /* SceneDelegate.swift */,
 				00BFE7EE29C329F900C279FD /* ViewController.swift */,
@@ -70,6 +75,7 @@
 				00BFE7F529C329FB00C279FD /* LaunchScreen.storyboard */,
 				00BFE7F829C329FB00C279FD /* Info.plist */,
 				00BFE7FE29C3377D00C279FD /* LoginVC.swift */,
+				00B45C3129CC29740030CD02 /* SignUpVC.swift */,
 			);
 			path = DateCountApp_snapkit;
 			sourceTree = "<group>";
@@ -102,6 +108,7 @@
 				00BFE7E329C329F900C279FD /* Sources */,
 				00BFE7E429C329F900C279FD /* Frameworks */,
 				00BFE7E529C329F900C279FD /* Resources */,
+				6410C7B6C949F567F1FD372F /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -152,12 +159,30 @@
 			files = (
 				00BFE7F729C329FB00C279FD /* LaunchScreen.storyboard in Resources */,
 				00BFE7F429C329FB00C279FD /* Assets.xcassets in Resources */,
+				00D6D10229CC582200725D65 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		6410C7B6C949F567F1FD372F /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-DateCountApp_snapkit/Pods-DateCountApp_snapkit-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-DateCountApp_snapkit/Pods-DateCountApp_snapkit-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DateCountApp_snapkit/Pods-DateCountApp_snapkit-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		EDFB4C02D82499879CE4C788 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -190,6 +215,7 @@
 				00BFE7EF29C329F900C279FD /* ViewController.swift in Sources */,
 				00BFE7EB29C329F900C279FD /* AppDelegate.swift in Sources */,
 				00BFE7FF29C3377D00C279FD /* LoginVC.swift in Sources */,
+				00B45C3229CC29740030CD02 /* SignUpVC.swift in Sources */,
 				00BFE7ED29C329F900C279FD /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -258,7 +284,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -312,7 +338,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
