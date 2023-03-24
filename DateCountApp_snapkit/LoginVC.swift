@@ -108,36 +108,46 @@ class LoginVC: UIViewController {
         setNotificationKeyboard()
         setLayout()
     }
-    
-    
     @objc private func moveToSignup(sender : UIButton){
-        //present 방식
-
-        let signUpVC = SignUpVC() //modalTransitionStyle은 원하는 거 선택 <- 검색해서 찾아보세요~
-        //modalPresentationStyle의 다양한 방식이 있으니 검색 ㄱㄱ
+        let signUpVC = SignUpVC()
         self.navigationController?.pushViewController(signUpVC, animated: true)
     }
     
-    //현재뷰(자신) 에게 노티피케이션 할당.
-    //그떄 호출할 함수는 keyboardWillShow
-    //이 노티피케이션의 이름은 ...? 이건뭐지....
+    
     private func setNotificationKeyboard(){
+        
+        /**
+         노티피케이션은 수신자는 addObserver, 발신자는 post를 이용해서 이벤트를 감지하는것 같다.
+         하지만 내가사용해야하는것은 UIResponder에서 기본적으로 제공하는 keyboardwillshownotification 이랑 keyboardWillHideNotification 이라서
+         따로 post를 등록안해도 이미 다 등록이 되어있다
+         그냥 수신할곳만 등록을 해주면 된다.
+         그래서 아래와 같이 등록을해주었고, 어떤함수가 호출될때 수행하는지 #selector를 선정해주었다.
+         */
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        //노티피케이션 메모리 올라간것 해제.
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
-    }
+    /**
+     원래는 노티피케이션을 등록시에는 메모리관리를 위해 아래와같이 해제를해주어야하는데
+     ios11 부터였나? 해제안햐줘도 알아서 해준다함. 개편힘..
+     */
+    
+//    override func viewWillDisappear(_ animated: Bool) {
+//        //노티피케이션 메모리 올라간것 해제.
+//        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+//        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+//    }
+    
+    
     
     
     @objc private func keyboardWillShow(_ notification: Notification) {
-        //이 아래코드가 뭘까... userInfo가 갑자기 왜나오는거지...?
-        //bottom에 두니깐 하단부에 키보드 크기만큼 공간을 늘려버리는 느낌
-        //만약 top에 keyboard사이즈를 넣어버리면,상단에 키보드크기만큼 공간이 늘어남.
-        
+        /**
+         아직 하단의 코드는 이해하지못했다.
+         userInfo가 뭔지 잘 모르겠다...
+         지금은 알바가야하니깐 요까지만하고 집가서 다시찾아보고 공부해야겠당
+         */
         guard let userInfo = notification.userInfo,
             let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else {
                 return
