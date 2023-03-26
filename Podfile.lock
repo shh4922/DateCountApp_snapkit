@@ -778,6 +778,7 @@ DEPENDENCIES:
   - Firebase/Core
   - FirebaseAnalytics
   - FirebaseAuth
+  - FirebaseCore
   - FirebaseFirestore
   - GoogleUtilities
   - SnapKit (~> 5.0.0)
@@ -825,6 +826,6 @@ SPEC CHECKSUMS:
   PromisesObjC: 09985d6d70fbe7878040aa746d78236e6946d2ef
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
 
-PODFILE CHECKSUM: ffc9d5f11dacf140eb3fe17a0c4d83562f6e8dd2
+PODFILE CHECKSUM: 77da35ce67bece3921bf94ca70d59c6346a423c4
 
 COCOAPODS: 1.12.0

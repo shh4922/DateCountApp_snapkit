@@ -15,14 +15,12 @@ class LoginVC: UIViewController {
     
     private func setLayout(){
         //라지 타이틀 추가
-//        navigationController?.navigationBar.prefersLargeTitles = true
-        
-        
-//        self.navigationController?.topViewController?.title = "로그인"
+        //    navigationController?.navigationBar.prefersLargeTitles = true
+        //    self.navigationController?.topViewController?.title = "로그인"
         self.navigationItem.title = "로그인"
         self.view.backgroundColor = .white
         view.addSubview(scrollView)
-    
+        
         scrollView.addSubview(containerview)
         containerview.addSubview(loginLabel)
         containerview.addSubview(subLabel)
@@ -32,12 +30,15 @@ class LoginVC: UIViewController {
         containerview.addSubview(signUpButton)
         
         scrollView.snp.makeConstraints { make in
-            make.edges.equalTo(view)
+            //스크롤뷰 상하좌우 모두 세이프에어리어에 맞추기.
+            make.edges.equalTo(view.safeAreaLayoutGuide)
         }
-
+        
         containerview.snp.makeConstraints { make in
-            make.top.bottom.equalTo(scrollView)
-            make.left.right.equalTo(view)
+            //상하좌우를 모두 scrollview에 일단은 맞춤
+            make.top.bottom.left.right.equalTo(scrollView)
+            //좌우는 scrollview와 같게 해야 상.하 로만 스크롤이 가능하기때문에 넓이는 scrollview와 같게맞춤
+            make.width.equalTo(scrollView.snp.width)
         }
         
         loginLabel.textColor = .black
@@ -61,6 +62,8 @@ class LoginVC: UIViewController {
         }
         
         idField.placeholder = "id"
+        idField.textContentType = .emailAddress
+        idField.keyboardType = .emailAddress
         idField.textColor = .black
         idField.backgroundColor = UIColor(named: "textFieldColor")
         idField.layer.cornerRadius = 4
@@ -74,6 +77,9 @@ class LoginVC: UIViewController {
         passField.textColor = .black
         passField.backgroundColor = UIColor(named: "textFieldColor")
         passField.layer.cornerRadius = 4
+        passField.textContentType = .password
+        passField.keyboardType = .default
+        passField.isSecureTextEntry = true
         passField.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalTo(idField.snp.bottom).offset(10)
@@ -105,17 +111,21 @@ class LoginVC: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+    }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
         setNotificationKeyboard()
         setLayout()
     }
+    // 터치가 발생할때 핸들러 캐치
+    
+    
     @objc private func moveToSignup(sender : UIButton){
         let signUpVC = SignUpVC()
         self.navigationController?.pushViewController(signUpVC, animated: true)
     }
-    
-    
     private func setNotificationKeyboard(){
-        
         /**
          노티피케이션은 수신자는 addObserver, 발신자는 post를 이용해서 이벤트를 감지하는것 같다.
          하지만 내가사용해야하는것은 UIResponder에서 기본적으로 제공하는 keyboardwillshownotification 이랑 keyboardWillHideNotification 이라서
@@ -125,88 +135,64 @@ class LoginVC: UIViewController {
          */
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-        
     }
     
-    /**
-     원래는 노티피케이션을 등록시에는 메모리관리를 위해 아래와같이 해제를해주어야하는데
-     ios11 부터였나? 해제안햐줘도 알아서 해준다함. 개편힘..
-     */
-    
-//    override func viewWillDisappear(_ animated: Bool) {
-//        //노티피케이션 메모리 올라간것 해제.
-//        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
-//        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
-//    }
-    
-    
-    
-    
+
     @objc private func keyboardWillShow(_ notification: Notification) {
         /**
          아직 하단의 코드는 이해하지못했다.
          userInfo가 뭔지 잘 모르겠다...
          지금은 알바가야하니깐 요까지만하고 집가서 다시찾아보고 공부해야겠당
          */
+        
+        print("loginVC = keyboardWillShow-run")
         guard let userInfo = notification.userInfo,
-            let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else {
+            let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else {
                 return
         }
         
-        
-        
-        let contentInset = UIEdgeInsets(
-            top: 0.0,
-            left: 0.0,
-            bottom: keyboardFrame.size.height,
-            right: 0.0)
-        
-        scrollView.contentInset = contentInset
-        scrollView.scrollIndicatorInsets = contentInset
+        scrollView.contentInset.bottom = view.convert(keyboardFrame.cgRectValue, from: nil).size.height
+//        scrollView.scrollIndicatorInsets = contentInset
     }
     
     @objc private func keyboardWillHide() {
-        let contentInset = UIEdgeInsets.zero
-        scrollView.contentInset = contentInset
-        scrollView.scrollIndicatorInsets = contentInset
+        print("loginVC = keyboardWillHide-run")
+        scrollView.contentInset.bottom = 0
+//        let contentInset = UIEdgeInsets.zero
         
-        
+//        scrollView.scrollIndicatorInsets = contentInset
     }
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        print("loginVC = touchesBegan-run")
     }
+   
     
     
 }
 
-
-
-
- 
-
-
-
+    
 #if DEBUG
-struct ViewControllerRepresentable: UIViewControllerRepresentable {
-    // update
-    func updateUIViewController(_ uiViewController: UIViewController, context: Context){
-
-    }
-    // makeui
-    @available(iOS 13.0, *)
-    func makeUIViewController(context: Context) -> UIViewController {
-        LoginVC()
-    }
-}
-@available(iOS 13.0, *)
-struct ViewController_Previews: PreviewProvider {
-    static var previews: some View{
-        Group{
-            ViewControllerRepresentable()
-                .ignoresSafeArea(.all)//미리보기의 safeArea 이외의 부분도 채워서 보여주게됌.
-                .previewDisplayName("iphone 11")
+    struct ViewControllerRepresentable: UIViewControllerRepresentable {
+        // update
+        func updateUIViewController(_ uiViewController: UIViewController, context: Context){
+            
+        }
+        // makeui
+        @available(iOS 13.0, *)
+        func makeUIViewController(context: Context) -> UIViewController {
+            LoginVC()
         }
     }
-}
+    @available(iOS 13.0, *)
+    struct ViewController_Previews: PreviewProvider {
+        static var previews: some View{
+            Group{
+                ViewControllerRepresentable()
+                    .ignoresSafeArea(.all)//미리보기의 safeArea 이외의 부분도 채워서 보여주게됌.
+                    .previewDisplayName("iphone 11")
+            }
+        }
+    }
+    
 #endif
+

@@ -28,4 +28,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
 }
+extension UIViewController {
+    func hideKeyboard() {
+        print("AppDelegate = hideKeyboard-run")
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self,
+            action: #selector(UIViewController.dismissKeyboard))
+        view.addGestureRecognizer(tap)
+    }
+    @objc func dismissKeyboard() {
+        print("AppDelegate = dismissKeyboard-run")
+        view.endEditing(true)
+    }
+}
+
 
