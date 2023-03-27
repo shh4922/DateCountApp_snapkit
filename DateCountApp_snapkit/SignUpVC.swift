@@ -100,6 +100,7 @@ class SignUpVC: UIViewController {
             make.bottom.equalTo(contentView)
         }
     }
+    
     private func setNotification(){
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -107,33 +108,14 @@ class SignUpVC: UIViewController {
     
     
     @objc private func keyboardWillShow(_ notification : Notification){
-        /**
-         아직 하단의 코드는 이해하지못했다.
-         userInfo가 뭔지 잘 모르겠다...
-         지금은 알바가야하니깐 요까지만하고 집가서 다시찾아보고 공부해야겠당
-         */
-        guard let userInfo = notification.userInfo,let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else {
-                return
-        }
-        //좌표 (0,550) 부터 가로=414, 세로 346 짜리의 키보드다 이말.
-        print(keyboardFrame.size.height)
-        let contentInset = UIEdgeInsets(
-            top: 0.0,
-            left: 0.0,
-            bottom: keyboardFrame.size.height,
-            right: 0.0)
-        
-        scrollView.contentInset = contentInset
-        scrollView.scrollIndicatorInsets = contentInset
+        print("signUpVC keyboardWillShow()-run")
     }
     
     @objc private func keyboardWillHide(){
-        let contentInset = UIEdgeInsets.zero
-        print("sighUpVC - keyboardWillHide run")
-        scrollView.contentInset = contentInset
-        scrollView.scrollIndicatorInsets = contentInset
+        print("signUpVC keyboardWillHide()-run")
     }
 }
+
 
 
 

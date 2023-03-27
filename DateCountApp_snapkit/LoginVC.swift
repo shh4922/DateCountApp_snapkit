@@ -14,9 +14,7 @@ class LoginVC: UIViewController {
     private var scrollView = UIScrollView()
     
     private func setLayout(){
-        //라지 타이틀 추가
-        //    navigationController?.navigationBar.prefersLargeTitles = true
-        //    self.navigationController?.topViewController?.title = "로그인"
+        
         self.navigationItem.title = "로그인"
         self.view.backgroundColor = .white
         view.addSubview(scrollView)
@@ -109,68 +107,49 @@ class LoginVC: UIViewController {
         }
         
     }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setNotificationKeyboard()
         setLayout()
     }
-    // 터치가 발생할때 핸들러 캐치
     
     
+    
+    //회원가입 페이지 이동
     @objc private func moveToSignup(sender : UIButton){
         let signUpVC = SignUpVC()
         self.navigationController?.pushViewController(signUpVC, animated: true)
     }
+    
+    
+    //SetNotificationObserver
     private func setNotificationKeyboard(){
-        /**
-         노티피케이션은 수신자는 addObserver, 발신자는 post를 이용해서 이벤트를 감지하는것 같다.
-         하지만 내가사용해야하는것은 UIResponder에서 기본적으로 제공하는 keyboardwillshownotification 이랑 keyboardWillHideNotification 이라서
-         따로 post를 등록안해도 이미 다 등록이 되어있다
-         그냥 수신할곳만 등록을 해주면 된다.
-         그래서 아래와 같이 등록을해주었고, 어떤함수가 호출될때 수행하는지 #selector를 선정해주었다.
-         */
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
 
+    //키보드가 보여지면 할 액션
     @objc private func keyboardWillShow(_ notification: Notification) {
-        /**
-         아직 하단의 코드는 이해하지못했다.
-         userInfo가 뭔지 잘 모르겠다...
-         지금은 알바가야하니깐 요까지만하고 집가서 다시찾아보고 공부해야겠당
-         */
-        
-        print("loginVC = keyboardWillShow-run")
-        guard let userInfo = notification.userInfo,
-            let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else {
-                return
-        }
-        
-        scrollView.contentInset.bottom = view.convert(keyboardFrame.cgRectValue, from: nil).size.height
-//        scrollView.scrollIndicatorInsets = contentInset
+        print("loginVC keyboardWillShow()-run")
     }
     
+    
+    //키보드가 뷰에서 안보이면 하는 액션
     @objc private func keyboardWillHide() {
-        print("loginVC = keyboardWillHide-run")
-        scrollView.contentInset.bottom = 0
-//        let contentInset = UIEdgeInsets.zero
-        
-//        scrollView.scrollIndicatorInsets = contentInset
+        print("loginVC keyboardWillHide()-run")
     }
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        print("loginVC = touchesBegan-run")
-    }
-   
-    
     
 }
 
-    
+   
+
+
+
+
+//프리뷰
 #if DEBUG
     struct ViewControllerRepresentable: UIViewControllerRepresentable {
         // update
