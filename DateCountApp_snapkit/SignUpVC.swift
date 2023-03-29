@@ -1,21 +1,22 @@
 import SwiftUI
 import UIKit
+import SnapKit
+import Firebase
 
 class SignUpVC: UIViewController {
 
     private let scrollView = UIScrollView()
     private let contentView = UIView()
-    
     private let titleLabel = UILabel()
     private let subLabel = UILabel()
-    
     private let IdField = UITextField()
     private let passwordField = UITextField()
     private let Btn_createAccount = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        setNotification()
+        setTapMethod()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -39,12 +40,13 @@ class SignUpVC: UIViewController {
         
         scrollView.backgroundColor = .white
         scrollView.snp.makeConstraints { make in
-            make.edges.equalTo(view)
+            make.edges.equalTo(view.safeAreaLayoutGuide)
         }
         contentView.backgroundColor = .white
         contentView.snp.makeConstraints { make in
-            make.top.bottom.equalTo(scrollView)
-            make.left.right.equalTo(view)
+            make.edges.equalToSuperview()
+            //세로 스크롤이 가능하도록 하기위해 width는 화면의view와 크기를 맞춤
+            make.width.equalTo(view.snp.width)
         }
         
         titleLabel.textColor = .black
@@ -66,6 +68,7 @@ class SignUpVC: UIViewController {
             make.left.equalTo(view).inset(30)
         }
         IdField.placeholder = "사용하실아이디를 입력하세요"
+        IdField.delegate = self
         IdField.textColor = .black
         IdField.textAlignment = .center
         IdField.font = .systemFont(ofSize: 23)
@@ -77,6 +80,7 @@ class SignUpVC: UIViewController {
             make.left.right.equalTo(view).inset(30)
         }
         passwordField.placeholder = "사용하실 비밀번호를 입력하세요."
+        passwordField.delegate = self
         passwordField.textAlignment = .center
         passwordField.textColor = .black
         passwordField.font = .systemFont(ofSize: 23)
@@ -89,6 +93,7 @@ class SignUpVC: UIViewController {
             make.left.right.equalTo(view).inset(30)
         }
         Btn_createAccount.backgroundColor = .systemBlue
+        Btn_createAccount.addTarget(self, action: #selector(signUpAction), for: .touchUpInside)
         Btn_createAccount.layer.cornerRadius = 5
         Btn_createAccount.setTitle("OK", for: .normal)
         Btn_createAccount.setTitleColor(.blue, for: .normal)
@@ -97,8 +102,17 @@ class SignUpVC: UIViewController {
             make.centerX.equalToSuperview()
             make.top.equalTo(passwordField.snp.bottom).offset(30)
             make.left.right.equalTo(view).inset(60)
-            make.bottom.equalTo(contentView)
+            make.bottom.equalTo(contentView.snp.bottom)
         }
+    }
+    
+    //스크롤뷰에 tab기능 추가를 위한 설정
+    private func setTapMethod(){
+        let singleTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(RunTapMethod))
+        singleTapGestureRecognizer.numberOfTapsRequired = 1
+        singleTapGestureRecognizer.isEnabled = true
+        singleTapGestureRecognizer.cancelsTouchesInView = false
+        scrollView.addGestureRecognizer(singleTapGestureRecognizer)
     }
     
     private func setNotification(){
@@ -106,16 +120,60 @@ class SignUpVC: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
+    //스크롤뷰 Tab할시 수행할 기능.
+    @objc private func RunTapMethod(){
+        self.view.endEditing(true)
+    }
     
     @objc private func keyboardWillShow(_ notification : Notification){
         print("signUpVC keyboardWillShow()-run")
+        //키보드가 올라오면
+        guard let userInfo = notification.userInfo,
+              let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else {
+            return
+        }
+        let contentInset = UIEdgeInsets(
+            top: 0.0,
+            left: 0.0,
+            bottom: keyboardFrame.size.height,
+            right: 0.0)
+        scrollView.contentInset = contentInset
+        scrollView.scrollIndicatorInsets = contentInset
     }
     
     @objc private func keyboardWillHide(){
         print("signUpVC keyboardWillHide()-run")
+        let contentInset = UIEdgeInsets.zero
+        scrollView.contentInset = contentInset
+        scrollView.scrollIndicatorInsets = contentInset
+
+    }
+    @objc private func signUpAction(){
+        if let email = IdField.text , let password = passwordField.text{
+            Auth.auth().createUser(withEmail: email, password: password){ (user,error) in
+                if user != nil{
+                    print("가입성공")
+                }else{
+                    print("가입 실패!")
+                }
+            }
+        }
+        
     }
 }
-
+//키보드 return버튼 클릭시, 다음input으로 이동을 위해 Delegate추가.
+extension SignUpVC: UITextFieldDelegate {
+  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    if textField == IdField {
+        print("id - return")
+      passwordField.becomeFirstResponder()
+    } else {
+        print("password - return")
+      passwordField.resignFirstResponder()
+    }
+    return true
+  }
+}
 
 
 

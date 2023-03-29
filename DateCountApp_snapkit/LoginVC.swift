@@ -1,6 +1,7 @@
 import UIKit
 import SwiftUI
 import SnapKit
+import Firebase
 
 class LoginVC: UIViewController {
     
@@ -13,10 +14,109 @@ class LoginVC: UIViewController {
     private let signUpButton = UIButton()
     private var scrollView = UIScrollView()
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setNotificationKeyboard()
+        setTapMethod()
+        if let person = Auth.auth().currentUser{
+            print("이미 로그인하셧습니다.")
+        }
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setLayout()
+    }
+    
+    //회원가입 페이지 이동
+    @objc private func moveToSignup(sender : UIButton){
+        let signUpVC = SignUpVC()
+        self.navigationController?.pushViewController(signUpVC, animated: true)
+    }
+    //스크롤뷰 Tab할시 수행할 기능.
+    @objc private func RunTapMethod(){
+        self.view.endEditing(true)
+    }
+    //키보드가 보여지면 할 액션
+    @objc private func keyboardWillShow(_ notification: Notification) {
+        
+        print("loginVC keyboardWillShow()-run")
+        
+        //키보드가 올라오면
+        guard let userInfo = notification.userInfo,
+              let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else {
+            return
+        }
+        let contentInset = UIEdgeInsets(
+            top: 0.0,
+            left: 0.0,
+            bottom: keyboardFrame.size.height,
+            right: 0.0)
+        scrollView.contentInset = contentInset
+        scrollView.scrollIndicatorInsets = contentInset
+
+//        if scrollView.contentInset == contentInset{
+//
+//            loginLabel.frame.origin.y -= 20
+//            subLabel.frame.origin.y -= 20
+//            idField.frame.origin.y -= 20
+//            passField.frame.origin.y -= 20
+//            loginButton.frame.origin.y -= 20
+//            signUpButton.frame.origin.y -= 20
+//        }
+    }
+    //키보드가 뷰에서 안보이면 하는 액션
+    @objc private func keyboardWillHide() {
+        print("loginVC keyboardWillHide()-run")
+        let contentInset = UIEdgeInsets.zero
+        scrollView.contentInset = contentInset
+        scrollView.scrollIndicatorInsets = contentInset
+        
+    }
+    //로그인 버튼 클릭
+    @objc private func loginAction(){
+        //아이디 패스워드 비어있는값
+        if let email = idField.text, let password = passField.text{
+            Auth.auth().signIn(withEmail: email, password: password){ authResult,error in
+                if email == "" || password == ""{
+                    print("아이디또는 비밀번호를 모두 입력하시오 ")
+                    return
+                }
+                if let e = error{
+                    print("아이디 비번은 입력되었지만, error가 난 경우")
+                    print("email : \(email), password : \(password)")
+                    print(e.localizedDescription)
+                }else{
+                    print("email : \(email), password : \(password)")
+                    print("login Succes")
+                }
+            }
+        }else{
+            //아이디 비밀번호가 하나라도 입력안되있을시,
+            print("아이디 또는 비밀번호를 입력하지 않은경우.")
+            print("email = \(idField.text),  password = \(passField.text)")
+        }
+    }
+    
+    
+    
+    //스크롤뷰에 tab기능 추가를 위한 설정
+    private func setTapMethod(){
+        let singleTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(RunTapMethod))
+        singleTapGestureRecognizer.numberOfTapsRequired = 1
+        singleTapGestureRecognizer.isEnabled = true
+        singleTapGestureRecognizer.cancelsTouchesInView = false
+        scrollView.addGestureRecognizer(singleTapGestureRecognizer)
+    }
+    //Set Notification
+    private func setNotificationKeyboard(){
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    //Set Layout
     private func setLayout(){
         
         self.navigationItem.title = "로그인"
-        self.view.backgroundColor = .white
+        self.view.backgroundColor = .green
         view.addSubview(scrollView)
         
         scrollView.addSubview(containerview)
@@ -27,16 +127,15 @@ class LoginVC: UIViewController {
         containerview.addSubview(loginButton)
         containerview.addSubview(signUpButton)
         
+        scrollView.backgroundColor = .yellow
         scrollView.snp.makeConstraints { make in
-            //스크롤뷰 상하좌우 모두 세이프에어리어에 맞추기.
             make.edges.equalTo(view.safeAreaLayoutGuide)
         }
         
+        containerview.backgroundColor = .white
         containerview.snp.makeConstraints { make in
-            //상하좌우를 모두 scrollview에 일단은 맞춤
-            make.top.bottom.left.right.equalTo(scrollView)
-            //좌우는 scrollview와 같게 해야 상.하 로만 스크롤이 가능하기때문에 넓이는 scrollview와 같게맞춤
-            make.width.equalTo(scrollView.snp.width)
+            make.edges.equalToSuperview()
+            make.width.equalTo(view.snp.width)
         }
         
         loginLabel.textColor = .black
@@ -45,8 +144,8 @@ class LoginVC: UIViewController {
         loginLabel.font = .boldSystemFont(ofSize: 40)
         loginLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(containerview.snp.top).inset(50)
-            make.left.equalTo(containerview.snp.left).inset(30)
+            make.top.equalTo(containerview.snp.top).offset(50)
+            make.left.equalTo(containerview.snp.left).offset(30)
         }
         
         subLabel.text = "하루명언으로 항상 동기부여받으며 공부해요."
@@ -60,6 +159,7 @@ class LoginVC: UIViewController {
         }
         
         idField.placeholder = "id"
+        idField.delegate = self
         idField.textContentType = .emailAddress
         idField.keyboardType = .emailAddress
         idField.textColor = .black
@@ -72,6 +172,7 @@ class LoginVC: UIViewController {
         }
         
         passField.placeholder = "password"
+        idField.delegate = self
         passField.textColor = .black
         passField.backgroundColor = UIColor(named: "textFieldColor")
         passField.layer.cornerRadius = 4
@@ -88,7 +189,7 @@ class LoginVC: UIViewController {
         loginButton.layer.cornerRadius = 5
         loginButton.setTitle("login", for: .normal)
         loginButton.setTitleColor(.white, for: .normal)
-        
+        loginButton.addTarget(self, action: #selector(loginAction), for: .touchUpInside)
         loginButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalTo(passField.snp.bottom).offset(40)
@@ -97,51 +198,33 @@ class LoginVC: UIViewController {
         
         signUpButton.setTitle("create your account", for: .normal)
         signUpButton.setTitleColor(.blue, for: .normal)
+        signUpButton.backgroundColor = .orange
         signUpButton.addTarget(self, action: #selector(moveToSignup), for: .touchUpInside)
         signUpButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(loginButton.snp.bottom).offset(40)
-            make.left.equalTo(containerview.snp.left).offset(20)
-            make.bottom.equalTo(containerview).offset(0)
-            
+            make.top.equalTo(loginButton.snp.bottom).offset(50)
+            make.left.equalTo(containerview.snp.left).offset(50)
+            make.bottom.equalTo(containerview.snp.bottom)
         }
         
     }
-    
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setNotificationKeyboard()
-        setLayout()
-    }
-    
-    
-    
-    //회원가입 페이지 이동
-    @objc private func moveToSignup(sender : UIButton){
-        let signUpVC = SignUpVC()
-        self.navigationController?.pushViewController(signUpVC, animated: true)
-    }
-    
-    
-    //SetNotificationObserver
-    private func setNotificationKeyboard(){
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-    }
-    
 
-    //키보드가 보여지면 할 액션
-    @objc private func keyboardWillShow(_ notification: Notification) {
-        print("loginVC keyboardWillShow()-run")
+   
+    
+}
+
+//keyboard에서 return 누를시, 다음 input으로 넘어가게 하기위해서 UITextFieldDelegate 추가
+extension LoginVC: UITextFieldDelegate {
+  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    if textField == idField {
+        print("id - return")
+      passField.becomeFirstResponder()
+    } else {
+        print("password - return")
+      passField.resignFirstResponder()
     }
-    
-    
-    //키보드가 뷰에서 안보이면 하는 액션
-    @objc private func keyboardWillHide() {
-        print("loginVC keyboardWillHide()-run")
-    }
-    
+    return true
+  }
 }
 
    
