@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		00AD82A129D56AB200059928 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AD82A029D56AB200059928 /* HomeVC.swift */; };
+		00AD82A329D5721B00059928 /* TabbarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AD82A229D5721B00059928 /* TabbarVC.swift */; };
+		00AD82A529D599CD00059928 /* ListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AD82A429D599CD00059928 /* ListVC.swift */; };
+		00AD82A729D599E300059928 /* SettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AD82A629D599E300059928 /* SettingVC.swift */; };
 		00B45C3229CC29740030CD02 /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B45C3129CC29740030CD02 /* SignUpVC.swift */; };
 		00BFE7EB29C329F900C279FD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BFE7EA29C329F900C279FD /* AppDelegate.swift */; };
 		00BFE7ED29C329F900C279FD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BFE7EC29C329F900C279FD /* SceneDelegate.swift */; };
@@ -19,6 +23,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		00AD82A029D56AB200059928 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
+		00AD82A229D5721B00059928 /* TabbarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarVC.swift; sourceTree = "<group>"; };
+		00AD82A429D599CD00059928 /* ListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListVC.swift; sourceTree = "<group>"; };
+		00AD82A629D599E300059928 /* SettingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingVC.swift; sourceTree = "<group>"; };
 		00B45C3129CC29740030CD02 /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
 		00BFE7E729C329F900C279FD /* DateCountApp_snapkit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DateCountApp_snapkit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		00BFE7EA29C329F900C279FD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -76,6 +84,10 @@
 				00BFE7F829C329FB00C279FD /* Info.plist */,
 				00BFE7FE29C3377D00C279FD /* LoginVC.swift */,
 				00B45C3129CC29740030CD02 /* SignUpVC.swift */,
+				00AD82A229D5721B00059928 /* TabbarVC.swift */,
+				00AD82A029D56AB200059928 /* HomeVC.swift */,
+				00AD82A429D599CD00059928 /* ListVC.swift */,
+				00AD82A629D599E300059928 /* SettingVC.swift */,
 			);
 			path = DateCountApp_snapkit;
 			sourceTree = "<group>";
@@ -213,8 +225,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				00BFE7EF29C329F900C279FD /* ViewController.swift in Sources */,
+				00AD82A729D599E300059928 /* SettingVC.swift in Sources */,
 				00BFE7EB29C329F900C279FD /* AppDelegate.swift in Sources */,
+				00AD82A329D5721B00059928 /* TabbarVC.swift in Sources */,
 				00BFE7FF29C3377D00C279FD /* LoginVC.swift in Sources */,
+				00AD82A529D599CD00059928 /* ListVC.swift in Sources */,
+				00AD82A129D56AB200059928 /* HomeVC.swift in Sources */,
 				00B45C3229CC29740030CD02 /* SignUpVC.swift in Sources */,
 				00BFE7ED29C329F900C279FD /* SceneDelegate.swift in Sources */,
 			);

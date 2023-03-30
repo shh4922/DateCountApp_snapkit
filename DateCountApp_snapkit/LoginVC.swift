@@ -32,6 +32,7 @@ class LoginVC: UIViewController {
         let signUpVC = SignUpVC()
         self.navigationController?.pushViewController(signUpVC, animated: true)
     }
+    
     //스크롤뷰 Tab할시 수행할 기능.
     @objc private func RunTapMethod(){
         self.view.endEditing(true)
@@ -88,6 +89,8 @@ class LoginVC: UIViewController {
                 }else{
                     print("email : \(email), password : \(password)")
                     print("login Succes")
+                    let mainVC = TabbarVC()
+                    self.navigationController?.pushViewController(mainVC, animated: true)
                 }
             }
         }else{
