@@ -19,7 +19,7 @@ class LoginVC: UIViewController {
         setNotificationKeyboard()
         setTapMethod()
         if let person = Auth.auth().currentUser{
-            print("이미 로그인하셧습니다.")
+            print("이미 로그인하셧습니다. 그 로그인한 계정은 \(person)")
         }
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -55,15 +55,6 @@ class LoginVC: UIViewController {
         scrollView.contentInset = contentInset
         scrollView.scrollIndicatorInsets = contentInset
 
-//        if scrollView.contentInset == contentInset{
-//
-//            loginLabel.frame.origin.y -= 20
-//            subLabel.frame.origin.y -= 20
-//            idField.frame.origin.y -= 20
-//            passField.frame.origin.y -= 20
-//            loginButton.frame.origin.y -= 20
-//            signUpButton.frame.origin.y -= 20
-//        }
     }
     //키보드가 뷰에서 안보이면 하는 액션
     @objc private func keyboardWillHide() {
@@ -93,10 +84,6 @@ class LoginVC: UIViewController {
                     self.navigationController?.pushViewController(mainVC, animated: true)
                 }
             }
-        }else{
-            //아이디 비밀번호가 하나라도 입력안되있을시,
-            print("아이디 또는 비밀번호를 입력하지 않은경우.")
-            print("email = \(idField.text),  password = \(passField.text)")
         }
     }
     
@@ -175,7 +162,7 @@ class LoginVC: UIViewController {
         }
         
         passField.placeholder = "password"
-        idField.delegate = self
+        passField.delegate = self
         passField.textColor = .black
         passField.backgroundColor = UIColor(named: "textFieldColor")
         passField.layer.cornerRadius = 4

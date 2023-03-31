@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		005B0EA529D6EE9F0055EFE2 /* KCC-Chassam.otf in Resources */ = {isa = PBXBuildFile; fileRef = 005B0EA429D6EE8D0055EFE2 /* KCC-Chassam.otf */; };
 		00AD82A129D56AB200059928 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AD82A029D56AB200059928 /* HomeVC.swift */; };
 		00AD82A329D5721B00059928 /* TabbarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AD82A229D5721B00059928 /* TabbarVC.swift */; };
 		00AD82A529D599CD00059928 /* ListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AD82A429D599CD00059928 /* ListVC.swift */; };
@@ -23,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		005B0EA429D6EE8D0055EFE2 /* KCC-Chassam.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "KCC-Chassam.otf"; path = "../../../Desktop/KCC차쌤체/KCC-Chassam.otf"; sourceTree = "<group>"; };
 		00AD82A029D56AB200059928 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		00AD82A229D5721B00059928 /* TabbarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarVC.swift; sourceTree = "<group>"; };
 		00AD82A429D599CD00059928 /* ListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListVC.swift; sourceTree = "<group>"; };
@@ -75,6 +77,7 @@
 		00BFE7E929C329F900C279FD /* DateCountApp_snapkit */ = {
 			isa = PBXGroup;
 			children = (
+				005B0EA429D6EE8D0055EFE2 /* KCC-Chassam.otf */,
 				00D6D10129CC582200725D65 /* GoogleService-Info.plist */,
 				00BFE7EA29C329F900C279FD /* AppDelegate.swift */,
 				00BFE7EC29C329F900C279FD /* SceneDelegate.swift */,
@@ -169,6 +172,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				005B0EA529D6EE9F0055EFE2 /* KCC-Chassam.otf in Resources */,
 				00BFE7F729C329FB00C279FD /* LaunchScreen.storyboard in Resources */,
 				00BFE7F429C329FB00C279FD /* Assets.xcassets in Resources */,
 				00D6D10229CC582200725D65 /* GoogleService-Info.plist in Resources */,

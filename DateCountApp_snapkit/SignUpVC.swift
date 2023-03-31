@@ -125,6 +125,7 @@ class SignUpVC: UIViewController {
         self.view.endEditing(true)
     }
     
+    //키보드가 보여질시 스크롤이 가능하도록 하기위해서 contentInset 조정
     @objc private func keyboardWillShow(_ notification : Notification){
         print("signUpVC keyboardWillShow()-run")
         //키보드가 올라오면
@@ -140,7 +141,7 @@ class SignUpVC: UIViewController {
         scrollView.contentInset = contentInset
         scrollView.scrollIndicatorInsets = contentInset
     }
-    
+    //키보드가 사라질시 contentInset.zero
     @objc private func keyboardWillHide(){
         print("signUpVC keyboardWillHide()-run")
         let contentInset = UIEdgeInsets.zero
@@ -148,6 +149,7 @@ class SignUpVC: UIViewController {
         scrollView.scrollIndicatorInsets = contentInset
 
     }
+    //가입완료 누를시.
     @objc private func signUpAction(){
         if let email = IdField.text , let password = passwordField.text{
             Auth.auth().createUser(withEmail: email, password: password){ (user,error) in
