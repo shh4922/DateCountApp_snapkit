@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		005B0EA529D6EE9F0055EFE2 /* KCC-Chassam.otf in Resources */ = {isa = PBXBuildFile; fileRef = 005B0EA429D6EE8D0055EFE2 /* KCC-Chassam.otf */; };
+		0068707729D9EA66001330FA /* DateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0068707629D9EA66001330FA /* DateTableViewCell.swift */; };
+		0068707929D9EAE1001330FA /* DateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0068707829D9EAE1001330FA /* DateModel.swift */; };
 		00AD82A129D56AB200059928 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AD82A029D56AB200059928 /* HomeVC.swift */; };
 		00AD82A329D5721B00059928 /* TabbarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AD82A229D5721B00059928 /* TabbarVC.swift */; };
 		00AD82A529D599CD00059928 /* ListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AD82A429D599CD00059928 /* ListVC.swift */; };
@@ -24,7 +25,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		005B0EA429D6EE8D0055EFE2 /* KCC-Chassam.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "KCC-Chassam.otf"; path = "../../../Desktop/KCC차쌤체/KCC-Chassam.otf"; sourceTree = "<group>"; };
+		0068707629D9EA66001330FA /* DateTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTableViewCell.swift; sourceTree = "<group>"; };
+		0068707829D9EAE1001330FA /* DateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateModel.swift; sourceTree = "<group>"; };
 		00AD82A029D56AB200059928 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		00AD82A229D5721B00059928 /* TabbarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarVC.swift; sourceTree = "<group>"; };
 		00AD82A429D599CD00059928 /* ListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListVC.swift; sourceTree = "<group>"; };
@@ -77,7 +79,6 @@
 		00BFE7E929C329F900C279FD /* DateCountApp_snapkit */ = {
 			isa = PBXGroup;
 			children = (
-				005B0EA429D6EE8D0055EFE2 /* KCC-Chassam.otf */,
 				00D6D10129CC582200725D65 /* GoogleService-Info.plist */,
 				00BFE7EA29C329F900C279FD /* AppDelegate.swift */,
 				00BFE7EC29C329F900C279FD /* SceneDelegate.swift */,
@@ -91,6 +92,8 @@
 				00AD82A029D56AB200059928 /* HomeVC.swift */,
 				00AD82A429D599CD00059928 /* ListVC.swift */,
 				00AD82A629D599E300059928 /* SettingVC.swift */,
+				0068707629D9EA66001330FA /* DateTableViewCell.swift */,
+				0068707829D9EAE1001330FA /* DateModel.swift */,
 			);
 			path = DateCountApp_snapkit;
 			sourceTree = "<group>";
@@ -172,7 +175,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				005B0EA529D6EE9F0055EFE2 /* KCC-Chassam.otf in Resources */,
 				00BFE7F729C329FB00C279FD /* LaunchScreen.storyboard in Resources */,
 				00BFE7F429C329FB00C279FD /* Assets.xcassets in Resources */,
 				00D6D10229CC582200725D65 /* GoogleService-Info.plist in Resources */,
@@ -233,7 +235,9 @@
 				00BFE7EB29C329F900C279FD /* AppDelegate.swift in Sources */,
 				00AD82A329D5721B00059928 /* TabbarVC.swift in Sources */,
 				00BFE7FF29C3377D00C279FD /* LoginVC.swift in Sources */,
+				0068707729D9EA66001330FA /* DateTableViewCell.swift in Sources */,
 				00AD82A529D599CD00059928 /* ListVC.swift in Sources */,
+				0068707929D9EAE1001330FA /* DateModel.swift in Sources */,
 				00AD82A129D56AB200059928 /* HomeVC.swift in Sources */,
 				00B45C3229CC29740030CD02 /* SignUpVC.swift in Sources */,
 				00BFE7ED29C329F900C279FD /* SceneDelegate.swift in Sources */,

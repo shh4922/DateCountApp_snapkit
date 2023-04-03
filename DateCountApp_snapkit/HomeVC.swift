@@ -3,46 +3,62 @@ import UIKit
 import SnapKit
 import SwiftUI
 
-class HomeVC: UIViewController {
+class HomeVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    private let titleLabel = UILabel()
-    private var text1 = UILabel()
+    var dataSource = [DateModel]()
+    
+    private lazy var dateTableView : UITableView = {
+       let dateTableView = UITableView()
+        view.addSubview(dateTableView)
+        
+        dateTableView.snp.makeConstraints { make in
+            make.left.right.bottom.equalTo(view)
+            make.top.equalTo(view).offset(40)
+        }
+        dateTableView.backgroundColor = .white
+        
+        return dateTableView
+    }()
+    
+    private func setupView(){
+        print("HomeVC - setupView")
+        dateTableView.register(DateTableViewCell.self, forCellReuseIdentifier: DateTableViewCell.identifier)
+        //하단 코드가 무엇을뜻하는지 모르겠음.
+        dateTableView.delegate = self
+        dateTableView.dataSource = self
+    }
+    
+    private func loadDate(){
+        print("HomeVC - runLoadDate")
+        dataSource.append(.init(dateCount: "123", testName: "정보처리기사"))
+        dataSource.append(.init(dateCount: "143", testName: "전기기사"))
+        dataSource.append(.init(dateCount: "235", testName: "소방기사"))
+//        dataSource.append(.init(currentDate: "2023년.12월.21일", selectDate: "2024년.1월.24일", testName: "정보처리기사"))
+//        dataSource.append(.init(currentDate: "2025년.5월.21일", selectDate: "2027년.6월.13일", testName: "전기기사"))
+        dateTableView.reloadData()
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return dataSource.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: DateTableViewCell.identifier) as? DateTableViewCell ?? DateTableViewCell()
+        cell.bind(model: dataSource[indexPath.row])
+        return cell
+    }
+    
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return 56
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        setLayout()
-    }
-    
-    
-    
-    private func setLayout(){
         view.backgroundColor = .white
-        view.addSubview(titleLabel)
-        view.addSubview(text1)
-        
-        titleLabel.text = "오늘의 글귀"
-        titleLabel.textColor = .black
-        titleLabel.textAlignment = .center
-        titleLabel.font = .boldSystemFont(ofSize: 30)
-        titleLabel.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(50)
-            make.left.equalToSuperview().offset(30)
-        }
-        text1.text = "뭉치면 살고 흩어지면 죽는다. 하지만 나는 너무 배가고프다 그렇기떄문에 밥을 먹어야한다. 슈바암ㅇㄴ암ㄴ이ㅏㅓㅁㄴ이ㅏㅁㄴㄴ머 \n asdasd asdasdas\n asdasd 뭉치면 살고 흩어지면 죽는다. 하지만 나는 너무 배가고프다 그렇기떄문에 밥을 먹어야한다"
-        text1.textColor = .black
-        text1.numberOfLines = .zero
-        text1.textAlignment = .center
-        text1.font = UIFont(name: "KCC-Chassam", size: 20)
-        text1.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.top.equalTo(titleLabel.snp.bottom).offset(30)
-            make.left.equalToSuperview().offset(30)
-        }
+        setupView()
+        loadDate()
     }
+    
 }
 
 
