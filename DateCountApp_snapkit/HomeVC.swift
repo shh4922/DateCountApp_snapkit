@@ -3,41 +3,79 @@ import UIKit
 import SnapKit
 import SwiftUI
 
-class HomeVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class HomeVC: UIViewController{
     
     var dataSource = [DateModel]()
     
     private lazy var dateTableView : UITableView = {
-       let dateTableView = UITableView()
-        view.addSubview(dateTableView)
-        
+        let dateTableView = UITableView()
+        //테이블뷰 라인 제거.
+        dateTableView.separatorStyle = .none
+        return dateTableView
+    }()
+    
+    //layout제약조건 및 설정
+    private func setAutoLayout(){
+        view.backgroundColor = .white
         dateTableView.snp.makeConstraints { make in
             make.left.right.bottom.equalTo(view)
             make.top.equalTo(view).offset(40)
         }
         dateTableView.backgroundColor = .white
-        
-        return dateTableView
-    }()
+    }
     
+    //뷰에 추가해야할 하위뷰들 넣어주는곳.
+    private func addView(){
+        view.addSubview(dateTableView)
+    }
+    
+    //특정기능을 위한 setup
     private func setupView(){
         print("HomeVC - setupView")
         dateTableView.register(DateTableViewCell.self, forCellReuseIdentifier: DateTableViewCell.identifier)
         //하단 코드가 무엇을뜻하는지 모르겠음.
         dateTableView.delegate = self
         dateTableView.dataSource = self
+    
     }
     
+    //사용자의 시험일정등의 데이터를 받아오는곳.
     private func loadDate(){
         print("HomeVC - runLoadDate")
-        dataSource.append(.init(dateCount: "123", testName: "정보처리기사"))
-        dataSource.append(.init(dateCount: "143", testName: "전기기사"))
-        dataSource.append(.init(dateCount: "235", testName: "소방기사"))
-//        dataSource.append(.init(currentDate: "2023년.12월.21일", selectDate: "2024년.1월.24일", testName: "정보처리기사"))
-//        dataSource.append(.init(currentDate: "2025년.5월.21일", selectDate: "2027년.6월.13일", testName: "전기기사"))
+        dataSource.append(.init(dateCount: 123, testName: "asddsa"))
+        dataSource.append(.init(dateCount: 213, testName: "asddsa"))
+        dataSource.append(.init(dateCount: 11243, testName: "asddsa"))
+        dataSource.append(.init(dateCount: 11, testName: "asddsa"))
+
         dateTableView.reloadData()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        print("HomeVC - viewWillAppear")
+        addView()
+        setAutoLayout()
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        print("HomeVC - viewDidLoad")
+        
+        setupView()
+        loadDate()
+    }
+    
+    @objc private func onClickPlusBtn(){
+        
+    }
+    
+}
+
+// TableView를 위해 추가한 것들.
+extension HomeVC : UITableViewDelegate, UITableViewDataSource {
+    
+    //셀의 개수를 리턴해주는것.
+    //셀의개수 = dataSource의 개수 -> dataSource에 샐들이 들어있으니깐.
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataSource.count
     }
@@ -45,29 +83,17 @@ class HomeVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: DateTableViewCell.identifier) as? DateTableViewCell ?? DateTableViewCell()
         cell.bind(model: dataSource[indexPath.row])
+        
         return cell
     }
-    
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return 56
-//    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .white
-        setupView()
-        loadDate()
-    }
-    
 }
-
 
 
 #if DEBUG
 struct HomeView: UIViewControllerRepresentable {
     // update
     func updateUIViewController(_ uiViewController: UIViewController, context: Context){
-
+        
     }
     // makeui
     @available(iOS 13.0, *)

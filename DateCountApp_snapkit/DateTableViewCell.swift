@@ -1,4 +1,6 @@
 
+import SnapKit
+import SwiftUI
 import UIKit
 
 class DateTableViewCell: UITableViewCell {
@@ -9,21 +11,22 @@ class DateTableViewCell: UITableViewCell {
         let vstack = UIStackView()
         vstack.distribution = .fillEqually
         vstack.axis = .vertical
+        vstack.backgroundColor = .white
         return vstack
     }()
     
-    lazy var hstack : UIStackView = {
+    lazy var top_hstack : UIStackView = {
         let hstack = UIStackView()
         hstack.distribution = .fillEqually
         hstack.axis = .horizontal
         return hstack
     }()
-    
-    lazy var dateLabel: UILabel = {
-        let label = UILabel()
-        return label
+    lazy var bottom_hstack : UIStackView = {
+        let hstack = UIStackView()
+        hstack.distribution = .fillEqually
+        hstack.axis = .horizontal
+        return hstack
     }()
-    
     lazy var testName: UILabel = {
         let label = UILabel()
         label.textColor = .black
@@ -31,15 +34,24 @@ class DateTableViewCell: UITableViewCell {
         label.font = .boldSystemFont(ofSize: 25)
         return label
     }()
+    lazy var testName_default: UILabel = {
+        let label = UILabel()
+        label.textColor = .black
+        label.textAlignment = .center
+        label.font = .boldSystemFont(ofSize: 25)
+        return label
+    }()
     
-    lazy var defaultText: UILabel = {
+    
+    // 남은기간 D -
+    lazy var dateCount_default: UILabel = {
         let label = UILabel()
         label.font = .boldSystemFont(ofSize: 20)
         label.textColor = .black
         label.textAlignment = .right
         return label
     }()
-    
+    //날자
     lazy var dateCount: UILabel = {
         let label = UILabel()
         label.font = .boldSystemFont(ofSize: 20)
@@ -50,18 +62,46 @@ class DateTableViewCell: UITableViewCell {
     
     private func addView(){
         contentView.addSubview(vstack)
-        vstack.addArrangedSubview(testName)
-        vstack.addArrangedSubview(hstack)
-        hstack.addArrangedSubview(defaultText)
-        hstack.addArrangedSubview(dateCount)
+        vstack.addArrangedSubview(top_hstack)
+        vstack.addArrangedSubview(bottom_hstack)
         
+        top_hstack.addArrangedSubview(testName_default)
+        top_hstack.addArrangedSubview(testName)
+        bottom_hstack.addArrangedSubview(dateCount_default)
+        bottom_hstack.addArrangedSubview(dateCount)
+        
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+
+        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5))
     }
     private func setLayout(){
         vstack.snp.makeConstraints { make in
             make.edges.equalTo(contentView.safeAreaLayoutGuide)
         }
-        hstack.snp.makeConstraints { make in
-            make.top.equalTo(testName.snp.bottom)
+        top_hstack.snp.makeConstraints { make in
+            make.top.equalToSuperview()
+            make.centerX.equalToSuperview()
+            make.leading.equalToSuperview().offset(20)
+        }
+        bottom_hstack.snp.makeConstraints { make in
+            make.top.equalTo(top_hstack.snp.bottom)
+            make.centerX.equalToSuperview()
+            make.leading.equalToSuperview().offset(20)
+        }
+        testName_default.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        testName.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        dateCount_default.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        dateCount.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
         }
     }
     
@@ -80,8 +120,9 @@ class DateTableViewCell: UITableViewCell {
 extension DateTableViewCell {
     public func bind(model: DateModel) {
         
+        testName_default.text = model.testName_default
         testName.text = model.testName
-        defaultText.text = model.defaultText
-        dateCount.text = model.dateCount
+        dateCount_default.text = model.dateCount_default
+        dateCount.text = "\(model.dateCount)"
     }
 }
