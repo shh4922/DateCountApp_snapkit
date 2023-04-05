@@ -5,68 +5,34 @@ import Firebase
 
 class SignUpVC: UIViewController {
 
-    private let scrollView = UIScrollView()
-    private let contentView = UIView()
-    private let titleLabel = UILabel()
-    private let subLabel = UILabel()
-    private let IdField = UITextField()
-    private let passwordField = UITextField()
-    private let Btn_createAccount = UIButton()
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setNotification()
-        setTapMethod()
-    }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        setLayout()
-    }
-    
-    
-    private func setLayout(){
-        self.navigationItem.title = "회원가입"
-        view.backgroundColor = .white
-        view.addSubview(scrollView)
-        scrollView.addSubview(contentView)
-        
-        contentView.addSubview(titleLabel)
-        contentView.addSubview(subLabel)
-        contentView.addSubview(IdField)
-        contentView.addSubview(passwordField)
-        contentView.addSubview(IdField)
-        contentView.addSubview(passwordField)
-        contentView.addSubview(Btn_createAccount)
-        
+    private lazy var scrollView : UIScrollView = {
+        let scrollView = UIScrollView()
         scrollView.backgroundColor = .white
-        scrollView.snp.makeConstraints { make in
-            make.edges.equalTo(view.safeAreaLayoutGuide)
-        }
+        return scrollView
+    }()
+    private lazy var contentView : UIView = {
+        let contentView = UIView()
         contentView.backgroundColor = .white
-        contentView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-            //세로 스크롤이 가능하도록 하기위해 width는 화면의view와 크기를 맞춤
-            make.width.equalTo(view.snp.width)
-        }
-        
+        return contentView
+    }()
+    private lazy var titleLabel : UILabel = {
+        let titleLabel = UILabel()
         titleLabel.textColor = .black
         titleLabel.textAlignment = .center
         titleLabel.text = "오늘의 명언"
         titleLabel.font = .boldSystemFont(ofSize: 40)
-        titleLabel.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.top.equalTo(contentView.snp.top).inset(50)
-            make.left.equalTo(contentView.snp.left).inset(30)
-        }
+        return titleLabel
+    }()
+    private lazy var subLabel : UILabel = {
+        let subLabel = UILabel()
         subLabel.textAlignment = .center
         subLabel.textColor = .lightGray
         subLabel.text = "하루명언으로 항상 동기부여받으며 공부해요."
         subLabel.font = .systemFont(ofSize: 15)
-        subLabel.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.top.equalTo(titleLabel.snp.bottom).offset(10)
-            make.left.equalTo(view).inset(30)
-        }
+        return subLabel
+    }()
+    private lazy var IdField : UITextField = {
+        let IdField = UITextField()
         IdField.placeholder = "사용하실아이디를 입력하세요"
         IdField.delegate = self
         IdField.textColor = .black
@@ -74,11 +40,10 @@ class SignUpVC: UIViewController {
         IdField.font = .systemFont(ofSize: 23)
         IdField.layer.cornerRadius = 3
         IdField.backgroundColor = UIColor(named: "textFieldColor")
-        IdField.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.top.equalTo(subLabel.snp.bottom).offset(70)
-            make.left.right.equalTo(view).inset(30)
-        }
+        return IdField
+    }()
+    private lazy var passwordField : UITextField = {
+        let passwordField = UITextField()
         passwordField.placeholder = "사용하실 비밀번호를 입력하세요."
         passwordField.delegate = self
         passwordField.textAlignment = .center
@@ -87,17 +52,79 @@ class SignUpVC: UIViewController {
         passwordField.layer.cornerRadius = 3
         passwordField.backgroundColor = UIColor(named: "textFieldColor")
         passwordField.isSecureTextEntry = true
-        passwordField.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.top.equalTo(IdField.snp.bottom).offset(30)
-            make.left.right.equalTo(view).inset(30)
-        }
+        return passwordField
+    }()
+    private lazy var Btn_createAccount : UIButton = {
+        let Btn_createAccount = UIButton()
         Btn_createAccount.backgroundColor = .systemBlue
         Btn_createAccount.addTarget(self, action: #selector(signUpAction), for: .touchUpInside)
         Btn_createAccount.layer.cornerRadius = 5
         Btn_createAccount.setTitle("OK", for: .normal)
         Btn_createAccount.setTitleColor(.blue, for: .normal)
         Btn_createAccount.setTitleColor(.white, for: .normal)
+        return Btn_createAccount
+    }()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setNotification()
+        setTapMethod()
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.navigationItem.title = "회원가입"
+        view.backgroundColor = .white
+        
+        addView()
+        setAutoLayout()
+    }
+    
+    private func addView(){
+        view.addSubview(scrollView)
+        scrollView.addSubview(contentView)
+        contentView.addSubview(titleLabel)
+        contentView.addSubview(subLabel)
+        contentView.addSubview(IdField)
+        contentView.addSubview(passwordField)
+        contentView.addSubview(IdField)
+        contentView.addSubview(passwordField)
+        contentView.addSubview(Btn_createAccount)
+
+    }
+    
+    private func setAutoLayout(){
+        scrollView.snp.makeConstraints { make in
+            make.edges.equalTo(view.safeAreaLayoutGuide)
+        }
+        contentView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+            //세로 스크롤이 가능하도록 하기위해 width는 화면의view와 크기를 맞춤
+            make.width.equalTo(view.snp.width)
+        }
+        titleLabel.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(contentView.snp.top).inset(50)
+            make.left.equalTo(contentView.snp.left).inset(30)
+        }
+        subLabel.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(titleLabel.snp.bottom).offset(10)
+            make.left.equalTo(view).inset(30)
+        }
+        
+        IdField.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(subLabel.snp.bottom).offset(70)
+            make.left.right.equalTo(view).inset(30)
+        }
+        
+        passwordField.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(IdField.snp.bottom).offset(30)
+            make.left.right.equalTo(view).inset(30)
+        }
+
         Btn_createAccount.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalTo(passwordField.snp.bottom).offset(30)

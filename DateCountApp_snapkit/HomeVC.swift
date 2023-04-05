@@ -39,7 +39,7 @@ class HomeVC: UIViewController{
         return textLabel
     }()
     private lazy var rightButton: UIBarButtonItem = {
-        let button = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(onClickPlusBtn))
+        let button = UIBarButtonItem(title: "test", style: .done, target: self, action: #selector(onClickPlusBtn))
         return button
     }()
     
@@ -82,7 +82,7 @@ class HomeVC: UIViewController{
     private func setupView(){
         print("HomeVC - setupView")
         view.backgroundColor = .white
-        self.navigationItem.rightBarButtonItem = self.rightButton
+        
         
         dateTableView.register(DateTableViewCell.self, forCellReuseIdentifier: DateTableViewCell.identifier)
         //tableview의 델리게잇 지정.
@@ -112,9 +112,10 @@ class HomeVC: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         print("HomeVC - viewDidLoad")
-        
+        self.navigationItem.rightBarButtonItem = self.rightButton
         setupView()
         loadDate()
+        self.navigationItem.rightBarButtonItem = self.rightButton
     }
     
     @objc private func onClickPlusBtn(){

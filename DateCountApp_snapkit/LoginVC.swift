@@ -5,17 +5,17 @@ import Firebase
 
 class LoginVC: UIViewController {
     
-    private lazy var containerview2 : UIView = {
+    private lazy var containerview : UIView = {
         let containerview = UIView()
         containerview.backgroundColor = .white
         return containerview
     }()
-    private lazy var scrollView2 : UIScrollView = {
+    private lazy var scrollView : UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.backgroundColor = .yellow
         return scrollView
     }()
-    private lazy var loginLabel2 : UILabel = {
+    private lazy var loginLabel : UILabel = {
         let loginLabel = UILabel()
         loginLabel.textColor = .black
         loginLabel.textAlignment = .center
@@ -23,7 +23,7 @@ class LoginVC: UIViewController {
         loginLabel.font = .boldSystemFont(ofSize: 40)
         return loginLabel
     }()
-    private lazy var subLabel2 : UILabel = {
+    private lazy var subLabel : UILabel = {
         let subLabel = UILabel()
         subLabel.text = "하루명언으로 항상 동기부여받으며 공부해요."
         subLabel.textAlignment = .center
@@ -31,7 +31,7 @@ class LoginVC: UIViewController {
         subLabel.textColor = .lightGray
         return subLabel
     }()
-    private lazy var idField2 : UITextField = {
+    private lazy var idField : UITextField = {
         let idField = UITextField()
         idField.placeholder = "id"
         idField.delegate = self
@@ -42,7 +42,7 @@ class LoginVC: UIViewController {
         idField.layer.cornerRadius = 4
         return idField
     }()
-    private lazy var passField2 : UITextField = {
+    private lazy var passField : UITextField = {
         let passField = UITextField()
         passField.placeholder = "password"
         passField.delegate = self
@@ -54,7 +54,7 @@ class LoginVC: UIViewController {
         passField.isSecureTextEntry = true
         return passField
     }()
-    private lazy var loginButton2 : UIButton = {
+    private lazy var loginButton : UIButton = {
         let loginButton = UIButton()
         loginButton.backgroundColor = .systemBlue
         loginButton.layer.cornerRadius = 5
@@ -63,7 +63,7 @@ class LoginVC: UIViewController {
         loginButton.addTarget(self, action: #selector(loginAction), for: .touchUpInside)
         return loginButton
     }()
-    private lazy var signUpButton2 : UIButton = {
+    private lazy var signUpButton : UIButton = {
         let signUpButton = UIButton()
         signUpButton.setTitle("create your account", for: .normal)
         signUpButton.setTitleColor(.blue, for: .normal)
@@ -71,27 +71,13 @@ class LoginVC: UIViewController {
         signUpButton.addTarget(self, action: #selector(moveToSignup), for: .touchUpInside)
         return signUpButton
     }()
-    private lazy var mainVC2 : UIViewController = {
+    private lazy var mainVC : UIViewController = {
        let mainVC = TabbarVC()
         return mainVC
     }()
-    
-    private let containerview = UIView()
-    private var idField = UITextField()
-    private var passField = UITextField()
-    private var loginLabel = UILabel()
-    private var subLabel = UILabel()
-    private let loginButton = UIButton()
-    private let signUpButton = UIButton()
-    private var scrollView = UIScrollView()
-    private let mainVC = TabbarVC()
-    
-    private func setLayout(){
-        
-        self.navigationItem.title = "로그인"
-        self.view.backgroundColor = .green
+
+    private func addView(){
         view.addSubview(scrollView)
-        
         scrollView.addSubview(containerview)
         containerview.addSubview(loginLabel)
         containerview.addSubview(subLabel)
@@ -99,87 +85,47 @@ class LoginVC: UIViewController {
         containerview.addSubview(passField)
         containerview.addSubview(loginButton)
         containerview.addSubview(signUpButton)
+    }
+    private func setAutoLayout(){
         
-        scrollView.backgroundColor = .yellow
         scrollView.snp.makeConstraints { make in
             make.edges.equalTo(view.safeAreaLayoutGuide)
         }
-        
-        containerview.backgroundColor = .white
         containerview.snp.makeConstraints { make in
             make.edges.equalToSuperview()
             make.width.equalTo(view.snp.width)
         }
-        
-        loginLabel.textColor = .black
-        loginLabel.textAlignment = .center
-        loginLabel.text = "오늘의 명언"
-        loginLabel.font = .boldSystemFont(ofSize: 40)
         loginLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalTo(containerview.snp.top).offset(50)
             make.left.equalTo(containerview.snp.left).offset(30)
         }
-        
-        subLabel.text = "하루명언으로 항상 동기부여받으며 공부해요."
-        subLabel.textAlignment = .center
-        subLabel.font = .boldSystemFont(ofSize: 15)
-        subLabel.textColor = .lightGray
         subLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalTo(loginLabel.snp.bottom).offset(5)
             make.left.equalTo(containerview.snp.left).offset(30)
         }
-        
-        idField.placeholder = "id"
-        idField.delegate = self
-        idField.textContentType = .emailAddress
-        idField.keyboardType = .emailAddress
-        idField.textColor = .black
-        idField.backgroundColor = UIColor(named: "textFieldColor")
-        idField.layer.cornerRadius = 4
         idField.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalTo(subLabel.snp.bottom).offset(30)
             make.left.equalTo(containerview.snp.left).offset(40)
         }
-        
-        passField.placeholder = "password"
-        passField.delegate = self
-        passField.textColor = .black
-        passField.backgroundColor = UIColor(named: "textFieldColor")
-        passField.layer.cornerRadius = 4
-        passField.textContentType = .password
-        passField.keyboardType = .default
-        passField.isSecureTextEntry = true
         passField.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalTo(idField.snp.bottom).offset(10)
             make.left.equalTo(containerview.snp.left).offset(40)
         }
-        
-        loginButton.backgroundColor = .systemBlue
-        loginButton.layer.cornerRadius = 5
-        loginButton.setTitle("login", for: .normal)
-        loginButton.setTitleColor(.white, for: .normal)
-        loginButton.addTarget(self, action: #selector(loginAction), for: .touchUpInside)
         loginButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalTo(passField.snp.bottom).offset(40)
             make.left.equalTo(containerview.snp.left).offset(100)
         }
-        
-        signUpButton.setTitle("create your account", for: .normal)
-        signUpButton.setTitleColor(.blue, for: .normal)
-        signUpButton.backgroundColor = .orange
-        signUpButton.addTarget(self, action: #selector(moveToSignup), for: .touchUpInside)
         signUpButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalTo(loginButton.snp.bottom).offset(50)
             make.left.equalTo(containerview.snp.left).offset(50)
             make.bottom.equalTo(containerview.snp.bottom)
         }
-        
     }
 
    
@@ -194,7 +140,12 @@ class LoginVC: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setLayout()
+        self.navigationItem.title = "로그인"
+        self.view.backgroundColor = .green
+        
+        //기본 설정들.
+        addView()
+        setAutoLayout()
     }
     
     //회원가입 페이지 이동
