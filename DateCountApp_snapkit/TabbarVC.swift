@@ -3,19 +3,24 @@ import SnapKit
 
 class TabbarVC : UITabBarController {
     
-    let homeVC = HomeVC()
+    //명언을 보여줄 뷰
     let listVC = ListVC()
+    //사용자의 시험일정을 보여줄 뷰
+    let homeVC = HomeVC()
+    //사용자의 설정을 컨트롤할 뷰
     let settingVC = SettingVC()
     
     private func setTabBar(){
         homeVC.title = "home"
         listVC.title = "list"
         settingVC.title = "setting"
-        self.setViewControllers([homeVC,listVC,settingVC], animated: false)
+        self.setViewControllers([listVC,homeVC,settingVC], animated: false)
         self.tabBar.backgroundColor = .white
-        guard let items = self.tabBar.items else { return }
+        guard let items = self.tabBar.items else {
+            return
+        }
         
-        let images = ["house.fill","list.bullet","gearshape.fill"]
+        let images = ["list.bullet","house.fill","gearshape.fill"]
         
         for x in 0...2 {
             items[x].image = UIImage(systemName: images[x])
