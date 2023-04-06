@@ -3,12 +3,18 @@ import SnapKit
 
 class TabbarVC : UITabBarController {
     
-    //명언을 보여줄 뷰
-    let listVC = ListVC()
-    //사용자의 시험일정을 보여줄 뷰
-    let homeVC = HomeVC()
-    //사용자의 설정을 컨트롤할 뷰
-    let settingVC = SettingVC()
+    private lazy var listVC : ListVC = {
+        let listVC = ListVC()
+        return listVC
+    }()
+    private lazy var homeVC : HomeVC = {
+        let homeVC = HomeVC()
+        return homeVC
+    }()
+    private lazy var settingVC : SettingVC = {
+        let settingVC = SettingVC()
+        return settingVC
+    }()
     
     private func setTabBar(){
         homeVC.title = "home"

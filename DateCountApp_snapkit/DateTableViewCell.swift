@@ -11,10 +11,8 @@ class DateTableViewCell: UITableViewCell {
         let vstack = UIStackView()
         vstack.distribution = .fillEqually
         vstack.axis = .vertical
-        vstack.backgroundColor = .white
         return vstack
     }()
-    
     lazy var top_hstack : UIStackView = {
         let hstack = UIStackView()
         hstack.distribution = .fillEqually
@@ -34,8 +32,6 @@ class DateTableViewCell: UITableViewCell {
         label.font = .boldSystemFont(ofSize: 25)
         return label
     }()
-    
-    // 남은기간 D -
     lazy var dateCount_default: UILabel = {
         let label = UILabel()
         label.font = .boldSystemFont(ofSize: 20)
@@ -43,7 +39,6 @@ class DateTableViewCell: UITableViewCell {
         label.textAlignment = .right
         return label
     }()
-    //날자
     lazy var dateCount: UILabel = {
         let label = UILabel()
         label.font = .boldSystemFont(ofSize: 20)
@@ -63,21 +58,15 @@ class DateTableViewCell: UITableViewCell {
         
     }
     
-    //MARK: layoutSubView
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 0, left: 0, bottom: 12, right: 0))
-    }
-    
-    //MARK: selectCell
+    //MARK: selectedCell
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         if selected {
             contentView.layer.borderWidth = 2
-            contentView.layer.borderColor = UIColor.blue.cgColor
+            contentView.layer.borderColor = UIColor.gray.cgColor
         } else {
-            contentView.layer.borderWidth = 1
-            contentView.layer.borderColor = UIColor.lightGray.cgColor
+            contentView.layer.borderWidth = 2
+            contentView.layer.borderColor = UIColor.systemGroupedBackground.cgColor
         }
     }
     
@@ -85,8 +74,16 @@ class DateTableViewCell: UITableViewCell {
     private func setAutoLayout(){
         vstack.snp.makeConstraints { make in
             make.edges.equalTo(contentView.safeAreaLayoutGuide)
-            make.height.equalTo(100)
         }
+        top_hstack.snp.makeConstraints { make in
+            make.top.equalToSuperview()
+            make.left.equalToSuperview()
+        }
+        bottom_hstack.snp.makeConstraints { make in
+            make.top.equalTo(top_hstack.snp.bottom)
+            make.left.equalToSuperview()
+        }
+
     }
     
     //MARK: init
@@ -97,11 +94,7 @@ class DateTableViewCell: UITableViewCell {
         addView()
         setAutoLayout()
     }
-    
-    
-    
     /*
-     
      required init? 은 필수생성자, 부모클래스에 "required init" 이게있다면 상속받은 아이들은 무조건적으로 required init?을  작성해주어야함.
      그런데 똑같이 작성하면 override를 작성해주어야하는데, 이녀석은 따로 작성해줄필요가없음.
      이녀석 자체로 override 되는거같음.
@@ -120,8 +113,6 @@ class DateTableViewCell: UITableViewCell {
 
 extension DateTableViewCell {
     public func bind(model: DateModel) {
-        
-        
         testName.text = model.testName
         dateCount_default.text = model.dateCount_default
         dateCount.text = "\(model.dateCount)"

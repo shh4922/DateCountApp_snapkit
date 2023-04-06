@@ -7,12 +7,12 @@ class LoginVC: UIViewController {
     
     private lazy var containerview : UIView = {
         let containerview = UIView()
-        containerview.backgroundColor = .white
+        containerview.backgroundColor = .systemBackground
         return containerview
     }()
     private lazy var scrollView : UIScrollView = {
         let scrollView = UIScrollView()
-        scrollView.backgroundColor = .yellow
+        scrollView.backgroundColor = .systemBackground
         return scrollView
     }()
     private lazy var loginLabel : UILabel = {
@@ -75,7 +75,11 @@ class LoginVC: UIViewController {
        let mainVC = TabbarVC()
         return mainVC
     }()
-
+    private lazy var SignupVC : UIViewController = {
+        let signUpVC = SignUpVC()
+        return signUpVC
+    }()
+    
     private func addView(){
         view.addSubview(scrollView)
         scrollView.addSubview(containerview)
@@ -87,7 +91,6 @@ class LoginVC: UIViewController {
         containerview.addSubview(signUpButton)
     }
     private func setAutoLayout(){
-        
         scrollView.snp.makeConstraints { make in
             make.edges.equalTo(view.safeAreaLayoutGuide)
         }
@@ -109,11 +112,13 @@ class LoginVC: UIViewController {
             make.centerX.equalToSuperview()
             make.top.equalTo(subLabel.snp.bottom).offset(30)
             make.left.equalTo(containerview.snp.left).offset(40)
+            make.height.equalTo(50)
         }
         passField.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalTo(idField.snp.bottom).offset(10)
             make.left.equalTo(containerview.snp.left).offset(40)
+            make.height.equalTo(50)
         }
         loginButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
@@ -136,12 +141,13 @@ class LoginVC: UIViewController {
         setTapMethod()
         if let person = Auth.auth().currentUser{
             print("이미 로그인하셧습니다. 그 로그인한 계정은 \(person)")
+            self.navigationController?.pushViewController(mainVC, animated: true)
         }
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationItem.title = "로그인"
-        self.view.backgroundColor = .green
+        self.view.backgroundColor = .systemBackground
         
         //기본 설정들.
         addView()
@@ -150,8 +156,7 @@ class LoginVC: UIViewController {
     
     //회원가입 페이지 이동
     @objc private func moveToSignup(sender : UIButton){
-        let signUpVC = SignUpVC()
-        self.navigationController?.pushViewController(signUpVC, animated: true)
+        self.navigationController?.pushViewController(SignupVC, animated: true)
     }
     
     //스크롤뷰 Tab할시 수행할 기능.
@@ -242,33 +247,30 @@ extension LoginVC: UITextFieldDelegate {
 }
 
    
-
-
-
-
-//프리뷰
-#if DEBUG
-    struct ViewControllerRepresentable: UIViewControllerRepresentable {
-        // update
-        func updateUIViewController(_ uiViewController: UIViewController, context: Context){
-            
-        }
-        // makeui
-        @available(iOS 13.0, *)
-        func makeUIViewController(context: Context) -> UIViewController {
-            LoginVC()
-        }
-    }
-    @available(iOS 13.0, *)
-    struct ViewController_Previews: PreviewProvider {
-        static var previews: some View{
-            Group{
-                ViewControllerRepresentable()
-                    .ignoresSafeArea(.all)//미리보기의 safeArea 이외의 부분도 채워서 보여주게됌.
-                    .previewDisplayName("iphone 11")
-            }
-        }
-    }
-    
-#endif
+//
+////프리뷰
+//#if DEBUG
+//    struct ViewControllerRepresentable: UIViewControllerRepresentable {
+//        // update
+//        func updateUIViewController(_ uiViewController: UIViewController, context: Context){
+//
+//        }
+//        // makeui
+//        @available(iOS 13.0, *)
+//        func makeUIViewController(context: Context) -> UIViewController {
+//            LoginVC()
+//        }
+//    }
+//    @available(iOS 13.0, *)
+//    struct ViewController_Previews: PreviewProvider {
+//        static var previews: some View{
+//            Group{
+//                ViewControllerRepresentable()
+//                    .ignoresSafeArea(.all)//미리보기의 safeArea 이외의 부분도 채워서 보여주게됌.
+//                    .previewDisplayName("iphone 11")
+//            }
+//        }
+//    }
+//
+//#endif
 

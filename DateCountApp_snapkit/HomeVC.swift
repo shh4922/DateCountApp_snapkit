@@ -2,6 +2,11 @@ import Firebase
 import UIKit
 import SnapKit
 import SwiftUI
+/*
+ 주황색은 contentView(cell)에 있는 vstack
+ 빨간색은 tableview
+ 파란색은 tableview에 보여지는 cell의 영역
+ */
 
 class HomeVC: UIViewController{
     
@@ -9,16 +14,15 @@ class HomeVC: UIViewController{
     
     private lazy var dateTableView : UITableView = {
         let dateTableView = UITableView(frame: view.safeAreaLayoutGuide.layoutFrame, style: .insetGrouped)
-        //테이블뷰 라인 제거.
-        dateTableView.separatorStyle = .none
-        dateTableView.backgroundColor = .systemGroupedBackground
         dateTableView.layer.cornerRadius = 10
+        dateTableView.backgroundColor = .systemBackground
+        dateTableView.separatorStyle = .none
         return dateTableView
     }()
     private lazy var topView : UIView = {
         let topview = UIView()
-        topview.backgroundColor = .systemGroupedBackground
         topview.layer.cornerRadius = 10
+        topview.backgroundColor = .systemGray5
         return topview
     }()
     private lazy var titleLabel : UILabel = {
@@ -81,13 +85,14 @@ class HomeVC: UIViewController{
     //특정기능을 위한 setup
     private func setupView(){
         print("HomeVC - setupView")
-        view.backgroundColor = .white
+        view.backgroundColor = .systemBackground
         
         
         dateTableView.register(DateTableViewCell.self, forCellReuseIdentifier: DateTableViewCell.identifier)
         //tableview의 델리게잇 지정.
         dateTableView.delegate = self
         dateTableView.dataSource = self
+        dateTableView.rowHeight = 100
         
     }
     
@@ -112,10 +117,9 @@ class HomeVC: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         print("HomeVC - viewDidLoad")
-        self.navigationItem.rightBarButtonItem = self.rightButton
         setupView()
         loadDate()
-        self.navigationItem.rightBarButtonItem = self.rightButton
+        
     }
     
     @objc private func onClickPlusBtn(){
@@ -135,7 +139,9 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: DateTableViewCell.identifier) as? DateTableViewCell ?? DateTableViewCell()
         
         cell.bind(model: dataSource[indexPath.row])
-        cell.backgroundColor = .systemGroupedBackground
+//        cell.backgroundColor = .blue
+//        cell.layer.cornerRadius = 10
+//        cell.frame = cell.frame.inset(by: UIEdgeInsets(top: 0, left: 0, bottom: 10, right: 0))
         return cell
     }
 }
@@ -145,7 +151,7 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
 struct HomeView: UIViewControllerRepresentable {
     // update
     func updateUIViewController(_ uiViewController: UIViewController, context: Context){
-        
+
     }
     // makeui
     @available(iOS 13.0, *)

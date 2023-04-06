@@ -3,8 +3,25 @@ import SwiftUI
 import UIKit
 
 class ListVC: UIViewController {
-    private let titleLabel = UILabel()
-    private var text1 = UILabel()
+    
+    private lazy var titleLabel : UILabel = {
+        let titleLabel = UILabel()
+        titleLabel.text = "오늘의 글귀"
+        titleLabel.textColor = .black
+        titleLabel.textAlignment = .center
+        titleLabel.font = .boldSystemFont(ofSize: 30)
+        
+        return titleLabel
+    }()
+    
+    private lazy var text1 : UILabel = {
+        let text1 = UILabel()
+        text1.text = "뭉치면 살고 흩어지면 죽는다. 하지만 나는 너무 배가고프다 그렇기떄문에 밥을 먹어야한다. 슈바암ㅇㄴ암ㄴ이ㅏㅓㅁㄴ이ㅏㅁㄴㄴ머 \n asdasd asdasdas\n asdasd 뭉치면 살고 흩어지면 죽는다. 하지만 나는 너무 배가고프다 그렇기떄문에 밥을 먹어야한다"
+        text1.textColor = .black
+        text1.numberOfLines = .zero
+        text1.textAlignment = .center
+        return text1
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -16,23 +33,17 @@ class ListVC: UIViewController {
     }
     
     private func setLayout(){
-        view.backgroundColor = .brown
+        view.backgroundColor = .systemBackground
         view.addSubview(titleLabel)
         view.addSubview(text1)
         
-        titleLabel.text = "오늘의 글귀"
-        titleLabel.textColor = .black
-        titleLabel.textAlignment = .center
-        titleLabel.font = .boldSystemFont(ofSize: 30)
+        
         titleLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(50)
             make.left.equalToSuperview().offset(30)
         }
-        text1.text = "뭉치면 살고 흩어지면 죽는다. 하지만 나는 너무 배가고프다 그렇기떄문에 밥을 먹어야한다. 슈바암ㅇㄴ암ㄴ이ㅏㅓㅁㄴ이ㅏㅁㄴㄴ머 \n asdasd asdasdas\n asdasd 뭉치면 살고 흩어지면 죽는다. 하지만 나는 너무 배가고프다 그렇기떄문에 밥을 먹어야한다"
-        text1.textColor = .black
-        text1.numberOfLines = .zero
-        text1.textAlignment = .center
+       
 //        text1.font = UIFont(name: "KCC-Chassam", size: 20)
         text1.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
