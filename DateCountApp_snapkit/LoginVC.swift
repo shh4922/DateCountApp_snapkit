@@ -5,6 +5,8 @@ import Firebase
 
 class LoginVC: UIViewController {
     
+    var isLogin : Bool = false
+    
     private lazy var containerview : UIView = {
         let containerview = UIView()
         containerview.backgroundColor = .systemBackground
@@ -79,7 +81,7 @@ class LoginVC: UIViewController {
         let signUpVC = SignUpVC()
         return signUpVC
     }()
-    
+    var currentUser : UserModel? = nil
     private func addView(){
         view.addSubview(scrollView)
         scrollView.addSubview(containerview)
@@ -139,10 +141,15 @@ class LoginVC: UIViewController {
         super.viewDidLoad()
         setNotificationKeyboard()
         setTapMethod()
+        
         if let person = Auth.auth().currentUser{
             print("이미 로그인하셧습니다. 그 로그인한 계정은 \(person)")
-            self.navigationController?.pushViewController(mainVC, animated: true)
+            
+            UserDefaults.standard.string(forKey: "userName")
+            (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(self.mainVC)
+//            self.navigationController?.pushViewController(mainVC, animated: true)
         }
+        
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -206,7 +213,12 @@ class LoginVC: UIViewController {
                 }else{
                     print("email : \(email), password : \(password)")
                     print("login Succes")
-                    self.navigationController?.pushViewController(self.mainVC, animated: true)
+                    UserDefaults.standard.string(forKey: "userName")
+//                    var appDelegate = UIApplication.shared.delegate as! SceneDelegate
+//                    appDelegate.window?.rootViewController = self.mainVC
+                    (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(self.mainVC)
+                    
+//                    self.navigationController?.pushViewController(self.mainVC, animated: true)
                 }
             }
         }

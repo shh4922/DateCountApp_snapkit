@@ -3,6 +3,10 @@ import SwiftUI
 import UIKit
 
 class ListVC: UIViewController {
+    private lazy var loginVC : LoginVC = {
+        let loginVC = LoginVC()
+        return loginVC
+    }()
     
     private lazy var titleLabel : UILabel = {
         let titleLabel = UILabel()
@@ -12,6 +16,14 @@ class ListVC: UIViewController {
         titleLabel.font = .boldSystemFont(ofSize: 30)
         
         return titleLabel
+    }()
+    private lazy var testButton : UIButton = {
+        let testButton = UIButton()
+        testButton.backgroundColor = .green
+        testButton.setTitle("로그아웃!!", for: .normal)
+        testButton.setTitleColor(.white, for: .normal)
+        testButton.addTarget(self, action: #selector(logout), for: .touchUpInside)
+        return testButton
     }()
     
     private lazy var text1 : UILabel = {
@@ -36,7 +48,7 @@ class ListVC: UIViewController {
         view.backgroundColor = .systemBackground
         view.addSubview(titleLabel)
         view.addSubview(text1)
-        
+        view.addSubview(testButton)
         
         titleLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
@@ -44,14 +56,24 @@ class ListVC: UIViewController {
             make.left.equalToSuperview().offset(30)
         }
        
-//        text1.font = UIFont(name: "KCC-Chassam", size: 20)
+
         text1.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalTo(titleLabel.snp.bottom).offset(30)
             make.left.equalToSuperview().offset(30)
         }
+        testButton.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(text1.snp.bottom).offset(20)
+            make.left.equalToSuperview().offset(30)
+        }
     }
 
+    @objc func logout(){
+        print("logout!!")
+        UserDefaults.standard.string(forKey: "userName")
+        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(loginVC)
+    }
 }
 
 

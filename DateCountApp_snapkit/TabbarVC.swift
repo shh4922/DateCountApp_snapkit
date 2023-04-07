@@ -9,12 +9,14 @@ class TabbarVC : UITabBarController {
     }()
     private lazy var homeVC : HomeVC = {
         let homeVC = HomeVC()
+        homeVC.navigationItem.title = "gkdlgkdl"
         return homeVC
     }()
     private lazy var settingVC : SettingVC = {
         let settingVC = SettingVC()
         return settingVC
     }()
+
     
     private func setTabBar(){
         homeVC.title = "home"

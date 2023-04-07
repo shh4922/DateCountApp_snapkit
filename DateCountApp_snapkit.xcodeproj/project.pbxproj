@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0068707729D9EA66001330FA /* DateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0068707629D9EA66001330FA /* DateTableViewCell.swift */; };
 		0068707929D9EAE1001330FA /* DateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0068707829D9EAE1001330FA /* DateModel.swift */; };
+		0099BC9429DFFFAA00404D7E /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0099BC9329DFFFAA00404D7E /* UserModel.swift */; };
 		00AD82A129D56AB200059928 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AD82A029D56AB200059928 /* HomeVC.swift */; };
 		00AD82A329D5721B00059928 /* TabbarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AD82A229D5721B00059928 /* TabbarVC.swift */; };
 		00AD82A529D599CD00059928 /* ListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AD82A429D599CD00059928 /* ListVC.swift */; };
@@ -27,6 +28,7 @@
 /* Begin PBXFileReference section */
 		0068707629D9EA66001330FA /* DateTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTableViewCell.swift; sourceTree = "<group>"; };
 		0068707829D9EAE1001330FA /* DateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateModel.swift; sourceTree = "<group>"; };
+		0099BC9329DFFFAA00404D7E /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		00AD82A029D56AB200059928 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		00AD82A229D5721B00059928 /* TabbarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarVC.swift; sourceTree = "<group>"; };
 		00AD82A429D599CD00059928 /* ListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListVC.swift; sourceTree = "<group>"; };
@@ -94,6 +96,7 @@
 				00AD82A629D599E300059928 /* SettingVC.swift */,
 				0068707629D9EA66001330FA /* DateTableViewCell.swift */,
 				0068707829D9EAE1001330FA /* DateModel.swift */,
+				0099BC9329DFFFAA00404D7E /* UserModel.swift */,
 			);
 			path = DateCountApp_snapkit;
 			sourceTree = "<group>";
@@ -240,6 +243,7 @@
 				0068707929D9EAE1001330FA /* DateModel.swift in Sources */,
 				00AD82A129D56AB200059928 /* HomeVC.swift in Sources */,
 				00B45C3229CC29740030CD02 /* SignUpVC.swift in Sources */,
+				0099BC9429DFFFAA00404D7E /* UserModel.swift in Sources */,
 				00BFE7ED29C329F900C279FD /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
