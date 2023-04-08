@@ -71,7 +71,6 @@ class ListVC: UIViewController {
 
     @objc func logout(){
         print("logout!!")
-        UserDefaults.standard.string(forKey: "userName")
         (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(loginVC)
     }
 }

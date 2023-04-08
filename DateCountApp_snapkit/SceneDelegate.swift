@@ -17,17 +17,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         
         // if user is logged in before
-        if let loggedUsername = UserDefaults.standard.string(forKey: "userName") {
+        if let isLogin = UserDefaults.standard.string(forKey : "userAccount"){
             
             window?.rootViewController = mainVC
-        } else {
-            
-            window?.rootViewController = loginVC
+        }else{
+            let navigationController = UINavigationController(rootViewController: loginVC)
+            window?.rootViewController = navigationController
         }
+        
         //시작 화면
 
 //        window?.rootViewController = loginVC
-//        let navigationController = UINavigationController(rootViewController: loginVC)
+//
 //        self.window?.rootViewController = navigationController
         
         // Not nil이면  화면그려!

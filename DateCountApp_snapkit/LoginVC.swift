@@ -138,20 +138,15 @@ class LoginVC: UIViewController {
    
     
     override func viewDidLoad() {
+        print("LoginVC - viewDidLoad run() ")
         super.viewDidLoad()
         setNotificationKeyboard()
         setTapMethod()
-        
-        if let person = Auth.auth().currentUser{
-            print("이미 로그인하셧습니다. 그 로그인한 계정은 \(person)")
-            
-            UserDefaults.standard.string(forKey: "userName")
-            (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(self.mainVC)
-//            self.navigationController?.pushViewController(mainVC, animated: true)
-        }
-        
+//        UserDefaults.standard.string(forKey: "userName")
+//        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(self.mainVC)
     }
     override func viewWillAppear(_ animated: Bool) {
+        print("LoginVC - viewWillAppear run() ")
         super.viewWillAppear(animated)
         self.navigationItem.title = "로그인"
         self.view.backgroundColor = .systemBackground
@@ -213,12 +208,9 @@ class LoginVC: UIViewController {
                 }else{
                     print("email : \(email), password : \(password)")
                     print("login Succes")
-                    UserDefaults.standard.string(forKey: "userName")
-//                    var appDelegate = UIApplication.shared.delegate as! SceneDelegate
-//                    appDelegate.window?.rootViewController = self.mainVC
+                    UserDefaults.standard.set(Auth.auth().currentUser?.email, forKey: "userAccount")
                     (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(self.mainVC)
-                    
-//                    self.navigationController?.pushViewController(self.mainVC, animated: true)
+
                 }
             }
         }
