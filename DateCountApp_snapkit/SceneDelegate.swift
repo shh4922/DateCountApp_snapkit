@@ -4,8 +4,17 @@ import Firebase
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-    let mainVC = TabbarVC()
-    let loginVC = LoginVC()
+    private lazy var mainVC : MainVC = {
+        let mainVC = MainVC()
+        return mainVC
+        
+    }()
+    private lazy var loginVC : UINavigationController = {
+        let loginVC = LoginVC()
+        let navLoginVC = UINavigationController(rootViewController: loginVC)
+        return navLoginVC
+    }()
+    
     func scene(_ scene: UIScene,
                willConnectTo session: UISceneSession,
                options connectionOptions: UIScene.ConnectionOptions)
@@ -15,23 +24,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         //그려질 화면? 앱? 폰?
         window = UIWindow(windowScene: windowScene)
         
-        
-        // if user is logged in before
-        if let isLogin = UserDefaults.standard.string(forKey : "userAccount"){
-            
+        if UserDefaults.standard.bool(forKey: "isLogin"){
+            print("is login true")
+            print("SceneDelegate_ \(Auth.auth().currentUser?.email)")
             window?.rootViewController = mainVC
         }else{
-            let navigationController = UINavigationController(rootViewController: loginVC)
-            window?.rootViewController = navigationController
+            print("is login false")
+            window?.rootViewController = loginVC
         }
         
-        //시작 화면
-
-//        window?.rootViewController = loginVC
-//
-//        self.window?.rootViewController = navigationController
-        
-        // Not nil이면  화면그려!
+        // 화면그려!
         window?.makeKeyAndVisible()
         
         
@@ -42,13 +44,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func sceneWillEnterForeground(_ scene: UIScene) {}
     func sceneDidEnterBackground(_ scene: UIScene) {}
     
+    // rootView바꿔주는 코드!
     func changeRootViewController(_ vc: UIViewController, animated: Bool = true) {
         guard let window = self.window else {
             return
         }
-        
-        // change the root view controller to your specific view controller
         window.rootViewController = vc
+        // add animation
+           UIView.transition(with: window,
+                             duration: 0.5,
+                             options: [.transitionFlipFromLeft],
+                             animations: nil,
+                             completion: nil)
+        
     }
 
 }

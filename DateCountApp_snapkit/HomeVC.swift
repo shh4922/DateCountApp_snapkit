@@ -2,16 +2,9 @@ import Firebase
 import UIKit
 import SnapKit
 import SwiftUI
-/*
- 주황색은 contentView(cell)에 있는 vstack
- 빨간색은 tableview
- 파란색은 tableview에 보여지는 cell의 영역
- */
 
 class HomeVC: UIViewController{
-    
     var dataSource = [DateModel]()
-    
     private lazy var dateTableView : UITableView = {
         let dateTableView = UITableView(frame: view.safeAreaLayoutGuide.layoutFrame, style: .insetGrouped)
         dateTableView.layer.cornerRadius = 10
@@ -37,7 +30,7 @@ class HomeVC: UIViewController{
         let textLabel = UILabel()
         textLabel.textAlignment = .center
         textLabel.textColor = .black
-        textLabel.font = .systemFont(ofSize: 15)
+        textLabel.font = UIFont(name: "Dovemayo_gothic", size: 20)
         textLabel.numberOfLines = 0
         textLabel.text = "잘하고싶다 배고프다 운동은 왜안했냐 시벌.. 책읽어야징 낼 학교가기싫다 음 불평만 하고있네 신현호 너 잘하고있다 계속이렇게만 꾸준히해 그럼 무조건 잘해진다 오키??똥싸고싶다 잘하고?"
         return textLabel
@@ -46,12 +39,25 @@ class HomeVC: UIViewController{
         let button = UIBarButtonItem(title: "test", style: .done, target: self, action: #selector(onClickPlusBtn))
         return button
     }()
-    
+    private lazy var navBar : UINavigationBar = {
+        var statusBarHeight: CGFloat = 0
+        statusBarHeight = UIApplication.shared.windows.first?.safeAreaInsets.top ?? 0
+        let navBar = UINavigationBar(frame: .init(x: 0, y: statusBarHeight, width: view.frame.width, height: statusBarHeight))
+        navBar.backgroundColor = .systemBackground
+        navBar.isTranslucent = false
+        
+        let navItem = UINavigationItem(title: "홈입니당")
+        navItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(onClickPlusBtn))
+        navItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(onClickPlusBtn))
+        navBar.items = [navItem]
+        return navBar
+    }()
     //layout제약조건 및 설정
     private func setAutoLayout(){
         topView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.left.equalTo(view.safeAreaLayoutGuide).offset(10)
+            make.top.equalTo(navBar.snp.bottom).offset(20)
+            make.left.equalToSuperview().offset(10)
             make.height.equalTo(200)
         }
         titleLabel.snp.makeConstraints { make in
@@ -72,22 +78,20 @@ class HomeVC: UIViewController{
             make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(40)
         }
     }
-    
     //뷰에 추가해야할 하위뷰들 넣어주는곳.
     private func addView(){
         view.addSubview(topView)
+        view.addSubview(navBar)
         topView.addSubview(titleLabel)
         topView.addSubview(textLabel)
         view.addSubview(dateTableView)
         
     }
-    
     //특정기능을 위한 setup
     private func setupView(){
         print("HomeVC - setupView")
         view.backgroundColor = .systemBackground
-        
-        
+
         dateTableView.register(DateTableViewCell.self, forCellReuseIdentifier: DateTableViewCell.identifier)
         //tableview의 델리게잇 지정.
         dateTableView.delegate = self
@@ -95,7 +99,6 @@ class HomeVC: UIViewController{
         dateTableView.rowHeight = 100
         
     }
-    
     //사용자의 시험일정등의 데이터를 받아오는곳.
     private func loadDate(){
         print("HomeVC - runLoadDate")

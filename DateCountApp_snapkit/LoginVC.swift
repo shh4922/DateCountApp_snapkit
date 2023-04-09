@@ -4,9 +4,6 @@ import SnapKit
 import Firebase
 
 class LoginVC: UIViewController {
-    
-    var isLogin : Bool = false
-    
     private lazy var containerview : UIView = {
         let containerview = UIView()
         containerview.backgroundColor = .systemBackground
@@ -22,7 +19,7 @@ class LoginVC: UIViewController {
         loginLabel.textColor = .black
         loginLabel.textAlignment = .center
         loginLabel.text = "오늘의 명언"
-        loginLabel.font = .boldSystemFont(ofSize: 40)
+        loginLabel.font = UIFont(name: "The Jamsil OTF 6 ExtraBold", size: 35)
         return loginLabel
     }()
     private lazy var subLabel : UILabel = {
@@ -42,6 +39,7 @@ class LoginVC: UIViewController {
         idField.textColor = .black
         idField.backgroundColor = UIColor(named: "textFieldColor")
         idField.layer.cornerRadius = 4
+        idField.addLeftPadding()
         return idField
     }()
     private lazy var passField : UITextField = {
@@ -54,6 +52,7 @@ class LoginVC: UIViewController {
         passField.textContentType = .password
         passField.keyboardType = .default
         passField.isSecureTextEntry = true
+        passField.addLeftPadding()
         return passField
     }()
     private lazy var loginButton : UIButton = {
@@ -74,7 +73,7 @@ class LoginVC: UIViewController {
         return signUpButton
     }()
     private lazy var mainVC : UIViewController = {
-       let mainVC = TabbarVC()
+       let mainVC = MainVC()
         return mainVC
     }()
     private lazy var SignupVC : UIViewController = {
@@ -82,71 +81,19 @@ class LoginVC: UIViewController {
         return signUpVC
     }()
     var currentUser : UserModel? = nil
-    private func addView(){
-        view.addSubview(scrollView)
-        scrollView.addSubview(containerview)
-        containerview.addSubview(loginLabel)
-        containerview.addSubview(subLabel)
-        containerview.addSubview(idField)
-        containerview.addSubview(passField)
-        containerview.addSubview(loginButton)
-        containerview.addSubview(signUpButton)
-    }
-    private func setAutoLayout(){
-        scrollView.snp.makeConstraints { make in
-            make.edges.equalTo(view.safeAreaLayoutGuide)
-        }
-        containerview.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-            make.width.equalTo(view.snp.width)
-        }
-        loginLabel.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.top.equalTo(containerview.snp.top).offset(50)
-            make.left.equalTo(containerview.snp.left).offset(30)
-        }
-        subLabel.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.top.equalTo(loginLabel.snp.bottom).offset(5)
-            make.left.equalTo(containerview.snp.left).offset(30)
-        }
-        idField.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.top.equalTo(subLabel.snp.bottom).offset(30)
-            make.left.equalTo(containerview.snp.left).offset(40)
-            make.height.equalTo(50)
-        }
-        passField.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.top.equalTo(idField.snp.bottom).offset(10)
-            make.left.equalTo(containerview.snp.left).offset(40)
-            make.height.equalTo(50)
-        }
-        loginButton.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.top.equalTo(passField.snp.bottom).offset(40)
-            make.left.equalTo(containerview.snp.left).offset(100)
-        }
-        signUpButton.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.top.equalTo(loginButton.snp.bottom).offset(50)
-            make.left.equalTo(containerview.snp.left).offset(50)
-            make.bottom.equalTo(containerview.snp.bottom)
-        }
-    }
-
+    
    
     
     override func viewDidLoad() {
-        print("LoginVC - viewDidLoad run() ")
+        print("LoginVC - viewDidLoad")
         super.viewDidLoad()
         setNotificationKeyboard()
         setTapMethod()
-//        UserDefaults.standard.string(forKey: "userName")
-//        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(self.mainVC)
+        print("LoginVC - \(Auth.auth().currentUser?.email)")
+//        print(Auth.auth().currentUser?.email)
     }
     override func viewWillAppear(_ animated: Bool) {
-        print("LoginVC - viewWillAppear run() ")
+        print("LoginVC - viewWillAppear")
         super.viewWillAppear(animated)
         self.navigationItem.title = "로그인"
         self.view.backgroundColor = .systemBackground
@@ -160,7 +107,6 @@ class LoginVC: UIViewController {
     @objc private func moveToSignup(sender : UIButton){
         self.navigationController?.pushViewController(SignupVC, animated: true)
     }
-    
     //스크롤뷰 Tab할시 수행할 기능.
     @objc private func RunTapMethod(){
         self.view.endEditing(true)
@@ -186,7 +132,7 @@ class LoginVC: UIViewController {
     }
     //키보드가 뷰에서 안보이면 하는 액션
     @objc private func keyboardWillHide() {
-        print("loginVC keyboardWillHide()-run")
+        print("loginVC keyboardWillHide()")
         let contentInset = UIEdgeInsets.zero
         scrollView.contentInset = contentInset
         scrollView.scrollIndicatorInsets = contentInset
@@ -208,16 +154,69 @@ class LoginVC: UIViewController {
                 }else{
                     print("email : \(email), password : \(password)")
                     print("login Succes")
-                    UserDefaults.standard.set(Auth.auth().currentUser?.email, forKey: "userAccount")
+                    UserDefaults.standard.set(true, forKey: "isLogin")
                     (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(self.mainVC)
 
                 }
             }
         }
     }
-    
-    
-    
+    //MARK: addView
+    private func addView(){
+        view.addSubview(scrollView)
+        scrollView.addSubview(containerview)
+        containerview.addSubview(loginLabel)
+        containerview.addSubview(subLabel)
+        containerview.addSubview(idField)
+        containerview.addSubview(passField)
+        containerview.addSubview(loginButton)
+        containerview.addSubview(signUpButton)
+    }
+    //MARK: setAutoLayout
+    private func setAutoLayout(){
+        scrollView.snp.makeConstraints { make in
+            make.edges.equalTo(view.safeAreaLayoutGuide)
+        }
+        containerview.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+            make.width.equalTo(view.snp.width)
+        }
+        loginLabel.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(containerview.snp.top).offset(50)
+            make.left.equalTo(containerview.snp.left).offset(30)
+        }
+        subLabel.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(loginLabel.snp.bottom).offset(5)
+            make.left.equalTo(containerview.snp.left).offset(30)
+        }
+        
+        idField.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(subLabel.snp.bottom).offset(30)
+            make.left.equalTo(containerview.snp.left).offset(40)
+            make.height.equalTo(50)
+            
+        }
+        passField.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(idField.snp.bottom).offset(10)
+            make.left.equalTo(containerview.snp.left).offset(40)
+            make.height.equalTo(50)
+        }
+        loginButton.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(passField.snp.bottom).offset(40)
+            make.left.equalTo(containerview.snp.left).offset(100)
+        }
+        signUpButton.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(loginButton.snp.bottom).offset(50)
+            make.left.equalTo(containerview.snp.left).offset(50)
+            make.bottom.equalTo(containerview.snp.bottom)
+        }
+    }
     //스크롤뷰에 tab기능 추가를 위한 설정
     private func setTapMethod(){
         let singleTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(RunTapMethod))
@@ -231,9 +230,6 @@ class LoginVC: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
-    //Set Layout
-  
-    
 }
 
 //keyboard에서 return 누를시, 다음 input으로 넘어가게 하기위해서 UITextFieldDelegate 추가
@@ -250,31 +246,40 @@ extension LoginVC: UITextFieldDelegate {
   }
 }
 
+// textField에 패딩주기위한 확장
+extension UITextField {
+  func addLeftPadding() {
+    let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: self.frame.height))
+    self.leftView = paddingView
+    self.leftViewMode = ViewMode.always
+  }
+}
+
    
 //
-////프리뷰
-//#if DEBUG
-//    struct ViewControllerRepresentable: UIViewControllerRepresentable {
-//        // update
-//        func updateUIViewController(_ uiViewController: UIViewController, context: Context){
-//
-//        }
-//        // makeui
-//        @available(iOS 13.0, *)
-//        func makeUIViewController(context: Context) -> UIViewController {
-//            LoginVC()
-//        }
-//    }
-//    @available(iOS 13.0, *)
-//    struct ViewController_Previews: PreviewProvider {
-//        static var previews: some View{
-//            Group{
-//                ViewControllerRepresentable()
-//                    .ignoresSafeArea(.all)//미리보기의 safeArea 이외의 부분도 채워서 보여주게됌.
-//                    .previewDisplayName("iphone 11")
-//            }
-//        }
-//    }
-//
-//#endif
+//프리뷰
+#if DEBUG
+    struct ViewControllerRepresentable: UIViewControllerRepresentable {
+        // update
+        func updateUIViewController(_ uiViewController: UIViewController, context: Context){
+
+        }
+        // makeui
+        @available(iOS 13.0, *)
+        func makeUIViewController(context: Context) -> UIViewController {
+            LoginVC()
+        }
+    }
+    @available(iOS 13.0, *)
+    struct ViewController_Previews: PreviewProvider {
+        static var previews: some View{
+            Group{
+                ViewControllerRepresentable()
+                    .ignoresSafeArea(.all)//미리보기의 safeArea 이외의 부분도 채워서 보여주게됌.
+                    .previewDisplayName("iphone 11")
+            }
+        }
+    }
+
+#endif
 

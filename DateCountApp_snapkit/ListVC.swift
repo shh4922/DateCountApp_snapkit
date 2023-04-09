@@ -1,11 +1,13 @@
 import SnapKit
 import SwiftUI
 import UIKit
-
+import Firebase
 class ListVC: UIViewController {
-    private lazy var loginVC : LoginVC = {
+    private lazy var loginVC : UINavigationController = {
         let loginVC = LoginVC()
-        return loginVC
+        let navLoginVC = UINavigationController(rootViewController: loginVC)
+        
+        return navLoginVC
     }()
     
     private lazy var titleLabel : UILabel = {
@@ -70,8 +72,16 @@ class ListVC: UIViewController {
     }
 
     @objc func logout(){
+        let auth = Auth.auth()
         print("logout!!")
-        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(loginVC)
+        do {
+            try auth.signOut()
+            UserDefaults.standard.set(false, forKey: "isLogin")
+            (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(loginVC)
+        }catch let signOutError {
+            print(signOutError)
+        }
+ 
     }
 }
 
