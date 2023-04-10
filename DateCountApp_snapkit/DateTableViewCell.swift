@@ -10,13 +10,15 @@ class DateTableViewCell: UITableViewCell {
     lazy var vstack : UIStackView = {
         let vstack = UIStackView()
         vstack.distribution = .fillEqually
+        vstack.spacing = 5
         vstack.axis = .vertical
         vstack.backgroundColor = .systemBackground
-//        vstack.spacing = 10
-//        vstack.layoutMargins = UIEdgeInsets(top: 15, left: 10, bottom: 0, right: 0) // 상하좌우 마진을 10으로 설정
-//        vstack.isLayoutMarginsRelativeArrangement = true
-//        vstack.setNeedsLayout()
-//        vstack.layoutIfNeeded()
+        vstack.setContentHuggingPriority(.init(251), for: .horizontal)
+        vstack.setContentCompressionResistancePriority(.init(751), for: .horizontal)
+        vstack.spacing = 0
+        //하위뷰들한테는 적용이 안된다함..
+        vstack.layoutMargins = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 0)
+        vstack.isLayoutMarginsRelativeArrangement = true
         return vstack
     }()
     lazy var testName: UILabel = {
@@ -24,11 +26,8 @@ class DateTableViewCell: UITableViewCell {
         label.textColor = .black
         label.textAlignment = .left
         label.font = .boldSystemFont(ofSize: 25)
-        label.setContentHuggingPriority(.defaultLow, for: .horizontal)
         label.backgroundColor = .systemBackground
-        label.numberOfLines = 0
-//        label.lineBreakMode = .byWordWrapping
-//        label.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        label.layoutMargins = UIEdgeInsets(top: 30, left: 10, bottom: 0, right: 0)
         return label
     }()
     lazy var selectedDate: UILabel = {
@@ -37,30 +36,27 @@ class DateTableViewCell: UITableViewCell {
         label.textColor = .lightGray
         label.textAlignment = .left
         label.backgroundColor = .systemBackground
-        label.numberOfLines = 0
-        label.setContentHuggingPriority(.defaultLow, for: .horizontal)
-//        label.lineBreakMode = .byWordWrapping
-//        label.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        label.layoutMargins = UIEdgeInsets(top: 0, left: 10, bottom: 10, right: 0)
         return label
     }()
     lazy var dateCount_default: UILabel = {
         let label = UILabel()
-        label.font = .boldSystemFont(ofSize: 20)
+        label.font = .boldSystemFont(ofSize: 25)
         label.textColor = .black
         label.textAlignment = .right
         label.backgroundColor = .systemBackground
-        label.setContentHuggingPriority(.defaultHigh, for: .horizontal)
-        
+        label.setContentHuggingPriority(.init(252), for: .horizontal)
+        label.setContentCompressionResistancePriority(.init(750), for: .horizontal)
         return label
     }()
     lazy var dateCount: UILabel = {
         let label = UILabel()
-        label.font = .boldSystemFont(ofSize: 20)
+        label.font = .boldSystemFont(ofSize: 25)
         label.textColor = .black
         label.textAlignment = .left
         label.backgroundColor = .systemBackground
-        label.numberOfLines = 0
-        label.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        label.setContentHuggingPriority(.init(251), for: .horizontal)
+        label.setContentCompressionResistancePriority(.init(751), for: .horizontal)
         return label
     }()
     
@@ -90,18 +86,29 @@ class DateTableViewCell: UITableViewCell {
     private func setAutoLayout(){
         
         vstack.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(10)
-            make.left.equalToSuperview().inset(10)
+            make.top.equalToSuperview()
+            make.bottom.equalToSuperview()
+            make.left.equalToSuperview()
+            make.width.equalTo(180)
         }
+//        testName.snp.makeConstraints { make in
+//            make.top.equalToSuperview().offset(15)
+//            make.left.equalToSuperview().offset(10)
+//        }
+//        selectedDate.snp.makeConstraints { make in
+//            make.top.equalTo(testName.snp.bottom).offset(0)
+//            make.left.equalToSuperview().offset(10)
+//        }
+        
         dateCount_default.snp.makeConstraints { make in
             make.top.equalToSuperview()
             make.centerY.equalToSuperview()
-            make.left.equalTo(vstack.snp.right).offset(20)
+            make.left.equalTo(vstack.snp.right)
         }
         dateCount.snp.makeConstraints { make in
-            make.top.equalToSuperview()
             make.centerY.equalToSuperview()
-            make.right.equalToSuperview().offset(10)
+            make.top.equalToSuperview()
+            make.left.equalTo(dateCount_default.snp.right)
         }
     }
     override func layoutSubviews() {
