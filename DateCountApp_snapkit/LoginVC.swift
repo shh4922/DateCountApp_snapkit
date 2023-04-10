@@ -4,6 +4,7 @@ import SnapKit
 import Firebase
 
 class LoginVC: UIViewController {
+    //MARK: - 필요한뷰 create
     private lazy var containerview : UIView = {
         let containerview = UIView()
         containerview.backgroundColor = .systemBackground
@@ -19,7 +20,7 @@ class LoginVC: UIViewController {
         loginLabel.textColor = .black
         loginLabel.textAlignment = .center
         loginLabel.text = "오늘의 명언"
-        loginLabel.font = UIFont(name: "The Jamsil OTF 6 ExtraBold", size: 35)
+        loginLabel.font = UIFont(name: "KimjungchulMyungjo-Bold", size: 35)
         return loginLabel
     }()
     private lazy var subLabel : UILabel = {
@@ -59,8 +60,9 @@ class LoginVC: UIViewController {
         let loginButton = UIButton()
         loginButton.backgroundColor = .systemBlue
         loginButton.layer.cornerRadius = 5
-        loginButton.setTitle("login", for: .normal)
+        loginButton.setTitle("Login", for: .normal)
         loginButton.setTitleColor(.white, for: .normal)
+        loginButton.titleLabel?.font = .boldSystemFont(ofSize: 20)
         loginButton.addTarget(self, action: #selector(loginAction), for: .touchUpInside)
         return loginButton
     }()
@@ -80,29 +82,24 @@ class LoginVC: UIViewController {
         let signUpVC = SignUpVC()
         return signUpVC
     }()
-    var currentUser : UserModel? = nil
     
-   
-    
+    //MARK: - lifecycle
+    //환경설정할부분 add
     override func viewDidLoad() {
-        print("LoginVC - viewDidLoad")
         super.viewDidLoad()
         setNotificationKeyboard()
         setTapMethod()
-        print("LoginVC - \(Auth.auth().currentUser?.email)")
-//        print(Auth.auth().currentUser?.email)
     }
+    
+    //MARK: viewWillApear
+    //view를 다시 그릴때마다 run할 부분.
     override func viewWillAppear(_ animated: Bool) {
-        print("LoginVC - viewWillAppear")
         super.viewWillAppear(animated)
-        self.navigationItem.title = "로그인"
-        self.view.backgroundColor = .systemBackground
-        
-        //기본 설정들.
         addView()
         setAutoLayout()
     }
     
+    //MARK: - method
     //회원가입 페이지 이동
     @objc private func moveToSignup(sender : UIButton){
         self.navigationController?.pushViewController(SignupVC, animated: true)
@@ -111,11 +108,10 @@ class LoginVC: UIViewController {
     @objc private func RunTapMethod(){
         self.view.endEditing(true)
     }
+    
+    //MARK: - keyboard setUp
     //키보드가 보여지면 할 액션
     @objc private func keyboardWillShow(_ notification: Notification) {
-        
-        print("loginVC keyboardWillShow()-run")
-        
         //키보드가 올라오면
         guard let userInfo = notification.userInfo,
               let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else {
@@ -132,13 +128,12 @@ class LoginVC: UIViewController {
     }
     //키보드가 뷰에서 안보이면 하는 액션
     @objc private func keyboardWillHide() {
-        print("loginVC keyboardWillHide()")
         let contentInset = UIEdgeInsets.zero
         scrollView.contentInset = contentInset
         scrollView.scrollIndicatorInsets = contentInset
         
     }
-    //로그인 버튼 클릭
+    //MARK: - loginAction
     @objc private func loginAction(){
         //아이디 패스워드 비어있는값
         if let email = idField.text, let password = passField.text{
@@ -161,7 +156,8 @@ class LoginVC: UIViewController {
             }
         }
     }
-    //MARK: addView
+    //MARK: - setUpView
+    //뷰에 add할 view들 추가
     private func addView(){
         view.addSubview(scrollView)
         scrollView.addSubview(containerview)
@@ -172,8 +168,12 @@ class LoginVC: UIViewController {
         containerview.addSubview(loginButton)
         containerview.addSubview(signUpButton)
     }
-    //MARK: setAutoLayout
+    
+    //오토레이아웃
     private func setAutoLayout(){
+        self.navigationItem.title = "로그인"
+        self.view.backgroundColor = .systemBackground
+        
         scrollView.snp.makeConstraints { make in
             make.edges.equalTo(view.safeAreaLayoutGuide)
         }
@@ -217,6 +217,7 @@ class LoginVC: UIViewController {
             make.bottom.equalTo(containerview.snp.bottom)
         }
     }
+    
     //스크롤뷰에 tab기능 추가를 위한 설정
     private func setTapMethod(){
         let singleTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(RunTapMethod))
@@ -232,6 +233,7 @@ class LoginVC: UIViewController {
     }
 }
 
+//MARK: - 키보드 return 누를시, 다음te
 //keyboard에서 return 누를시, 다음 input으로 넘어가게 하기위해서 UITextFieldDelegate 추가
 extension LoginVC: UITextFieldDelegate {
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -246,6 +248,7 @@ extension LoginVC: UITextFieldDelegate {
   }
 }
 
+//MARK: - textfield패딩
 // textField에 패딩주기위한 확장
 extension UITextField {
   func addLeftPadding() {
@@ -256,7 +259,7 @@ extension UITextField {
 }
 
    
-//
+
 //프리뷰
 #if DEBUG
     struct ViewControllerRepresentable: UIViewControllerRepresentable {
@@ -282,4 +285,3 @@ extension UITextField {
     }
 
 #endif
-

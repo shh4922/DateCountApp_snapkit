@@ -26,7 +26,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         if UserDefaults.standard.bool(forKey: "isLogin"){
             print("is login true")
-            print("SceneDelegate_ \(Auth.auth().currentUser?.email)")
             window?.rootViewController = mainVC
         }else{
             print("is login false")

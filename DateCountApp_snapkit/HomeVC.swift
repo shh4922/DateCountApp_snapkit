@@ -4,6 +4,7 @@ import SnapKit
 import SwiftUI
 
 class HomeVC: UIViewController{
+    //MARK: - 데이터 생성.
     var dataSource = [DateModel]()
     private lazy var dateTableView : UITableView = {
         let dateTableView = UITableView(frame: view.safeAreaLayoutGuide.layoutFrame, style: .insetGrouped)
@@ -52,6 +53,22 @@ class HomeVC: UIViewController{
         navBar.items = [navItem]
         return navBar
     }()
+    
+    //MARK: - lifecycle
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        addView()
+        setAutoLayout()
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupView()
+        loadDate()
+        
+    }
+    
+    //MARK: - setUpView
     //layout제약조건 및 설정
     private func setAutoLayout(){
         topView.snp.makeConstraints { make in
@@ -69,7 +86,7 @@ class HomeVC: UIViewController{
             make.top.equalTo(titleLabel.snp.bottom).offset(10)
             make.centerX.equalToSuperview()
             make.leading.equalToSuperview().offset(10)
-            
+
         }
         dateTableView.snp.makeConstraints { make in
             make.top.equalTo(topView.snp.bottom).offset(15)
@@ -89,9 +106,8 @@ class HomeVC: UIViewController{
     }
     //특정기능을 위한 setup
     private func setupView(){
-        print("HomeVC - setupView")
         view.backgroundColor = .systemBackground
-
+        //어떤 셀을 가져올지 정해줘야함.
         dateTableView.register(DateTableViewCell.self, forCellReuseIdentifier: DateTableViewCell.identifier)
         //tableview의 델리게잇 지정.
         dateTableView.delegate = self
@@ -99,6 +115,8 @@ class HomeVC: UIViewController{
         dateTableView.rowHeight = 100
         
     }
+    
+    //MARK: - 테스트코드
     //사용자의 시험일정등의 데이터를 받아오는곳.
     private func loadDate(){
         print("HomeVC - runLoadDate")
@@ -110,27 +128,14 @@ class HomeVC: UIViewController{
         dateTableView.reloadData()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        print("HomeVC - viewWillAppear")
-        addView()
-        setAutoLayout()
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        print("HomeVC - viewDidLoad")
-        setupView()
-        loadDate()
-        
-    }
-    
+
     @objc private func onClickPlusBtn(){
         print("onClick!!!!")
     }
     
 }
 
+//MARK: - tableViewSetUp
 // TableView를 위해 추가한 것들.
 extension HomeVC : UITableViewDelegate, UITableViewDataSource {
     
@@ -142,9 +147,8 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: DateTableViewCell.identifier) as? DateTableViewCell ?? DateTableViewCell()
         
         cell.bind(model: dataSource[indexPath.row])
-//        cell.backgroundColor = .blue
-//        cell.layer.cornerRadius = 10
-//        cell.frame = cell.frame.inset(by: UIEdgeInsets(top: 0, left: 0, bottom: 10, right: 0))
+        //셀 선택시, 색상나오는거 안보이게 함.
+        cell.selectionStyle = .none
         return cell
     }
 }

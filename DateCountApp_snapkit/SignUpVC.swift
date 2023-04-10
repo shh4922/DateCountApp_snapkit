@@ -5,6 +5,7 @@ import Firebase
 
 class SignUpVC: UIViewController {
 
+    //MARK: - viewCreate
     private lazy var scrollView : UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.backgroundColor = .white
@@ -20,7 +21,7 @@ class SignUpVC: UIViewController {
         titleLabel.textColor = .black
         titleLabel.textAlignment = .center
         titleLabel.text = "오늘의 명언"
-        titleLabel.font = .boldSystemFont(ofSize: 40)
+        titleLabel.font = UIFont(name: "KimjungchulMyungjo-Bold", size: 40)
         return titleLabel
     }()
     private lazy var subLabel : UILabel = {
@@ -40,6 +41,7 @@ class SignUpVC: UIViewController {
         IdField.font = .systemFont(ofSize: 23)
         IdField.layer.cornerRadius = 3
         IdField.backgroundColor = UIColor(named: "textFieldColor")
+        IdField.addLeftPadding()
         return IdField
     }()
     private lazy var passwordField : UITextField = {
@@ -52,6 +54,7 @@ class SignUpVC: UIViewController {
         passwordField.layer.cornerRadius = 3
         passwordField.backgroundColor = UIColor(named: "textFieldColor")
         passwordField.isSecureTextEntry = true
+        passwordField.addLeftPadding()
         return passwordField
     }()
     private lazy var Btn_createAccount : UIButton = {
@@ -65,6 +68,7 @@ class SignUpVC: UIViewController {
         return Btn_createAccount
     }()
     
+    //MARK: - lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setNotification()
@@ -72,14 +76,11 @@ class SignUpVC: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        self.navigationItem.title = "회원가입"
-        view.backgroundColor = .white
-        
         addView()
         setAutoLayout()
     }
     
+    //MARK: - setUpView
     private func addView(){
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
@@ -94,6 +95,9 @@ class SignUpVC: UIViewController {
     }
     
     private func setAutoLayout(){
+        self.navigationItem.title = "회원가입"
+        view.backgroundColor = .white
+        
         scrollView.snp.makeConstraints { make in
             make.edges.equalTo(view.safeAreaLayoutGuide)
         }
@@ -133,6 +137,7 @@ class SignUpVC: UIViewController {
         }
     }
     
+    //MARK: - setUp
     //스크롤뷰에 tab기능 추가를 위한 설정
     private func setTapMethod(){
         let singleTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(RunTapMethod))
@@ -147,11 +152,25 @@ class SignUpVC: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
+    //MARK: - action
     //스크롤뷰 Tab할시 수행할 기능.
     @objc private func RunTapMethod(){
         self.view.endEditing(true)
     }
+    //가입완료 누를시.
+    @objc private func signUpAction(){
+        if let email = IdField.text , let password = passwordField.text{
+            Auth.auth().createUser(withEmail: email, password: password){ (user,error) in
+                if user != nil{
+                    print("가입성공")
+                }else{
+                    print("가입 실패!")
+                }
+            }
+        }
+    }
     
+    //MARK: - 키보드 셋업
     //키보드가 보여질시 스크롤이 가능하도록 하기위해서 contentInset 조정
     @objc private func keyboardWillShow(_ notification : Notification){
         print("signUpVC keyboardWillShow()-run")
@@ -176,20 +195,10 @@ class SignUpVC: UIViewController {
         scrollView.scrollIndicatorInsets = contentInset
 
     }
-    //가입완료 누를시.
-    @objc private func signUpAction(){
-        if let email = IdField.text , let password = passwordField.text{
-            Auth.auth().createUser(withEmail: email, password: password){ (user,error) in
-                if user != nil{
-                    print("가입성공")
-                }else{
-                    print("가입 실패!")
-                }
-            }
-        }
-        
-    }
+    
 }
+
+//MARK: - 리턴누를시 다음 textField로 이동하는기능
 //키보드 return버튼 클릭시, 다음input으로 이동을 위해 Delegate추가.
 extension SignUpVC: UITextFieldDelegate {
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {

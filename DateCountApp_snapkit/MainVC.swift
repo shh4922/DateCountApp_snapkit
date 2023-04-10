@@ -5,24 +5,15 @@ class MainVC : UITabBarController {
     
     private lazy var listVC : ListVC = {
         let listVC = ListVC()
-//        listVC.navigationItem.title = "home"
-//
-//        let navListVC = UINavigationController(rootViewController: listVC)
         return listVC
     }()
     private lazy var homeVC : HomeVC = {
         let homeVC = HomeVC()
-//        homeVC.navigationItem.title = "일정"
-        
-//        let navLoginVC = UINavigationController(rootViewController: homeVC)
         return homeVC
     }()
-    private lazy var settingVC : UINavigationController = {
+    private lazy var settingVC : SettingVC = {
         let settingVC = SettingVC()
-        settingVC.navigationItem.title = "setting"
-        
-        let navSettingVC = UINavigationController(rootViewController: settingVC)
-        return navSettingVC
+        return settingVC
     }()
     private lazy var logoutButotn : UIButton = {
         let logoutButton = UIButton()

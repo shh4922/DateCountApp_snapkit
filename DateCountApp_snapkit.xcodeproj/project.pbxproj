@@ -25,6 +25,8 @@
 		00BFE7F729C329FB00C279FD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 00BFE7F529C329FB00C279FD /* LaunchScreen.storyboard */; };
 		00BFE7FF29C3377D00C279FD /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BFE7FE29C3377D00C279FD /* LoginVC.swift */; };
 		00D6D10229CC582200725D65 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 00D6D10129CC582200725D65 /* GoogleService-Info.plist */; };
+		00D9A8BA29E319BD004BF6E8 /* KimjungchulMyungjo-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 00D9A8B929E319BC004BF6E8 /* KimjungchulMyungjo-Bold.otf */; };
+		00D9A8BC29E321BB004BF6E8 /* AddDateVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D9A8BB29E321BB004BF6E8 /* AddDateVC.swift */; };
 		DF2959A34F147E70CC85E719 /* libPods-DateCountApp_snapkit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 42073FBC95E00FA1C06CF06F /* libPods-DateCountApp_snapkit.a */; };
 /* End PBXBuildFile section */
 
@@ -49,6 +51,8 @@
 		00BFE7F829C329FB00C279FD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00BFE7FE29C3377D00C279FD /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		00D6D10129CC582200725D65 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Desktop/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		00D9A8B929E319BC004BF6E8 /* KimjungchulMyungjo-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "KimjungchulMyungjo-Bold.otf"; sourceTree = "<group>"; };
+		00D9A8BB29E321BB004BF6E8 /* AddDateVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDateVC.swift; sourceTree = "<group>"; };
 		1D92F8D0A6991CDFE98FC893 /* Pods-DateCountApp_snapkit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DateCountApp_snapkit.release.xcconfig"; path = "Target Support Files/Pods-DateCountApp_snapkit/Pods-DateCountApp_snapkit.release.xcconfig"; sourceTree = "<group>"; };
 		42073FBC95E00FA1C06CF06F /* libPods-DateCountApp_snapkit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DateCountApp_snapkit.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6493818DC1D5FD8BF1F7EDA1 /* Pods-DateCountApp_snapkit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DateCountApp_snapkit.debug.xcconfig"; path = "Target Support Files/Pods-DateCountApp_snapkit/Pods-DateCountApp_snapkit.debug.xcconfig"; sourceTree = "<group>"; };
@@ -69,6 +73,7 @@
 		0099BC9529E1F73B00404D7E /* Font */ = {
 			isa = PBXGroup;
 			children = (
+				00D9A8B929E319BC004BF6E8 /* KimjungchulMyungjo-Bold.otf */,
 				00ACCBC629E29555001A45A5 /* Dovemayo_gothic.ttf */,
 				00ACCBC429E293F3001A45A5 /* ChosunCentennial_otf.otf */,
 				0099BC9829E1F87C00404D7E /* The Jamsil OTF 6 ExtraBold.otf */,
@@ -114,6 +119,7 @@
 				0068707629D9EA66001330FA /* DateTableViewCell.swift */,
 				0068707829D9EAE1001330FA /* DateModel.swift */,
 				0099BC9329DFFFAA00404D7E /* UserModel.swift */,
+				00D9A8BB29E321BB004BF6E8 /* AddDateVC.swift */,
 			);
 			path = DateCountApp_snapkit;
 			sourceTree = "<group>";
@@ -199,6 +205,7 @@
 				0099BC9929E1F87C00404D7E /* The Jamsil OTF 6 ExtraBold.otf in Resources */,
 				00BFE7F429C329FB00C279FD /* Assets.xcassets in Resources */,
 				00ACCBC529E293F3001A45A5 /* ChosunCentennial_otf.otf in Resources */,
+				00D9A8BA29E319BD004BF6E8 /* KimjungchulMyungjo-Bold.otf in Resources */,
 				00ACCBC729E29555001A45A5 /* Dovemayo_gothic.ttf in Resources */,
 				00D6D10229CC582200725D65 /* GoogleService-Info.plist in Resources */,
 			);
@@ -262,6 +269,7 @@
 				00AD82A529D599CD00059928 /* ListVC.swift in Sources */,
 				0068707929D9EAE1001330FA /* DateModel.swift in Sources */,
 				00AD82A129D56AB200059928 /* HomeVC.swift in Sources */,
+				00D9A8BC29E321BB004BF6E8 /* AddDateVC.swift in Sources */,
 				00B45C3229CC29740030CD02 /* SignUpVC.swift in Sources */,
 				0099BC9429DFFFAA00404D7E /* UserModel.swift in Sources */,
 				00BFE7ED29C329F900C279FD /* SceneDelegate.swift in Sources */,

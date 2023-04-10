@@ -10,12 +10,19 @@ class ListVC: UIViewController {
         return navLoginVC
     }()
     
+    private lazy var imgView : UIImageView = {
+        let imgView = UIImageView()
+        imgView.backgroundColor = .white
+//        imgView.image = UIImage(named: "Myimg2")
+        imgView.contentMode = .scaleAspectFill
+        return imgView
+    }()
     private lazy var titleLabel : UILabel = {
         let titleLabel = UILabel()
         titleLabel.text = "오늘의 글귀"
         titleLabel.textColor = .black
         titleLabel.textAlignment = .center
-        titleLabel.font = .boldSystemFont(ofSize: 30)
+        titleLabel.font = UIFont(name: "KimjungchulMyungjo-Bold", size: 35)
         
         return titleLabel
     }()
@@ -34,6 +41,7 @@ class ListVC: UIViewController {
         text1.textColor = .black
         text1.numberOfLines = .zero
         text1.textAlignment = .center
+        text1.font = UIFont(name: "KimjungchulMyungjo-Bold", size: 20)
         return text1
     }()
     
@@ -47,11 +55,14 @@ class ListVC: UIViewController {
     }
     
     private func setLayout(){
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .systemYellow
+//        view.addSubview(imgView)
         view.addSubview(titleLabel)
         view.addSubview(text1)
         view.addSubview(testButton)
-        
+//        imgView.snp.makeConstraints { make in
+//            make.edges.equalToSuperview()
+//        }
         titleLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(50)
@@ -79,6 +90,7 @@ class ListVC: UIViewController {
             UserDefaults.standard.set(false, forKey: "isLogin")
             (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(loginVC)
         }catch let signOutError {
+            print("로그아웃에러!!!!!!!!!!!!!@@@@@@@@@@@@@@@@!!@!@!@!@")
             print(signOutError)
         }
  

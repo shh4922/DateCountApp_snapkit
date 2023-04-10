@@ -11,25 +11,36 @@ class DateTableViewCell: UITableViewCell {
         let vstack = UIStackView()
         vstack.distribution = .fillEqually
         vstack.axis = .vertical
+        vstack.backgroundColor = .systemBackground
+//        vstack.spacing = 10
+//        vstack.layoutMargins = UIEdgeInsets(top: 15, left: 10, bottom: 0, right: 0) // 상하좌우 마진을 10으로 설정
+//        vstack.isLayoutMarginsRelativeArrangement = true
+//        vstack.setNeedsLayout()
+//        vstack.layoutIfNeeded()
         return vstack
-    }()
-    lazy var top_hstack : UIStackView = {
-        let hstack = UIStackView()
-        hstack.distribution = .fillEqually
-        hstack.axis = .horizontal
-        return hstack
-    }()
-    lazy var bottom_hstack : UIStackView = {
-        let hstack = UIStackView()
-        hstack.distribution = .fillEqually
-        hstack.axis = .horizontal
-        return hstack
     }()
     lazy var testName: UILabel = {
         let label = UILabel()
         label.textColor = .black
-        label.textAlignment = .center
+        label.textAlignment = .left
         label.font = .boldSystemFont(ofSize: 25)
+        label.setContentHuggingPriority(.defaultLow, for: .horizontal)
+        label.backgroundColor = .systemBackground
+        label.numberOfLines = 0
+//        label.lineBreakMode = .byWordWrapping
+//        label.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        return label
+    }()
+    lazy var selectedDate: UILabel = {
+        let label = UILabel()
+        label.font = .boldSystemFont(ofSize: 15)
+        label.textColor = .lightGray
+        label.textAlignment = .left
+        label.backgroundColor = .systemBackground
+        label.numberOfLines = 0
+        label.setContentHuggingPriority(.defaultLow, for: .horizontal)
+//        label.lineBreakMode = .byWordWrapping
+//        label.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         return label
     }()
     lazy var dateCount_default: UILabel = {
@@ -37,6 +48,9 @@ class DateTableViewCell: UITableViewCell {
         label.font = .boldSystemFont(ofSize: 20)
         label.textColor = .black
         label.textAlignment = .right
+        label.backgroundColor = .systemBackground
+        label.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        
         return label
     }()
     lazy var dateCount: UILabel = {
@@ -44,21 +58,23 @@ class DateTableViewCell: UITableViewCell {
         label.font = .boldSystemFont(ofSize: 20)
         label.textColor = .black
         label.textAlignment = .left
+        label.backgroundColor = .systemBackground
+        label.numberOfLines = 0
+        label.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         return label
     }()
     
     //MARK: addView
     private func addView(){
+        contentView.backgroundColor = .systemBackground
         contentView.addSubview(vstack)
-        vstack.addArrangedSubview(top_hstack)
-        vstack.addArrangedSubview(bottom_hstack)
-        top_hstack.addArrangedSubview(testName)
-        bottom_hstack.addArrangedSubview(dateCount_default)
-        bottom_hstack.addArrangedSubview(dateCount)
-        
+        vstack.addArrangedSubview(testName)
+        vstack.addArrangedSubview(selectedDate)
+        contentView.addSubview(dateCount_default)
+        contentView.addSubview(dateCount)
     }
     
-    //MARK: selectedCell
+//    MARK: selectedCell
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         if selected {
@@ -72,18 +88,29 @@ class DateTableViewCell: UITableViewCell {
     
     //MARK: setAutoLayout
     private func setAutoLayout(){
+        
         vstack.snp.makeConstraints { make in
-            make.edges.equalTo(contentView.safeAreaLayoutGuide)
+            make.top.equalToSuperview().offset(10)
+            make.left.equalToSuperview().inset(10)
         }
-        top_hstack.snp.makeConstraints { make in
+        dateCount_default.snp.makeConstraints { make in
             make.top.equalToSuperview()
-            make.left.equalToSuperview()
+            make.centerY.equalToSuperview()
+            make.left.equalTo(vstack.snp.right).offset(20)
         }
-        bottom_hstack.snp.makeConstraints { make in
-            make.top.equalTo(top_hstack.snp.bottom)
-            make.left.equalToSuperview()
+        dateCount.snp.makeConstraints { make in
+            make.top.equalToSuperview()
+            make.centerY.equalToSuperview()
+            make.right.equalToSuperview().offset(10)
         }
-
+    }
+    override func layoutSubviews() {
+        // 테이블 뷰 셀 사이의 간격
+        super.layoutSubviews()
+        contentView.layer.cornerRadius = 10
+        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 0, left: 0, bottom: 12, right: 0))
+        //셀 cornerRadius 적용.
+        contentView.layer.masksToBounds = true
     }
     
     //MARK: init
@@ -114,6 +141,7 @@ class DateTableViewCell: UITableViewCell {
 extension DateTableViewCell {
     public func bind(model: DateModel) {
         testName.text = model.testName
+        selectedDate.text = model.selectedDate
         dateCount_default.text = model.dateCount_default
         dateCount.text = "\(model.dateCount)"
     }

@@ -4,6 +4,7 @@
 <dict>
 	<key>UIAppFonts</key>
 	<array>
+		<string>KimjungchulMyungjo-Bold.otf</string>
 		<string>Dovemayo_gothic.ttf</string>
 		<string>ChosunCentennial_otf.otf</string>
 		<string>The Jamsil OTF 6 ExtraBold.otf</string>
