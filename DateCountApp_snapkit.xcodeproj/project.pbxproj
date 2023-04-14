@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		005F16B829E7FDCA006CBEA7 /* TestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005F16B729E7FDCA006CBEA7 /* TestData.swift */; };
 		0068707729D9EA66001330FA /* DateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0068707629D9EA66001330FA /* DateTableViewCell.swift */; };
 		0068707929D9EAE1001330FA /* DateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0068707829D9EAE1001330FA /* DateModel.swift */; };
-		0099BC9429DFFFAA00404D7E /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0099BC9329DFFFAA00404D7E /* UserModel.swift */; };
 		0099BC9929E1F87C00404D7E /* The Jamsil OTF 6 ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0099BC9829E1F87C00404D7E /* The Jamsil OTF 6 ExtraBold.otf */; };
 		00ACCBC529E293F3001A45A5 /* ChosunCentennial_otf.otf in Resources */ = {isa = PBXBuildFile; fileRef = 00ACCBC429E293F3001A45A5 /* ChosunCentennial_otf.otf */; };
 		00ACCBC729E29555001A45A5 /* Dovemayo_gothic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 00ACCBC629E29555001A45A5 /* Dovemayo_gothic.ttf */; };
@@ -31,9 +31,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		005F16B729E7FDCA006CBEA7 /* TestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestData.swift; sourceTree = "<group>"; };
 		0068707629D9EA66001330FA /* DateTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTableViewCell.swift; sourceTree = "<group>"; };
 		0068707829D9EAE1001330FA /* DateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateModel.swift; sourceTree = "<group>"; };
-		0099BC9329DFFFAA00404D7E /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		0099BC9829E1F87C00404D7E /* The Jamsil OTF 6 ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "The Jamsil OTF 6 ExtraBold.otf"; sourceTree = "<group>"; };
 		00ACCBC429E293F3001A45A5 /* ChosunCentennial_otf.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ChosunCentennial_otf.otf; sourceTree = "<group>"; };
 		00ACCBC629E29555001A45A5 /* Dovemayo_gothic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Dovemayo_gothic.ttf; sourceTree = "<group>"; };
@@ -118,8 +118,8 @@
 				00AD82A629D599E300059928 /* SettingVC.swift */,
 				0068707629D9EA66001330FA /* DateTableViewCell.swift */,
 				0068707829D9EAE1001330FA /* DateModel.swift */,
-				0099BC9329DFFFAA00404D7E /* UserModel.swift */,
 				00D9A8BB29E321BB004BF6E8 /* AddDateVC.swift */,
+				005F16B729E7FDCA006CBEA7 /* TestData.swift */,
 			);
 			path = DateCountApp_snapkit;
 			sourceTree = "<group>";
@@ -264,6 +264,7 @@
 				00AD82A729D599E300059928 /* SettingVC.swift in Sources */,
 				00BFE7EB29C329F900C279FD /* AppDelegate.swift in Sources */,
 				00AD82A329D5721B00059928 /* MainVC.swift in Sources */,
+				005F16B829E7FDCA006CBEA7 /* TestData.swift in Sources */,
 				00BFE7FF29C3377D00C279FD /* LoginVC.swift in Sources */,
 				0068707729D9EA66001330FA /* DateTableViewCell.swift in Sources */,
 				00AD82A529D599CD00059928 /* ListVC.swift in Sources */,
@@ -271,7 +272,6 @@
 				00AD82A129D56AB200059928 /* HomeVC.swift in Sources */,
 				00D9A8BC29E321BB004BF6E8 /* AddDateVC.swift in Sources */,
 				00B45C3229CC29740030CD02 /* SignUpVC.swift in Sources */,
-				0099BC9429DFFFAA00404D7E /* UserModel.swift in Sources */,
 				00BFE7ED29C329F900C279FD /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

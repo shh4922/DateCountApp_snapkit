@@ -5,18 +5,16 @@ import UIKit
 
 class DateTableViewCell: UITableViewCell {
     
-    static let identifier = "dateTableViewCell"
     
+    static let identifier = "dateTableViewCell"
+    //MARK: - 초기생성
     lazy var vstack : UIStackView = {
         let vstack = UIStackView()
         vstack.distribution = .fillEqually
         vstack.spacing = 5
         vstack.axis = .vertical
         vstack.backgroundColor = .systemBackground
-        vstack.setContentHuggingPriority(.init(251), for: .horizontal)
         vstack.setContentCompressionResistancePriority(.init(751), for: .horizontal)
-        vstack.spacing = 0
-        //하위뷰들한테는 적용이 안된다함..
         vstack.layoutMargins = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 0)
         vstack.isLayoutMarginsRelativeArrangement = true
         return vstack
@@ -27,7 +25,8 @@ class DateTableViewCell: UITableViewCell {
         label.textAlignment = .left
         label.font = .boldSystemFont(ofSize: 25)
         label.backgroundColor = .systemBackground
-        label.layoutMargins = UIEdgeInsets(top: 30, left: 10, bottom: 0, right: 0)
+        label.setContentCompressionResistancePriority(.init(750), for: .horizontal)
+        label.numberOfLines = 1
         return label
     }()
     lazy var selectedDate: UILabel = {
@@ -36,7 +35,7 @@ class DateTableViewCell: UITableViewCell {
         label.textColor = .lightGray
         label.textAlignment = .left
         label.backgroundColor = .systemBackground
-        label.layoutMargins = UIEdgeInsets(top: 0, left: 10, bottom: 10, right: 0)
+        label.setContentCompressionResistancePriority(.init(750), for: .horizontal)
         return label
     }()
     lazy var dateCount_default: UILabel = {
@@ -46,7 +45,7 @@ class DateTableViewCell: UITableViewCell {
         label.textAlignment = .right
         label.backgroundColor = .systemBackground
         label.setContentHuggingPriority(.init(252), for: .horizontal)
-        label.setContentCompressionResistancePriority(.init(750), for: .horizontal)
+        label.setContentCompressionResistancePriority(.init(752), for: .horizontal)
         return label
     }()
     lazy var dateCount: UILabel = {
@@ -56,11 +55,11 @@ class DateTableViewCell: UITableViewCell {
         label.textAlignment = .left
         label.backgroundColor = .systemBackground
         label.setContentHuggingPriority(.init(251), for: .horizontal)
-        label.setContentCompressionResistancePriority(.init(751), for: .horizontal)
+        label.setContentCompressionResistancePriority(.init(752), for: .horizontal)
         return label
     }()
     
-    //MARK: addView
+    //MARK: - addView
     private func addView(){
         contentView.backgroundColor = .systemBackground
         contentView.addSubview(vstack)
@@ -70,7 +69,7 @@ class DateTableViewCell: UITableViewCell {
         contentView.addSubview(dateCount)
     }
     
-//    MARK: selectedCell
+    //MARK: - selectedCell
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         if selected {
@@ -82,33 +81,28 @@ class DateTableViewCell: UITableViewCell {
         }
     }
     
-    //MARK: setAutoLayout
+    //MARK: - setAutoLayout
     private func setAutoLayout(){
-        
         vstack.snp.makeConstraints { make in
             make.top.equalToSuperview()
             make.bottom.equalToSuperview()
             make.left.equalToSuperview()
-            make.width.equalTo(180)
+            make.right.greaterThanOrEqualTo(dateCount_default.snp.left).offset(-20)
+            make.width.equalToSuperview().multipliedBy(0.6)
         }
-//        testName.snp.makeConstraints { make in
-//            make.top.equalToSuperview().offset(15)
-//            make.left.equalToSuperview().offset(10)
-//        }
-//        selectedDate.snp.makeConstraints { make in
-//            make.top.equalTo(testName.snp.bottom).offset(0)
-//            make.left.equalToSuperview().offset(10)
-//        }
         
         dateCount_default.snp.makeConstraints { make in
             make.top.equalToSuperview()
             make.centerY.equalToSuperview()
-            make.left.equalTo(vstack.snp.right)
+
+            make.right.equalTo(dateCount.snp.left).offset(5)
+            make.width.equalToSuperview().multipliedBy(0.1)
         }
         dateCount.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
             make.top.equalToSuperview()
-            make.left.equalTo(dateCount_default.snp.right)
+            make.right.equalTo(contentView.snp.right).inset(10)
+            make.width.equalToSuperview().multipliedBy(0.3)
         }
     }
     override func layoutSubviews() {
@@ -120,7 +114,7 @@ class DateTableViewCell: UITableViewCell {
         contentView.layer.masksToBounds = true
     }
     
-    //MARK: init
+    //MARK: - init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         //tableviewCell을 상속받은 아이가 init을 수행하기위해선,
         //수퍼클래스의 init을 반드시 호출해주어야함.
@@ -138,13 +132,14 @@ class DateTableViewCell: UITableViewCell {
      *** 이부분이 문법책 12장이랑 18장에서 나오게되는데 아직은 모르는게 맞으니 그냥 그러려니하고 넘어가자 ***
      
      */
-    //MARK: required init?
+    //MARK: - required init?
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
     
 }
 
+//MARK: - extention
 extension DateTableViewCell {
     public func bind(model: DateModel) {
         testName.text = model.testName

@@ -23,7 +23,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 
         //그려질 화면? 앱? 폰?
         window = UIWindow(windowScene: windowScene)
-        
+//        window?.rootViewController = AddDateVC()
         if UserDefaults.standard.bool(forKey: "isLogin"){
             print("is login true")
             window?.rootViewController = mainVC
@@ -31,7 +31,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             print("is login false")
             window?.rootViewController = loginVC
         }
-        
+//
         // 화면그려!
         window?.makeKeyAndVisible()
         

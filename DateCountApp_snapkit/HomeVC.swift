@@ -36,23 +36,28 @@ class HomeVC: UIViewController{
         textLabel.text = "잘하고싶다 배고프다 운동은 왜안했냐 시벌.. 책읽어야징 낼 학교가기싫다 음 불평만 하고있네 신현호 너 잘하고있다 계속이렇게만 꾸준히해 그럼 무조건 잘해진다 오키??똥싸고싶다 잘하고?"
         return textLabel
     }()
-    private lazy var rightButton: UIBarButtonItem = {
-        let button = UIBarButtonItem(title: "test", style: .done, target: self, action: #selector(onClickPlusBtn))
+    private lazy var rightButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("add", for: .normal)
+        button.setTitleColor(.systemBlue, for: .normal)
+        button.addTarget(self, action: #selector(onClickPlusBtn), for: .touchUpInside)
+        
         return button
     }()
-    private lazy var navBar : UINavigationBar = {
-        var statusBarHeight: CGFloat = 0
-        statusBarHeight = UIApplication.shared.windows.first?.safeAreaInsets.top ?? 0
-        let navBar = UINavigationBar(frame: .init(x: 0, y: statusBarHeight, width: view.frame.width, height: statusBarHeight))
-        navBar.backgroundColor = .systemBackground
-        navBar.isTranslucent = false
-        
-        let navItem = UINavigationItem(title: "홈입니당")
-        navItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(onClickPlusBtn))
-        navItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(onClickPlusBtn))
-        navBar.items = [navItem]
-        return navBar
-    }()
+//    private lazy var navBar : UINavigationBar = {
+//        var statusBarHeight: CGFloat = 0
+//        statusBarHeight = UIApplication.shared.windows.first?.safeAreaInsets.top ?? 0
+//        let navBar = UINavigationBar(frame: .init(x: 0, y: statusBarHeight, width: view.frame.width, height: statusBarHeight))
+////        let navVar = UINavigationBar(.init(x: 0, y: <#T##CGFloat#>, width: <#T##CGFloat#>, height: <#T##CGFloat#>))
+//        navBar.backgroundColor = .systemBackground
+//        navBar.isTranslucent = false
+//
+//        let navItem = UINavigationItem(title: "홈입니당")
+//        navItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(onClickPlusBtn))
+//        navItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(onClickPlusBtn))
+//        navBar.items = [navItem]
+//        return navBar
+//    }()
     
     //MARK: - lifecycle
     override func viewWillAppear(_ animated: Bool) {
@@ -71,9 +76,15 @@ class HomeVC: UIViewController{
     //MARK: - setUpView
     //layout제약조건 및 설정
     private func setAutoLayout(){
+//        navBar.snp.makeConstraints { make in
+//            make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+//            make.left.equalToSuperview()
+//            make.height.equalTo(70)
+//            make.width.equalTo(view.frame.width)
+//        }
         topView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(navBar.snp.bottom).offset(20)
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(30)
             make.left.equalToSuperview().offset(10)
             make.height.equalTo(200)
         }
@@ -98,7 +109,6 @@ class HomeVC: UIViewController{
     //뷰에 추가해야할 하위뷰들 넣어주는곳.
     private func addView(){
         view.addSubview(topView)
-        view.addSubview(navBar)
         topView.addSubview(titleLabel)
         topView.addSubview(textLabel)
         view.addSubview(dateTableView)
@@ -107,6 +117,9 @@ class HomeVC: UIViewController{
     //특정기능을 위한 setup
     private func setupView(){
         view.backgroundColor = .systemBackground
+        
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rightButton)
+        
         //어떤 셀을 가져올지 정해줘야함.
         dateTableView.register(DateTableViewCell.self, forCellReuseIdentifier: DateTableViewCell.identifier)
         //tableview의 델리게잇 지정.
@@ -116,6 +129,7 @@ class HomeVC: UIViewController{
         
     }
     
+    
     //MARK: - 테스트코드
     //사용자의 시험일정등의 데이터를 받아오는곳.
     private func loadDate(){
@@ -124,13 +138,18 @@ class HomeVC: UIViewController{
         dataSource.append(.init(dateCount: 213, testName: "전기기사"))
         dataSource.append(.init(dateCount: 11243, testName: "수능"))
         dataSource.append(.init(dateCount: 11, testName: "중간고사"))
-        
+        dataSource.append(.init(dateCount: 12345, testName: "중간고사가나다라마바사아자차"))
         dateTableView.reloadData()
     }
     
 
     @objc private func onClickPlusBtn(){
         print("onClick!!!!")
+        let pushVC = AddDateVC()
+        pushVC.modalTransitionStyle = .coverVertical
+        pushVC.modalPresentationStyle = .automatic
+        self.present(pushVC, animated: true, completion: nil)
+
     }
     
 }

@@ -11,6 +11,8 @@ pod 'FirebaseAuth'
 pod 'FirebaseFirestore'
 
 pod 'Firebase/Core'
+pod 'Firebase/Database'
+#firebase가 설치가 안되서 밑에작성해주니까 됌.. ㅋ
 pod 'GoogleUtilities', :modular_headers => true
 pod 'FirebaseCore', :modular_headers => true
 end

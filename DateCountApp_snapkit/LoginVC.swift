@@ -72,6 +72,8 @@ class LoginVC: UIViewController {
         signUpButton.setTitleColor(.blue, for: .normal)
         signUpButton.backgroundColor = .orange
         signUpButton.addTarget(self, action: #selector(moveToSignup), for: .touchUpInside)
+        signUpButton.setContentHuggingPriority(.defaultLow, for: .horizontal)
+        signUpButton.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
         return signUpButton
     }()
     private lazy var mainVC : UIViewController = {
@@ -213,7 +215,7 @@ class LoginVC: UIViewController {
         signUpButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalTo(loginButton.snp.bottom).offset(50)
-            make.left.equalTo(containerview.snp.left).offset(50)
+            make.left.equalTo(containerview.snp.left).offset(60)
             make.bottom.equalTo(containerview.snp.bottom)
         }
     }

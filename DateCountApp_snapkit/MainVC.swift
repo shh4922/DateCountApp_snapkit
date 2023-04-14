@@ -3,13 +3,15 @@ import SnapKit
 
 class MainVC : UITabBarController {
     
-    private lazy var listVC : ListVC = {
+    private lazy var listVC : UINavigationController = {
         let listVC = ListVC()
-        return listVC
+        let navListVC = UINavigationController(rootViewController: listVC)
+        return navListVC
     }()
-    private lazy var homeVC : HomeVC = {
+    private lazy var homeVC : UINavigationController = {
         let homeVC = HomeVC()
-        return homeVC
+        let navHomeVC = UINavigationController(rootViewController: homeVC)
+        return navHomeVC
     }()
     private lazy var settingVC : SettingVC = {
         let settingVC = SettingVC()
@@ -20,6 +22,7 @@ class MainVC : UITabBarController {
         logoutButton.frame = CGRect(x: 0, y: 0, width: 34, height: 34)
         return logoutButton
     }()
+
 
     
     private func setTabBar(){
@@ -38,6 +41,8 @@ class MainVC : UITabBarController {
             items[x].image = UIImage(systemName: images[x])
         }
         self.tabBar.tintColor = .systemBlue
+        self.tabBar.itemPositioning = .centered
+        
     }
     
     override func viewDidLoad() {
@@ -45,3 +50,4 @@ class MainVC : UITabBarController {
         setTabBar()
     }
 }
+

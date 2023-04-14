@@ -5,6 +5,8 @@ import Firebase
 
 class SignUpVC: UIViewController {
 
+    private var ref : DatabaseReference!
+    let db = Firestore.firestore()
     //MARK: - viewCreate
     private lazy var scrollView : UIScrollView = {
         let scrollView = UIScrollView()
@@ -163,6 +165,14 @@ class SignUpVC: UIViewController {
             Auth.auth().createUser(withEmail: email, password: password){ (user,error) in
                 if user != nil{
                     print("가입성공")
+                    guard let uid = user?.user.uid else {return}
+                    let myData = TestData(email: email, password: password)
+                    self.ref = Database.database().reference()
+                    self.ref.child("Users").child(uid).child("info").setValue([
+                        "email" : email,
+                        "password" : password,
+                        
+                    ])
                 }else{
                     print("가입 실패!")
                 }

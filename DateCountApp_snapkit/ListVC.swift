@@ -55,6 +55,8 @@ class ListVC: UIViewController {
     }
     
     private func setLayout(){
+        self.navigationItem.title = "hihihiihi gyoen"
+//        self.navigationItem.rightBarButtonItem
         view.backgroundColor = .systemYellow
 //        view.addSubview(imgView)
         view.addSubview(titleLabel)
