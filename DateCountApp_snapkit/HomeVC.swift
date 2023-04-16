@@ -1,11 +1,15 @@
 import Firebase
+
 import UIKit
 import SnapKit
 import SwiftUI
 
 class HomeVC: UIViewController{
     //MARK: - 데이터 생성.
-    var dataSource = [DateModel]()
+    var userDataAry = [DateModel]()
+    let decoder = JSONDecoder()
+    
+    
     private lazy var dateTableView : UITableView = {
         let dateTableView = UITableView(frame: view.safeAreaLayoutGuide.layoutFrame, style: .insetGrouped)
         dateTableView.layer.cornerRadius = 10
@@ -36,14 +40,14 @@ class HomeVC: UIViewController{
         textLabel.text = "잘하고싶다 배고프다 운동은 왜안했냐 시벌.. 책읽어야징 낼 학교가기싫다 음 불평만 하고있네 신현호 너 잘하고있다 계속이렇게만 꾸준히해 그럼 무조건 잘해진다 오키??똥싸고싶다 잘하고?"
         return textLabel
     }()
-    private lazy var rightButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("add", for: .normal)
-        button.setTitleColor(.systemBlue, for: .normal)
-        button.addTarget(self, action: #selector(onClickPlusBtn), for: .touchUpInside)
-        
-        return button
-    }()
+//    private lazy var rightButton: UIButton = {
+//        let button = UIButton()
+//        button.setTitle("add", for: .normal)
+//        button.setTitleColor(.systemBlue, for: .normal)
+//        button.addTarget(self, action: #selector(onClickPlusBtn), for: .touchUpInside)
+//
+//        return button
+//    }()
 //    private lazy var navBar : UINavigationBar = {
 //        var statusBarHeight: CGFloat = 0
 //        statusBarHeight = UIApplication.shared.windows.first?.safeAreaInsets.top ?? 0
@@ -59,32 +63,61 @@ class HomeVC: UIViewController{
 //        return navBar
 //    }()
     
+    private lazy var navBar : UINavigationBar = {
+        let navBar = UINavigationBar(frame: CGRect(x: 0, y: 20, width: view.frame.width, height: 40))
+        navBar.barStyle = .default
+        //반투명
+        navBar.isTranslucent = false
+        navBar.backgroundColor = .lightGray
+        navBar.items = [navItem]
+        return navBar
+    }()
+    private lazy var rightBarButton : UIBarButtonItem = {
+//        let button = UIButton()
+//        button.addTarget(self, action: #selector(onClickPlusBtn), for: .touchUpInside)
+        let rightBarButton  = UIBarButtonItem(barButtonSystemItem: .add , target: self, action: #selector(onClickPlusBtn))
+        
+        return  rightBarButton
+    }()
+    private lazy var navItem : UINavigationItem = {
+        let navItem = UINavigationItem()
+        navItem.rightBarButtonItem = rightBarButton
+//        navItem.leftBarButtonItem
+        return navItem
+    }()
+    
+    @objc private func test1(){
+        print("addTest run")
+    }
+    
     //MARK: - lifecycle
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        addView()
-        setAutoLayout()
+        
+//        loadDate()
+        loadTestData()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
-        loadDate()
+        addView()
+        setAutoLayout()
         
     }
     
     //MARK: - setUpView
     //layout제약조건 및 설정
     private func setAutoLayout(){
-//        navBar.snp.makeConstraints { make in
-//            make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
-//            make.left.equalToSuperview()
-//            make.height.equalTo(70)
-//            make.width.equalTo(view.frame.width)
-//        }
+        navBar.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+            make.left.equalToSuperview()
+            make.height.equalTo(40)
+            make.width.equalTo(view.frame.width)
+        }
         topView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(30)
+            make.top.equalTo(navBar.snp.bottom).offset(30)
             make.left.equalToSuperview().offset(10)
             make.height.equalTo(200)
         }
@@ -108,6 +141,7 @@ class HomeVC: UIViewController{
     }
     //뷰에 추가해야할 하위뷰들 넣어주는곳.
     private func addView(){
+        view.addSubview(navBar)
         view.addSubview(topView)
         topView.addSubview(titleLabel)
         topView.addSubview(textLabel)
@@ -118,7 +152,9 @@ class HomeVC: UIViewController{
     private func setupView(){
         view.backgroundColor = .systemBackground
         
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rightButton)
+//        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rightButton)
+        
+        
         
         //어떤 셀을 가져올지 정해줘야함.
         dateTableView.register(DateTableViewCell.self, forCellReuseIdentifier: DateTableViewCell.identifier)
@@ -131,23 +167,36 @@ class HomeVC: UIViewController{
     
     
     //MARK: - 테스트코드
-    //사용자의 시험일정등의 데이터를 받아오는곳.
-    private func loadDate(){
-        print("HomeVC - runLoadDate")
-        dataSource.append(.init(dateCount: 123, testName: "정처기"))
-        dataSource.append(.init(dateCount: 213, testName: "전기기사"))
-        dataSource.append(.init(dateCount: 11243, testName: "수능"))
-        dataSource.append(.init(dateCount: 11, testName: "중간고사"))
-        dataSource.append(.init(dateCount: 12345, testName: "중간고사가나다라마바사아자차"))
-        dateTableView.reloadData()
+    private func loadTestData(){
+        guard let uid : String = Auth.auth().currentUser?.uid else{return}
+        let db = Database.database().reference().child("Users").child(uid).child("MyTests")
+        
+        db.observeSingleEvent(of: .value){ snapshot in
+            //snapshot의 값을 딕셔너리 형태로 변경해줍니다.
+            guard let snapData = snapshot.value as? [String:Any] else {return}
+            
+            let data = try! JSONSerialization.data(withJSONObject: Array(snapData.values), options: [])
+            do{
+                let dataList = try self.decoder.decode([DateModel].self, from: data)
+                self.userDataAry = dataList
+                DispatchQueue.main.async {
+                    self.dateTableView.reloadData()
+                }
+            }catch let error {
+                print(error)
+            }
+            
+        }
     }
     
 
+    // ShowAddView
     @objc private func onClickPlusBtn(){
         print("onClick!!!!")
         let pushVC = AddDateVC()
         pushVC.modalTransitionStyle = .coverVertical
         pushVC.modalPresentationStyle = .automatic
+        //일부러 present로 함, nav로 하면 좀 생동감이없어서,
         self.present(pushVC, animated: true, completion: nil)
 
     }
@@ -160,12 +209,31 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
     
     //셀의 개수를 리턴해주는것.
     //셀의개수 = dataSource의 개수 -> dataSource에 샐들이 들어있으니깐.
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {return dataSource.count}
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return userDataAry.count
+    }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: DateTableViewCell.identifier) as? DateTableViewCell ?? DateTableViewCell()
         
-        cell.bind(model: dataSource[indexPath.row])
+        cell.bind(model: userDataAry[indexPath.row])
+        cell.dateCount_default.text = "D - "
+        
+        
+//        let dateFormatter = DateFormatter()
+//        dateFormatter.dateFormat = "yyyy-MM-dd"
+//        if let selectedDate = cell.selectedDate.text {
+//            let convertDate = dateFormatter.date(from: selectedDate)
+//            let today = Data()
+//            let numberOfDays = Calendar.current.dateComponents([.day], from: today, to: convertDate) // <3>
+//
+//            return numberOfDays.day!
+//        }
+//
+        
+        
+        
+        cell.dateCount.text = "123"
         //셀 선택시, 색상나오는거 안보이게 함.
         cell.selectionStyle = .none
         return cell

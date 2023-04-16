@@ -6,12 +6,11 @@ import FirebaseCore
 import Firebase
 
 class AddDateVC : UIViewController {
-    private var selectedDate : String = ""
+    private var selectedDate : String? = nil
     let formatDate = DateFormatter()
+    
+    //이걸 이렇게 강제로 ! 하는게 맞을까..?
     private var ref : DatabaseReference!
-    
-    
-    
     
     //MARK: - createUI
     private lazy var scrollView : UIScrollView = {
@@ -70,14 +69,25 @@ class AddDateVC : UIViewController {
     
     
     //MARK: - lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        
+        setUp()
         setNotification()
         setTapMethod()
         addView()
         setAutoLayout()
     }
+    
+    //MARK: - 기본setUp
+    private func setUp(){
+
+        formatDate.dateFormat = "yyyy-MM-dd"
+        selectedDate = formatDate.string(from: Date())
+    }
+    
     
     //MARK: - setUpView
     private func setAutoLayout(){
@@ -124,21 +134,24 @@ class AddDateVC : UIViewController {
     
     //MARK: - method
     @objc private func selectDate(_ sender: UIDatePicker){
-        formatDate.dateFormat = "yyyy-MM-dd"
-        let myDate = formatDate.string(from: sender.date)
-        selectedDate = myDate
+        selectedDate = formatDate.string(from: sender.date)
     }
     @objc private func saveDateData(){
-        guard let uid : String = Auth.auth().currentUser?.uid else{return}
-        ref = Database.database().reference().child("Users").child(uid).child("MyTests").childByAutoId()
-        let data = [
-            "testNmae": "myTest",
-            "selectedDate": selectedDate
-        ]
-        ref.setValue(data)
-        
-        //뷰가너무 빨리닫힘.
-        dismiss(animated: true)
+        //만약 날자를 선택하지않고, 바로 저장을 눌렀을경우 -> "" 이 날자에 들어가게됌/
+        if testName.text == "" || selectedDate == nil {
+            print("에러에러 둘다 널이야.")
+        }else{
+            guard let uid : String = Auth.auth().currentUser?.uid else{return}
+            ref = Database.database().reference().child("Users").child(uid).child("MyTests").childByAutoId()
+            let data = [
+                "testName": testName.text,
+                "selectedDate": selectedDate
+            ]
+            ref.setValue(data)
+            
+            //뷰가너무 빨리닫힘.
+            dismiss(animated: true)
+        }
     }
     
     //MARK: - setNotification
@@ -146,7 +159,9 @@ class AddDateVC : UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
+    
     //MARK: - 키보드 셋업
+    
     //키보드가 보여질시 스크롤이 가능하도록 하기위해서 contentInset 조정
     @objc private func keyboardWillShow(_ notification : Notification){
         print("signUpVC keyboardWillShow()-run")
@@ -172,8 +187,9 @@ class AddDateVC : UIViewController {
 
     }
     
-    //MARK: - tabAtction
-    //스크롤뷰 Tab할시 수행할 기능.
+    //MARK: - Keyboard tabAtction
+    
+    //키보드팝업창에서 탭할시 , 키보드 내려가게하기위해 setUp과, run할 메서드 추가.
     @objc private func RunTapMethod(){
         self.view.endEditing(true)
     }

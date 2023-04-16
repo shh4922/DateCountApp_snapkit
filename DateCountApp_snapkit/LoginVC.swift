@@ -145,15 +145,13 @@ class LoginVC: UIViewController {
                     return
                 }
                 if let e = error{
+                    self.showDialog(msg: "아이디 또는 비밀번호를 확인해주세요.")
                     print("아이디 비번은 입력되었지만, error가 난 경우")
                     print("email : \(email), password : \(password)")
                     print(e.localizedDescription)
                 }else{
-                    print("email : \(email), password : \(password)")
-                    print("login Succes")
                     UserDefaults.standard.set(true, forKey: "isLogin")
                     (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(self.mainVC)
-
                 }
             }
         }
@@ -232,6 +230,13 @@ class LoginVC: UIViewController {
     private func setNotificationKeyboard(){
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    private func showDialog(msg: String){
+        let alert = UIAlertController(title: "알림", message: msg, preferredStyle: UIAlertController.Style.alert)
+        let action = UIAlertAction(title: "OK", style: UIAlertAction.Style.default)
+        alert.addAction(action)
+        self.present(alert, animated: true)
     }
 }
 

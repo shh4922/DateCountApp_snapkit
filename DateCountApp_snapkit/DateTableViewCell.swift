@@ -88,7 +88,7 @@ class DateTableViewCell: UITableViewCell {
             make.bottom.equalToSuperview()
             make.left.equalToSuperview()
             make.right.greaterThanOrEqualTo(dateCount_default.snp.left).offset(-20)
-            make.width.equalToSuperview().multipliedBy(0.6)
+            make.width.equalToSuperview().multipliedBy(0.5)
         }
         
         dateCount_default.snp.makeConstraints { make in
@@ -96,7 +96,7 @@ class DateTableViewCell: UITableViewCell {
             make.centerY.equalToSuperview()
 
             make.right.equalTo(dateCount.snp.left).offset(5)
-            make.width.equalToSuperview().multipliedBy(0.1)
+            make.width.equalToSuperview().multipliedBy(0.2)
         }
         dateCount.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
@@ -109,8 +109,11 @@ class DateTableViewCell: UITableViewCell {
         // 테이블 뷰 셀 사이의 간격
         super.layoutSubviews()
         contentView.layer.cornerRadius = 10
+        
+        //셀사이에 간격을 주기위해 바텀에 패딩을 줌.
         contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 0, left: 0, bottom: 12, right: 0))
-        //셀 cornerRadius 적용.
+        
+        //셀 cornerRadius 적용하려면 써줘야함..
         contentView.layer.masksToBounds = true
     }
     
@@ -128,8 +131,9 @@ class DateTableViewCell: UITableViewCell {
      이녀석 자체로 override 되는거같음.
      하지만 잘 이해가가지않음.. 받아드려지지도 않고
      개념다시봐야할듯.
-     
      *** 이부분이 문법책 12장이랑 18장에서 나오게되는데 아직은 모르는게 맞으니 그냥 그러려니하고 넘어가자 ***
+     23.04.16 좆됬다 슈발
+     읽어봐도 모르겠다..ㅋ
      
      */
     //MARK: - required init?
@@ -144,7 +148,7 @@ extension DateTableViewCell {
     public func bind(model: DateModel) {
         testName.text = model.testName
         selectedDate.text = model.selectedDate
-        dateCount_default.text = model.dateCount_default
-        dateCount.text = "\(model.dateCount)"
+//        dateCount_default.text = model.dateCount_default
+//        dateCount.text = "\(model.dateCount)"
     }
 }
