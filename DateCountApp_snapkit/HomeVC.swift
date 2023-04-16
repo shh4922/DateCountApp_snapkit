@@ -9,7 +9,6 @@ class HomeVC: UIViewController{
     var userDataAry = [DateModel]()
     let decoder = JSONDecoder()
     
-    
     private lazy var dateTableView : UITableView = {
         let dateTableView = UITableView(frame: view.safeAreaLayoutGuide.layoutFrame, style: .insetGrouped)
         dateTableView.layer.cornerRadius = 10
@@ -20,75 +19,38 @@ class HomeVC: UIViewController{
     private lazy var topView : UIView = {
         let topview = UIView()
         topview.layer.cornerRadius = 10
-        topview.backgroundColor = .systemGray5
+        topview.backgroundColor = .black
         return topview
-    }()
-    private lazy var titleLabel : UILabel = {
-        let titleLabel = UILabel()
-        titleLabel.textAlignment = .center
-        titleLabel.textColor = .black
-        titleLabel.font = .boldSystemFont(ofSize: 25)
-        titleLabel.text = "오늘의 명언"
-        return titleLabel
     }()
     private lazy var textLabel : UILabel = {
         let textLabel = UILabel()
         textLabel.textAlignment = .center
-        textLabel.textColor = .black
-        textLabel.font = UIFont(name: "Dovemayo_gothic", size: 20)
+        textLabel.textColor = .white
+        textLabel.font = UIFont(name: "KimjungchulMyungjo-Bold", size: 30)
         textLabel.numberOfLines = 0
-        textLabel.text = "잘하고싶다 배고프다 운동은 왜안했냐 시벌.. 책읽어야징 낼 학교가기싫다 음 불평만 하고있네 신현호 너 잘하고있다 계속이렇게만 꾸준히해 그럼 무조건 잘해진다 오키??똥싸고싶다 잘하고?"
+        textLabel.text = "장고끝에 악수 둔다."
         return textLabel
     }()
-//    private lazy var rightButton: UIButton = {
-//        let button = UIButton()
-//        button.setTitle("add", for: .normal)
-//        button.setTitleColor(.systemBlue, for: .normal)
-//        button.addTarget(self, action: #selector(onClickPlusBtn), for: .touchUpInside)
-//
-//        return button
-//    }()
-//    private lazy var navBar : UINavigationBar = {
-//        var statusBarHeight: CGFloat = 0
-//        statusBarHeight = UIApplication.shared.windows.first?.safeAreaInsets.top ?? 0
-//        let navBar = UINavigationBar(frame: .init(x: 0, y: statusBarHeight, width: view.frame.width, height: statusBarHeight))
-////        let navVar = UINavigationBar(.init(x: 0, y: <#T##CGFloat#>, width: <#T##CGFloat#>, height: <#T##CGFloat#>))
-//        navBar.backgroundColor = .systemBackground
-//        navBar.isTranslucent = false
-//
-//        let navItem = UINavigationItem(title: "홈입니당")
-//        navItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(onClickPlusBtn))
-//        navItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(onClickPlusBtn))
-//        navBar.items = [navItem]
-//        return navBar
-//    }()
-    
+    private lazy var rightButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("add", for: .normal)
+        button.setTitleColor(.systemBlue, for: .normal)
+        button.addTarget(self, action: #selector(onClickPlusBtn), for: .touchUpInside)
+
+        return button
+    }()
     private lazy var navBar : UINavigationBar = {
-        let navBar = UINavigationBar(frame: CGRect(x: 0, y: 20, width: view.frame.width, height: 40))
-        navBar.barStyle = .default
-        //반투명
-        navBar.isTranslucent = false
-        navBar.backgroundColor = .lightGray
-        navBar.items = [navItem]
+        let navBar = UINavigationBar()
+        navBar.translatesAutoresizingMaskIntoConstraints = false
         return navBar
     }()
-    private lazy var rightBarButton : UIBarButtonItem = {
-//        let button = UIButton()
-//        button.addTarget(self, action: #selector(onClickPlusBtn), for: .touchUpInside)
-        let rightBarButton  = UIBarButtonItem(barButtonSystemItem: .add , target: self, action: #selector(onClickPlusBtn))
-        
-        return  rightBarButton
-    }()
     private lazy var navItem : UINavigationItem = {
-        let navItem = UINavigationItem()
+        let navItem = UINavigationItem(title: "리스트")
+        let rightBarButton  = UIBarButtonItem(barButtonSystemItem: .add , target: self, action: #selector(onClickPlusBtn))
         navItem.rightBarButtonItem = rightBarButton
-//        navItem.leftBarButtonItem
-        return navItem
+        return  navItem
     }()
     
-    @objc private func test1(){
-        print("addTest run")
-    }
     
     //MARK: - lifecycle
     override func viewWillAppear(_ animated: Bool) {
@@ -97,7 +59,6 @@ class HomeVC: UIViewController{
 //        loadDate()
         loadTestData()
     }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
@@ -112,25 +73,20 @@ class HomeVC: UIViewController{
         navBar.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
             make.left.equalToSuperview()
-            make.height.equalTo(40)
-            make.width.equalTo(view.frame.width)
+            make.right.equalToSuperview()
+            
         }
         topView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalTo(navBar.snp.bottom).offset(30)
-            make.left.equalToSuperview().offset(10)
-            make.height.equalTo(200)
-        }
-        titleLabel.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.leading.equalToSuperview().offset(10)
-            make.top.equalToSuperview().offset(10)
+            make.left.equalToSuperview().offset(30)
+            make.height.equalTo(100)
         }
         textLabel.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(10)
+//            make.top.equalToSuperview().inset(20)
             make.centerX.equalToSuperview()
-            make.leading.equalToSuperview().offset(10)
-
+            make.centerY.equalToSuperview()
+//            make.leading.equalToSuperview().offset(10)
         }
         dateTableView.snp.makeConstraints { make in
             make.top.equalTo(topView.snp.bottom).offset(15)
@@ -143,7 +99,6 @@ class HomeVC: UIViewController{
     private func addView(){
         view.addSubview(navBar)
         view.addSubview(topView)
-        topView.addSubview(titleLabel)
         topView.addSubview(textLabel)
         view.addSubview(dateTableView)
         
@@ -151,10 +106,7 @@ class HomeVC: UIViewController{
     //특정기능을 위한 setup
     private func setupView(){
         view.backgroundColor = .systemBackground
-        
-//        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rightButton)
-        
-        
+        navBar.setItems([navItem], animated: true)
         
         //어떤 셀을 가져올지 정해줘야함.
         dateTableView.register(DateTableViewCell.self, forCellReuseIdentifier: DateTableViewCell.identifier)
@@ -177,6 +129,7 @@ class HomeVC: UIViewController{
             
             let data = try! JSONSerialization.data(withJSONObject: Array(snapData.values), options: [])
             do{
+                //데이터가 정렬되지않아있음. 남은날짜 순서로 오름차순으로 정렬후에 넣어주는걸로
                 let dataList = try self.decoder.decode([DateModel].self, from: data)
                 self.userDataAry = dataList
                 DispatchQueue.main.async {
@@ -218,21 +171,6 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
         
         cell.bind(model: userDataAry[indexPath.row])
         cell.dateCount_default.text = "D - "
-        
-        
-//        let dateFormatter = DateFormatter()
-//        dateFormatter.dateFormat = "yyyy-MM-dd"
-//        if let selectedDate = cell.selectedDate.text {
-//            let convertDate = dateFormatter.date(from: selectedDate)
-//            let today = Data()
-//            let numberOfDays = Calendar.current.dateComponents([.day], from: today, to: convertDate) // <3>
-//
-//            return numberOfDays.day!
-//        }
-//
-        
-        
-        
         cell.dateCount.text = "123"
         //셀 선택시, 색상나오는거 안보이게 함.
         cell.selectionStyle = .none

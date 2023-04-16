@@ -8,10 +8,11 @@ class MainVC : UITabBarController {
         let navListVC = UINavigationController(rootViewController: listVC)
         return navListVC
     }()
-    private lazy var homeVC : UINavigationController = {
+    private lazy var homeVC : UIViewController = {
         let homeVC = HomeVC()
-        let navHomeVC = UINavigationController(rootViewController: homeVC)
-        return navHomeVC
+//        let navHomeVC = UINavigationController(rootViewController: homeVC)
+//        navHomeVC.navigationBar = "ㄴㅇ"
+        return homeVC
     }()
     private lazy var settingVC : SettingVC = {
         let settingVC = SettingVC()
