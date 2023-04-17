@@ -8,6 +8,7 @@ class HomeVC: UIViewController{
     //MARK: - 데이터 생성.
     var userDataAry = [DateModel]()
     let decoder = JSONDecoder()
+    let dateFormatter = DateFormatter()
     
     private lazy var dateTableView : UITableView = {
         let dateTableView = UITableView(frame: view.safeAreaLayoutGuide.layoutFrame, style: .insetGrouped)
@@ -55,8 +56,6 @@ class HomeVC: UIViewController{
     //MARK: - lifecycle
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-//        loadDate()
         loadTestData()
     }
     override func viewDidLoad() {
@@ -123,15 +122,18 @@ class HomeVC: UIViewController{
         guard let uid : String = Auth.auth().currentUser?.uid else{return}
         let db = Database.database().reference().child("Users").child(uid).child("MyTests")
         
-        db.observeSingleEvent(of: .value){ snapshot in
+        db.observeSingleEvent(of: .value){snapshot in
             //snapshot의 값을 딕셔너리 형태로 변경해줍니다.
             guard let snapData = snapshot.value as? [String:Any] else {return}
-            
+            print(snapData)
             let data = try! JSONSerialization.data(withJSONObject: Array(snapData.values), options: [])
             do{
-                //데이터가 정렬되지않아있음. 남은날짜 순서로 오름차순으로 정렬후에 넣어주는걸로
+                //데이터가 정렬되지않아있음. 선택날짜 순서로 오름차순으로 정렬후에 넣어주는걸로
                 let dataList = try self.decoder.decode([DateModel].self, from: data)
-                self.userDataAry = dataList
+                
+                //sorted()에서 사용할 매개변수를 잡아주지못해서 오류가났던거같넹
+                self.userDataAry = dataList.sorted(by: { $0.selectedDate < $1.selectedDate })
+                
                 DispatchQueue.main.async {
                     self.dateTableView.reloadData()
                 }
@@ -140,6 +142,7 @@ class HomeVC: UIViewController{
             }
             
         }
+        
     }
     
 
@@ -153,6 +156,7 @@ class HomeVC: UIViewController{
         self.present(pushVC, animated: true, completion: nil)
 
     }
+
     
 }
 
@@ -171,7 +175,30 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
         
         cell.bind(model: userDataAry[indexPath.row])
         cell.dateCount_default.text = "D - "
-        cell.dateCount.text = "123"
+        
+        if let selectedDate = cell.selectedDate.text {
+            dateFormatter.dateFormat = "yyyy-MM-dd"
+            
+            if let selectedDate_ = dateFormatter.date(from: selectedDate){
+                
+                let currentDate = Date()
+                let calendar = Calendar.current
+                
+                //아래코드는 시간차로 인한 날짜오류가 생겨서, 달력날짜를 기준으로 두 날의 차이를 계산하기위해 만들어줌.
+                let stactOfselectedDate = calendar.startOfDay(for: selectedDate_)
+                let stactOfcurrentDate = calendar.startOfDay(for: currentDate)
+
+                
+                let dateComponents = calendar.dateComponents([.day], from: stactOfcurrentDate, to: stactOfselectedDate)
+                
+                if let dayDifference = dateComponents.day {
+                    
+                    cell.dateCount.text = "\(dayDifference)"
+                }
+                
+            }
+        }
+        
         //셀 선택시, 색상나오는거 안보이게 함.
         cell.selectionStyle = .none
         return cell
