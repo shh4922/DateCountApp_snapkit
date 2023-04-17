@@ -13,7 +13,3 @@ struct TestData {
     //사용자가 등록한 시험
 //    var tests : [Test]? = nil
 }
-//struct Test {
-//    var testName : String
-//    var selectedDate : String
-//}
