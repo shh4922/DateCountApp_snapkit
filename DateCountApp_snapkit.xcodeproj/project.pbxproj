@@ -10,6 +10,7 @@
 		005F16B829E7FDCA006CBEA7 /* TestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005F16B729E7FDCA006CBEA7 /* TestData.swift */; };
 		0068707729D9EA66001330FA /* DateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0068707629D9EA66001330FA /* DateTableViewCell.swift */; };
 		0068707929D9EAE1001330FA /* DateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0068707829D9EAE1001330FA /* DateModel.swift */; };
+		0081615529EEA838003E3D19 /* TextData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0081615429EEA838003E3D19 /* TextData.swift */; };
 		0099BC9929E1F87C00404D7E /* The Jamsil OTF 6 ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0099BC9829E1F87C00404D7E /* The Jamsil OTF 6 ExtraBold.otf */; };
 		00ACCBC529E293F3001A45A5 /* ChosunCentennial_otf.otf in Resources */ = {isa = PBXBuildFile; fileRef = 00ACCBC429E293F3001A45A5 /* ChosunCentennial_otf.otf */; };
 		00ACCBC729E29555001A45A5 /* Dovemayo_gothic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 00ACCBC629E29555001A45A5 /* Dovemayo_gothic.ttf */; };
@@ -26,7 +27,6 @@
 		00D6D10229CC582200725D65 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 00D6D10129CC582200725D65 /* GoogleService-Info.plist */; };
 		00D9A8BA29E319BD004BF6E8 /* KimjungchulMyungjo-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 00D9A8B929E319BC004BF6E8 /* KimjungchulMyungjo-Bold.otf */; };
 		00D9A8BC29E321BB004BF6E8 /* AddDateVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D9A8BB29E321BB004BF6E8 /* AddDateVC.swift */; };
-		00F6690329ECB6E600A0A395 /* test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6690229ECB6E600A0A395 /* test.swift */; };
 		00FECC8E29EA8BB4005DEF5D /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BFE7FE29C3377D00C279FD /* LoginVC.swift */; };
 		DF2959A34F147E70CC85E719 /* libPods-DateCountApp_snapkit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 42073FBC95E00FA1C06CF06F /* libPods-DateCountApp_snapkit.a */; };
 /* End PBXBuildFile section */
@@ -35,6 +35,7 @@
 		005F16B729E7FDCA006CBEA7 /* TestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestData.swift; sourceTree = "<group>"; };
 		0068707629D9EA66001330FA /* DateTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTableViewCell.swift; sourceTree = "<group>"; };
 		0068707829D9EAE1001330FA /* DateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateModel.swift; sourceTree = "<group>"; };
+		0081615429EEA838003E3D19 /* TextData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextData.swift; sourceTree = "<group>"; };
 		0099BC9829E1F87C00404D7E /* The Jamsil OTF 6 ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "The Jamsil OTF 6 ExtraBold.otf"; sourceTree = "<group>"; };
 		00ACCBC429E293F3001A45A5 /* ChosunCentennial_otf.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ChosunCentennial_otf.otf; sourceTree = "<group>"; };
 		00ACCBC629E29555001A45A5 /* Dovemayo_gothic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Dovemayo_gothic.ttf; sourceTree = "<group>"; };
@@ -54,7 +55,6 @@
 		00D6D10129CC582200725D65 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Desktop/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		00D9A8B929E319BC004BF6E8 /* KimjungchulMyungjo-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "KimjungchulMyungjo-Bold.otf"; sourceTree = "<group>"; };
 		00D9A8BB29E321BB004BF6E8 /* AddDateVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDateVC.swift; sourceTree = "<group>"; };
-		00F6690229ECB6E600A0A395 /* test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = test.swift; sourceTree = "<group>"; };
 		1D92F8D0A6991CDFE98FC893 /* Pods-DateCountApp_snapkit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DateCountApp_snapkit.release.xcconfig"; path = "Target Support Files/Pods-DateCountApp_snapkit/Pods-DateCountApp_snapkit.release.xcconfig"; sourceTree = "<group>"; };
 		42073FBC95E00FA1C06CF06F /* libPods-DateCountApp_snapkit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DateCountApp_snapkit.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6493818DC1D5FD8BF1F7EDA1 /* Pods-DateCountApp_snapkit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DateCountApp_snapkit.debug.xcconfig"; path = "Target Support Files/Pods-DateCountApp_snapkit/Pods-DateCountApp_snapkit.debug.xcconfig"; sourceTree = "<group>"; };
@@ -122,7 +122,7 @@
 				0068707829D9EAE1001330FA /* DateModel.swift */,
 				00D9A8BB29E321BB004BF6E8 /* AddDateVC.swift */,
 				005F16B729E7FDCA006CBEA7 /* TestData.swift */,
-				00F6690229ECB6E600A0A395 /* test.swift */,
+				0081615429EEA838003E3D19 /* TextData.swift */,
 			);
 			path = DateCountApp_snapkit;
 			sourceTree = "<group>";
@@ -269,6 +269,7 @@
 				00AD82A329D5721B00059928 /* MainVC.swift in Sources */,
 				005F16B829E7FDCA006CBEA7 /* TestData.swift in Sources */,
 				0068707729D9EA66001330FA /* DateTableViewCell.swift in Sources */,
+				0081615529EEA838003E3D19 /* TextData.swift in Sources */,
 				00AD82A529D599CD00059928 /* ListVC.swift in Sources */,
 				0068707929D9EAE1001330FA /* DateModel.swift in Sources */,
 				00AD82A129D56AB200059928 /* HomeVC.swift in Sources */,
@@ -276,7 +277,6 @@
 				00D9A8BC29E321BB004BF6E8 /* AddDateVC.swift in Sources */,
 				00B45C3229CC29740030CD02 /* SignUpVC.swift in Sources */,
 				00BFE7ED29C329F900C279FD /* SceneDelegate.swift in Sources */,
-				00F6690329ECB6E600A0A395 /* test.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

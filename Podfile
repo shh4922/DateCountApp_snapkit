@@ -6,6 +6,7 @@ target 'DateCountApp_snapkit' do
 pod 'SnapKit', '~> 5.0.0'
 
 pod 'FirebaseAnalytics'
+pod 'Firebase/Analytics'
 
 pod 'FirebaseAuth'
 pod 'FirebaseFirestore'

@@ -32,17 +32,26 @@ class HomeVC: UIViewController{
         textLabel.text = "장고끝에 악수 둔다."
         return textLabel
     }()
-    private lazy var rightButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("add", for: .normal)
-        button.setTitleColor(.systemBlue, for: .normal)
-        button.addTarget(self, action: #selector(onClickPlusBtn), for: .touchUpInside)
-
-        return button
-    }()
+//    private lazy var rightButton: UIButton = {
+//        let button = UIButton()
+//        button.setTitle("add", for: .normal)
+//        button.setTitleColor(.systemBlue, for: .normal)
+//        button.addTarget(self, action: #selector(onClickPlusBtn), for: .touchUpInside)
+//
+//        return button
+//    }()
     private lazy var navBar : UINavigationBar = {
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = .black
+        
+        
         let navBar = UINavigationBar()
         navBar.translatesAutoresizingMaskIntoConstraints = false
+        navBar.isTranslucent = false
+        navBar.standardAppearance = appearance
+        navBar.scrollEdgeAppearance = navBar.standardAppearance
+        
         return navBar
     }()
     private lazy var navItem : UINavigationItem = {
@@ -104,7 +113,7 @@ class HomeVC: UIViewController{
     }
     //특정기능을 위한 setup
     private func setupView(){
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .white
         navBar.setItems([navItem], animated: true)
         
         //어떤 셀을 가져올지 정해줘야함.
