@@ -91,24 +91,39 @@ class ListVC: UIViewController , UNUserNotificationCenterDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setNotification()
+        if UserDefaults.standard.bool(forKey: "isSendedText") {
+            getTextOnFirebase()
+            print("투루임!!")
+        }else{
+            if let loadedDic = UserDefaults.standard.dictionary(forKey: "myDictionary"){
+                text1.text = loadedDic["text"] as? String ?? ""
+                author.text = loadedDic["author"] as? String ?? ""
+            }
+            print("투루아님..")
+        }
         
+        UserDefaults.standard.set(false, forKey: "isSendedText")
+        print("false로 바꿈")
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setLayout()
         navBar.setItems([navItem], animated: true)
-        getTextOnFirebase()
+        
     }
     @objc private func onClickPlusBtn(){
         print("sd")
+    }
+    private func saveUserDefaultTextData(){
+        
     }
     
     private func setLayout(){
         
         view.backgroundColor = .black
         
-//        view.addSubview(navBar)
+        //        view.addSubview(navBar)
         view.addSubview(imgView)
         imgView.addSubview(text1)
         imgView.addSubview(author)
@@ -148,7 +163,7 @@ class ListVC: UIViewController , UNUserNotificationCenterDelegate {
     
     //밑에 두 observeSingleEvent가 비동기로 작업해서, 명언 데이터를 받아오기전에 UI를 그려버려서  데이터를 보여주지못한다
     @objc private func getTextOnFirebase(){
-        os_log("getTextOnFirebase 함수 수행!", log: .default, type: .debug)
+        
         guard let uid : String = Auth.auth().currentUser?.uid else{return}
         
         let DeleveredDB = Database.database().reference().child("Users").child(uid).child("info").child("deleveredData")
@@ -198,12 +213,18 @@ class ListVC: UIViewController , UNUserNotificationCenterDelegate {
                 "text" : randomData?["text"],
                 "author" : randomData?["author"]
             ])
+            UserDefaults.standard.set(
+                [
+                "text" : randomData?["text"],
+                "author" : randomData?["author"]
+                ],
+                forKey: "myDictionary"
+            )
+            
         }
     }
     
-    private func setNotification(){
-        NotificationCenter.default.addObserver(self, selector: #selector(getTextOnFirebase), name: NSNotification.Name("getTextOnFirebase"), object: nil)
-    }
+    
 }
 
 #if DEBUG

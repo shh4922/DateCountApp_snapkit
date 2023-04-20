@@ -3,7 +3,7 @@ import UIKit
 import Firebase
 
 @main
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
     
     
     
@@ -24,25 +24,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
         // 매일 00시00분에 알림 발송
-           let content = UNMutableNotificationContent()
-           content.title = "알림"
-           content.body = "오늘의 명언이 도착하였습니다! \n 확인해주세요!"
-           content.sound = .default
-           
-           var dateComponents = DateComponents()
-           dateComponents.hour = 3
-           dateComponents.minute = 11
-           
-           let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
-           let request = UNNotificationRequest(identifier: "dailyAlarm", content: content, trigger: trigger)
-           center.add(request) { error in
-               if let error = error {
-                   print(error.localizedDescription)
-               }
-               let notificationCenter = NotificationCenter.default
-                   notificationCenter.post(name: Notification.Name("getTextOnFirebase"), object: nil)
-               print("AppDelegate 실행!!")
-           }
+        let content = UNMutableNotificationContent()
+        content.title = "알림"
+        content.body = "오늘의 명언이 도착하였습니다! \n 확인해주세요!"
+        content.sound = .default
+        
+        var components = DateComponents()
+        components.hour = 0
+        components.minute = 0
+        let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: true)
+        
+        let request = UNNotificationRequest(identifier: "DailyQuote", content: content, trigger: trigger)
+        
+        
+        
+        UNUserNotificationCenter.current().add(request) { error in
+            if let error = error {
+                print("Error adding daily quote notification: \(error.localizedDescription)")
+            } else {
+                print("나 실행 하고있냐?")
+                UserDefaults.standard.set(true, forKey: "isSendedText")
+            }
+        }
+        
+        
         
         return true
     }
