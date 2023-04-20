@@ -165,7 +165,6 @@ class SignUpVC: UIViewController {
             Auth.auth().createUser(withEmail: email, password: password){ (user,error) in
                 if user != nil{
                     print("가입성공")
-                    let userInfo : TestData = TestData(email: email, password: password)
                     guard let uid = user?.user.uid else { return }
                     self.ref = Database.database().reference()
                     self.ref.child("Users").child(uid).child("info").setValue([

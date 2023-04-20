@@ -30,8 +30,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
            content.sound = .default
            
            var dateComponents = DateComponents()
-           dateComponents.hour = 0
-           dateComponents.minute = 0
+           dateComponents.hour = 3
+           dateComponents.minute = 11
            
            let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
            let request = UNNotificationRequest(identifier: "dailyAlarm", content: content, trigger: trigger)
@@ -39,7 +39,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                if let error = error {
                    print(error.localizedDescription)
                }
-               
+               let notificationCenter = NotificationCenter.default
+                   notificationCenter.post(name: Notification.Name("getTextOnFirebase"), object: nil)
+               print("AppDelegate 실행!!")
            }
         
         return true

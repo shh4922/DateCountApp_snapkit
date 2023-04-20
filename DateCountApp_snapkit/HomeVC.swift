@@ -13,20 +13,20 @@ class HomeVC: UIViewController{
     private lazy var dateTableView : UITableView = {
         let dateTableView = UITableView(frame: view.safeAreaLayoutGuide.layoutFrame, style: .insetGrouped)
         dateTableView.layer.cornerRadius = 10
-        dateTableView.backgroundColor = .systemBackground
+        dateTableView.backgroundColor = .white
         dateTableView.separatorStyle = .none
         return dateTableView
     }()
     private lazy var topView : UIView = {
         let topview = UIView()
         topview.layer.cornerRadius = 10
-        topview.backgroundColor = .black
+        topview.backgroundColor = .systemGray5
         return topview
     }()
     private lazy var textLabel : UILabel = {
         let textLabel = UILabel()
         textLabel.textAlignment = .center
-        textLabel.textColor = .white
+        textLabel.textColor = .black
         textLabel.font = UIFont(name: "KimjungchulMyungjo-Bold", size: 30)
         textLabel.numberOfLines = 0
         textLabel.text = "장고끝에 악수 둔다."
@@ -41,17 +41,10 @@ class HomeVC: UIViewController{
 //        return button
 //    }()
     private lazy var navBar : UINavigationBar = {
-        let appearance = UINavigationBarAppearance()
-        appearance.configureWithOpaqueBackground()
-        appearance.backgroundColor = .black
-        
-        
         let navBar = UINavigationBar()
         navBar.translatesAutoresizingMaskIntoConstraints = false
-        navBar.isTranslucent = false
-        navBar.standardAppearance = appearance
-        navBar.scrollEdgeAppearance = navBar.standardAppearance
-        
+        navBar.barTintColor = .systemGray5
+//        navBar.backgroundColor = .
         return navBar
     }()
     private lazy var navItem : UINavigationItem = {
@@ -113,7 +106,7 @@ class HomeVC: UIViewController{
     }
     //특정기능을 위한 setup
     private func setupView(){
-        view.backgroundColor = .white
+        view.backgroundColor = .systemGray5
         navBar.setItems([navItem], animated: true)
         
         //어떤 셀을 가져올지 정해줘야함.
@@ -201,8 +194,14 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
                 let dateComponents = calendar.dateComponents([.day], from: stactOfcurrentDate, to: stactOfselectedDate)
                 
                 if let dayDifference = dateComponents.day {
+                    if dayDifference == 0{
+                        cell.dateCount.text = " day"
+                    }else if dayDifference > 0 {
+                        cell.dateCount.text = "\(dayDifference)"
+                    }else{
+                        cell.dateCount.text = " 마감"
+                    }
                     
-                    cell.dateCount.text = "\(dayDifference)"
                 }
                 
             }

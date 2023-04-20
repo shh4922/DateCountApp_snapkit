@@ -11,8 +11,8 @@ class MainVC : UITabBarController {
         let homeVC = HomeVC()
         return homeVC
     }()
-    private lazy var settingVC : SettingVC = {
-        let settingVC = SettingVC()
+    private lazy var settingVC : UINavigationController = {
+        let settingVC = UINavigationController(rootViewController: SettingVC())
         return settingVC
     }()
     private lazy var logoutButotn : UIButton = {

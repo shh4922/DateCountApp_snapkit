@@ -2,7 +2,9 @@ import SnapKit
 import SwiftUI
 import UIKit
 import Firebase
-class ListVC: UIViewController {
+import os.log
+
+class ListVC: UIViewController , UNUserNotificationCenterDelegate {
     
     var myData : Set<[String:String]> = Set()
     
@@ -89,7 +91,7 @@ class ListVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        setNotification()
         
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -145,7 +147,8 @@ class ListVC: UIViewController {
     }
     
     //밑에 두 observeSingleEvent가 비동기로 작업해서, 명언 데이터를 받아오기전에 UI를 그려버려서  데이터를 보여주지못한다
-    private func getTextOnFirebase(){
+    @objc private func getTextOnFirebase(){
+        os_log("getTextOnFirebase 함수 수행!", log: .default, type: .debug)
         guard let uid : String = Auth.auth().currentUser?.uid else{return}
         
         let DeleveredDB = Database.database().reference().child("Users").child(uid).child("info").child("deleveredData")
@@ -198,6 +201,9 @@ class ListVC: UIViewController {
         }
     }
     
+    private func setNotification(){
+        NotificationCenter.default.addObserver(self, selector: #selector(getTextOnFirebase), name: NSNotification.Name("getTextOnFirebase"), object: nil)
+    }
 }
 
 #if DEBUG
