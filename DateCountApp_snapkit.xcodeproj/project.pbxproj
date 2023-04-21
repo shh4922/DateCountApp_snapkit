@@ -10,6 +10,7 @@
 		005F16B829E7FDCA006CBEA7 /* TestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005F16B729E7FDCA006CBEA7 /* TestData.swift */; };
 		0068707729D9EA66001330FA /* DateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0068707629D9EA66001330FA /* DateTableViewCell.swift */; };
 		0068707929D9EAE1001330FA /* DateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0068707829D9EAE1001330FA /* DateModel.swift */; };
+		0075C64929F26B62005626F7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0075C64829F26B62005626F7 /* GoogleService-Info.plist */; };
 		0081615529EEA838003E3D19 /* TextData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0081615429EEA838003E3D19 /* TextData.swift */; };
 		0099BC9929E1F87C00404D7E /* The Jamsil OTF 6 ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0099BC9829E1F87C00404D7E /* The Jamsil OTF 6 ExtraBold.otf */; };
 		00ACCBC529E293F3001A45A5 /* ChosunCentennial_otf.otf in Resources */ = {isa = PBXBuildFile; fileRef = 00ACCBC429E293F3001A45A5 /* ChosunCentennial_otf.otf */; };
@@ -35,6 +36,7 @@
 		005F16B729E7FDCA006CBEA7 /* TestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestData.swift; sourceTree = "<group>"; };
 		0068707629D9EA66001330FA /* DateTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTableViewCell.swift; sourceTree = "<group>"; };
 		0068707829D9EAE1001330FA /* DateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateModel.swift; sourceTree = "<group>"; };
+		0075C64829F26B62005626F7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0081615429EEA838003E3D19 /* TextData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextData.swift; sourceTree = "<group>"; };
 		0099BC9829E1F87C00404D7E /* The Jamsil OTF 6 ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "The Jamsil OTF 6 ExtraBold.otf"; sourceTree = "<group>"; };
 		00ACCBC429E293F3001A45A5 /* ChosunCentennial_otf.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ChosunCentennial_otf.otf; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 			isa = PBXGroup;
 			children = (
 				00D6D10129CC582200725D65 /* GoogleService-Info.plist */,
+				0075C64829F26B62005626F7 /* GoogleService-Info.plist */,
 				00BFE7EA29C329F900C279FD /* AppDelegate.swift */,
 				00BFE7EC29C329F900C279FD /* SceneDelegate.swift */,
 				00BFE7EE29C329F900C279FD /* ViewController.swift */,
@@ -205,6 +208,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				00BFE7F729C329FB00C279FD /* LaunchScreen.storyboard in Resources */,
+				0075C64929F26B62005626F7 /* GoogleService-Info.plist in Resources */,
 				0099BC9929E1F87C00404D7E /* The Jamsil OTF 6 ExtraBold.otf in Resources */,
 				00BFE7F429C329FB00C279FD /* Assets.xcassets in Resources */,
 				00ACCBC529E293F3001A45A5 /* ChosunCentennial_otf.otf in Resources */,
