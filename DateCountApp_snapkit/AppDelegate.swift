@@ -5,11 +5,18 @@ import Firebase
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
     
-    //stop
+    
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
+        setUpAlter()
+        // 매일 00시00분에 알림 발송
+        Alter()
         
+        return true
+    }
+    
+    func setUpAlter(){
         // 알림 권한 요청
         let center = UNUserNotificationCenter.current()
         center.requestAuthorization(options: [.alert, .sound]) { granted, error in
@@ -23,7 +30,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 print("알림 권한이 거부되었습니다.")
             }
         }
-        // 매일 00시00분에 알림 발송
+    }
+    func Alter(){
         let content = UNMutableNotificationContent()
         content.title = "알림"
         content.body = "오늘의 명언이 도착하였습니다! \n 확인해주세요!"
@@ -34,22 +42,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         components.minute = 0
         let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: true)
         
+        /*
+         UNNotificationRequest 는 클라이언트에게 푸쉬알람을 주는 함수이다.
+         identifier는 뭔지 모르겠지만 UserDefault처럼 따로 설정해주는게 아닐까 싶다. ->
+         또한 content는 알람이다보니깐, 해당알람에 들어갈 title과 body를 만들어서 전달해준다. 그렇기때문에 위에서 지정해준것.
+         trigger는 알람이 올 시간과, 반복여부를 담고있는 UNCalendarNotificationTrigger 이다!
+         */
         let request = UNNotificationRequest(identifier: "DailyQuote", content: content, trigger: trigger)
-        
-        
-        
         UNUserNotificationCenter.current().add(request) { error in
             if let error = error {
                 print("Error adding daily quote notification: \(error.localizedDescription)")
             } else {
-                print("나 실행 하고있냐?")
                 UserDefaults.standard.set(true, forKey: "isSendedText")
             }
         }
-        
-        
-        
-        return true
     }
     
     // MARK: UISceneSession Lifecycle

@@ -85,16 +85,16 @@ class LoginVC: UIViewController {
         return signUpVC
     }()
     
+    let loginViewModel : LoginViewModel = LoginViewModel()
+    
     //MARK: - lifecycle
     //환경설정할부분 add
     override func viewDidLoad() {
         super.viewDidLoad()
         setNotificationKeyboard()
         setTapMethod()
+        viewSetUp()
     }
-    
-    //MARK: viewWillApear
-    //view를 다시 그릴때마다 run할 부분.
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         addView()
@@ -111,53 +111,31 @@ class LoginVC: UIViewController {
         self.view.endEditing(true)
     }
     
-    //MARK: - keyboard setUp
-    //키보드가 보여지면 할 액션
-    @objc private func keyboardWillShow(_ notification: Notification) {
-        //키보드가 올라오면
-        guard let userInfo = notification.userInfo,
-              let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else {
-            return
-        }
-        let contentInset = UIEdgeInsets(
-            top: 0.0,
-            left: 0.0,
-            bottom: keyboardFrame.size.height,
-            right: 0.0)
-        scrollView.contentInset = contentInset
-        scrollView.scrollIndicatorInsets = contentInset
-
+    private func showDialog(msg: String){
+        let alert = UIAlertController(title: "알림", message: msg, preferredStyle: UIAlertController.Style.alert)
+        let action = UIAlertAction(title: "OK", style: UIAlertAction.Style.default)
+        alert.addAction(action)
+        self.present(alert, animated: true)
     }
-    //키보드가 뷰에서 안보이면 하는 액션
-    @objc private func keyboardWillHide() {
-        let contentInset = UIEdgeInsets.zero
-        scrollView.contentInset = contentInset
-        scrollView.scrollIndicatorInsets = contentInset
-        
-    }
+   
     //MARK: - loginAction
     @objc private func loginAction(){
-        //아이디 패스워드 비어있는값
-        if let email = idField.text, let password = passField.text{
-            Auth.auth().signIn(withEmail: email, password: password){ authResult,error in
-                if email == "" || password == ""{
-                    print("아이디또는 비밀번호를 모두 입력하시오 ")
-                    return
-                }
-                if let e = error{
-                    self.showDialog(msg: "아이디 또는 비밀번호를 확인해주세요.")
-                    print("아이디 비번은 입력되었지만, error가 난 경우")
-                    print("email : \(email), password : \(password)")
-                    print(e.localizedDescription)
-                }else{
-                    UserDefaults.standard.set(true, forKey: "isLogin")
-                    (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(self.mainVC)
-                }
+        let user : User = User(email: idField.text, password: passField.text)
+        loginViewModel.loginAction(user: user){ result in
+            switch result{
+            case "NoAccount":
+                self.showDialog(msg: "아이디 또는 비밀번호를 잘못 입력하였습니다!")
+            case "success":
+                self.showDialog(msg: "로그인 성공 ㅎ")
+                UserDefaults.standard.set(true, forKey: "isLogin")
+                (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(self.mainVC)
+            default:
+                self.showDialog(msg: "아이디 비밀번호를 모두 입력해세요!")
             }
         }
     }
-    //MARK: - setUpView
-    //뷰에 add할 view들 추가
+    
+    //MARK: - setUI
     private func addView(){
         view.addSubview(scrollView)
         scrollView.addSubview(containerview)
@@ -168,12 +146,7 @@ class LoginVC: UIViewController {
         containerview.addSubview(loginButton)
         containerview.addSubview(signUpButton)
     }
-    
-    //오토레이아웃
     private func setAutoLayout(){
-        self.navigationItem.title = "로그인"
-        self.view.backgroundColor = .systemBackground
-        
         scrollView.snp.makeConstraints { make in
             make.edges.equalTo(view.safeAreaLayoutGuide)
         }
@@ -217,27 +190,12 @@ class LoginVC: UIViewController {
             make.bottom.equalTo(containerview.snp.bottom)
         }
     }
-    
-    //스크롤뷰에 tab기능 추가를 위한 설정
-    private func setTapMethod(){
-        let singleTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(RunTapMethod))
-        singleTapGestureRecognizer.numberOfTapsRequired = 1
-        singleTapGestureRecognizer.isEnabled = true
-        singleTapGestureRecognizer.cancelsTouchesInView = false
-        scrollView.addGestureRecognizer(singleTapGestureRecognizer)
-    }
-    //Set Notification
-    private func setNotificationKeyboard(){
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    private func viewSetUp(){
+        self.navigationItem.title = "로그인"
+        self.view.backgroundColor = .systemBackground
+        
     }
     
-    private func showDialog(msg: String){
-        let alert = UIAlertController(title: "알림", message: msg, preferredStyle: UIAlertController.Style.alert)
-        let action = UIAlertAction(title: "OK", style: UIAlertAction.Style.default)
-        alert.addAction(action)
-        self.present(alert, animated: true)
-    }
 }
 
 //MARK: - 키보드 return 누를시, 다음te
@@ -265,30 +223,50 @@ extension UITextField {
   }
 }
 
+//MARK: - Set Notification
+extension LoginVC {
+    private func setNotificationKeyboard(){
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+}
+
+//MARK: - keyboard setUp
+extension LoginVC {
+    //키보드가 보여지면 할 액션
+    @objc private func keyboardWillShow(_ notification: Notification) {
+        //키보드가 올라오면
+        guard let userInfo = notification.userInfo,
+              let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else {
+            return
+        }
+        let contentInset = UIEdgeInsets(
+            top: 0.0,
+            left: 0.0,
+            bottom: keyboardFrame.size.height,
+            right: 0.0)
+        scrollView.contentInset = contentInset
+        scrollView.scrollIndicatorInsets = contentInset
+
+    }
+    //키보드가 뷰에서 안보이면 하는 액션
+    @objc private func keyboardWillHide() {
+        let contentInset = UIEdgeInsets.zero
+        scrollView.contentInset = contentInset
+        scrollView.scrollIndicatorInsets = contentInset
+        
+    }
+}
+
+//MARK: -ScrollView tab기능 추가를 위한 setUp
+extension LoginVC{
+    private func setTapMethod(){
+        let singleTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(RunTapMethod))
+        singleTapGestureRecognizer.numberOfTapsRequired = 1
+        singleTapGestureRecognizer.isEnabled = true
+        singleTapGestureRecognizer.cancelsTouchesInView = false
+        scrollView.addGestureRecognizer(singleTapGestureRecognizer)
+    }
+}
+
    
-
-//프리뷰
-#if DEBUG
-    struct ViewControllerRepresentable: UIViewControllerRepresentable {
-        // update
-        func updateUIViewController(_ uiViewController: UIViewController, context: Context){
-
-        }
-        // makeui
-        @available(iOS 13.0, *)
-        func makeUIViewController(context: Context) -> UIViewController {
-            LoginVC()
-        }
-    }
-    @available(iOS 13.0, *)
-    struct ViewController_Previews: PreviewProvider {
-        static var previews: some View{
-            Group{
-                ViewControllerRepresentable()
-                    .ignoresSafeArea(.all)//미리보기의 safeArea 이외의 부분도 채워서 보여주게됌.
-                    .previewDisplayName("iphone 11")
-            }
-        }
-    }
-
-#endif

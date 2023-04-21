@@ -4,9 +4,8 @@ import SnapKit
 import Firebase
 //asdasd
 class SignUpVC: UIViewController {
-
-    private var ref : DatabaseReference!
-    let db = Firestore.firestore()
+    
+    let signUpViewModel : SignUpViewModel = SignUpViewModel()
     //MARK: - viewCreate
     private lazy var scrollView : UIScrollView = {
         let scrollView = UIScrollView()
@@ -73,6 +72,7 @@ class SignUpVC: UIViewController {
     //MARK: - lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        setUpView()
         setNotification()
         setTapMethod()
     }
@@ -95,17 +95,13 @@ class SignUpVC: UIViewController {
         contentView.addSubview(Btn_createAccount)
 
     }
-    
     private func setAutoLayout(){
-        self.navigationItem.title = "회원가입"
-        view.backgroundColor = .white
         
         scrollView.snp.makeConstraints { make in
             make.edges.equalTo(view.safeAreaLayoutGuide)
         }
         contentView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
-            //세로 스크롤이 가능하도록 하기위해 width는 화면의view와 크기를 맞춤
             make.width.equalTo(view.snp.width)
         }
         titleLabel.snp.makeConstraints { make in
@@ -138,83 +134,43 @@ class SignUpVC: UIViewController {
             make.bottom.equalTo(contentView.snp.bottom)
         }
     }
-    
-    //MARK: - setUp
-    //스크롤뷰에 tab기능 추가를 위한 설정
-    private func setTapMethod(){
-        let singleTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(RunTapMethod))
-        singleTapGestureRecognizer.numberOfTapsRequired = 1
-        singleTapGestureRecognizer.isEnabled = true
-        singleTapGestureRecognizer.cancelsTouchesInView = false
-        scrollView.addGestureRecognizer(singleTapGestureRecognizer)
+    private func setUpView(){
+        self.navigationItem.title = "회원가입"
+        view.backgroundColor = .white
+        
     }
     
-    private func setNotification(){
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-    }
     
-    //MARK: - action
-    //스크롤뷰 Tab할시 수행할 기능.
+    
+    //MARK: - method
     @objc private func RunTapMethod(){
         self.view.endEditing(true)
     }
-    //가입완료 누를시.
-    @objc private func signUpAction(){
-        if let email = IdField.text , let password = passwordField.text{
-            Auth.auth().createUser(withEmail: email, password: password){ (user,error) in
-                if user != nil{
-                    print("가입성공")
-                    guard let uid = user?.user.uid else { return }
-                    self.ref = Database.database().reference()
-                    self.ref.child("Users").child(uid).child("info").setValue([
-                        "email" : email,
-                        "password" : password,
-                        "deleveredData" : [
-                            "A" :[
-                                "text" : "aaa",
-                                "author" : "bbb"
-                            ]
-                        ],
-                        "subscribedData" : nil
-                    ])
-                }else{
-                    print("가입 실패!")
-                }
-            }
-        }
+    
+    private func showDialog(msg: String){
+        let alert = UIAlertController(title: "알림", message: msg, preferredStyle: UIAlertController.Style.alert)
+        let action = UIAlertAction(title: "OK", style: UIAlertAction.Style.default)
+        alert.addAction(action)
+        self.present(alert, animated: true)
     }
     
-    //MARK: - 키보드 셋업
-    //키보드가 보여질시 스크롤이 가능하도록 하기위해서 contentInset 조정
-    @objc private func keyboardWillShow(_ notification : Notification){
-        print("signUpVC keyboardWillShow()-run")
-        //키보드가 올라오면
-        guard let userInfo = notification.userInfo,
-              let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else {
-            return
+    @objc private func signUpAction(){
+        let user = User(email: IdField.text, password: passwordField.text)
+        signUpViewModel.signUpAction(userData: user) { result in
+            switch result{
+            case "success":
+                self.showDialog(msg: "성공")
+            case "SameAccount":
+                self.showDialog(msg: "중복된 계정이 있습니다!")
+            default :
+                self.showDialog(msg: "아이디와 비밀번호를 모두 입력해주세요!")
+            }
         }
-        let contentInset = UIEdgeInsets(
-            top: 0.0,
-            left: 0.0,
-            bottom: keyboardFrame.size.height,
-            right: 0.0)
-        scrollView.contentInset = contentInset
-        scrollView.scrollIndicatorInsets = contentInset
-    }
-    //키보드가 사라질시 contentInset.zero
-    @objc private func keyboardWillHide(){
-        print("signUpVC keyboardWillHide()-run")
-        let contentInset = UIEdgeInsets.zero
-        scrollView.contentInset = contentInset
-        scrollView.scrollIndicatorInsets = contentInset
-
     }
     
 }
 
 //MARK: - 리턴누를시 다음 textField로 이동하는기능
-//키보드 return버튼 클릭시, 다음input으로 이동을 위해 Delegate추가.
 extension SignUpVC: UITextFieldDelegate {
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
     if textField == IdField {
@@ -228,28 +184,41 @@ extension SignUpVC: UITextFieldDelegate {
   }
 }
 
-
-
-#if DEBUG
-struct SignupView: UIViewControllerRepresentable {
-    // update
-    func updateUIViewController(_ uiViewController: UIViewController, context: Context){
-
+//MARK: - 키보드 notification setUp
+extension SignUpVC {
+    private func setNotification(){
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
-    // makeui
-    @available(iOS 13.0, *)
-    func makeUIViewController(context: Context) -> UIViewController {
-        SignUpVC()
-    }
-}
-@available(iOS 13.0, *)
-struct SignupView_Previews: PreviewProvider {
-    static var previews: some View{
-        Group{
-            SignupView()
-                .ignoresSafeArea(.all)//미리보기의 safeArea 이외의 부분도 채워서 보여주게됌.
-                .previewDisplayName("iphone 11")
+    @objc private func keyboardWillShow(_ notification : Notification){
+        guard let userInfo = notification.userInfo,
+              let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else {
+            return
         }
+        let contentInset = UIEdgeInsets(
+            top: 0.0,
+            left: 0.0,
+            bottom: keyboardFrame.size.height,
+            right: 0.0)
+        scrollView.contentInset = contentInset
+        scrollView.scrollIndicatorInsets = contentInset
+    }
+    @objc private func keyboardWillHide(){
+        let contentInset = UIEdgeInsets.zero
+        scrollView.contentInset = contentInset
+        scrollView.scrollIndicatorInsets = contentInset
+
     }
 }
-#endif
+
+//MARK: - ScrollView Tab Action setUp
+extension SignUpVC {
+    private func setTapMethod(){
+        let singleTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(RunTapMethod))
+        singleTapGestureRecognizer.numberOfTapsRequired = 1
+        singleTapGestureRecognizer.isEnabled = true
+        singleTapGestureRecognizer.cancelsTouchesInView = false
+        scrollView.addGestureRecognizer(singleTapGestureRecognizer)
+    }
+    
+}

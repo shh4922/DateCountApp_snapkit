@@ -22,11 +22,13 @@
 		00B45C3229CC29740030CD02 /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B45C3129CC29740030CD02 /* SignUpVC.swift */; };
 		00BFE7EB29C329F900C279FD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BFE7EA29C329F900C279FD /* AppDelegate.swift */; };
 		00BFE7ED29C329F900C279FD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BFE7EC29C329F900C279FD /* SceneDelegate.swift */; };
-		00BFE7EF29C329F900C279FD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BFE7EE29C329F900C279FD /* ViewController.swift */; };
 		00BFE7F429C329FB00C279FD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 00BFE7F329C329FB00C279FD /* Assets.xcassets */; };
 		00BFE7F729C329FB00C279FD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 00BFE7F529C329FB00C279FD /* LaunchScreen.storyboard */; };
 		00D9A8BA29E319BD004BF6E8 /* KimjungchulMyungjo-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 00D9A8B929E319BC004BF6E8 /* KimjungchulMyungjo-Bold.otf */; };
 		00D9A8BC29E321BB004BF6E8 /* AddDateVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D9A8BB29E321BB004BF6E8 /* AddDateVC.swift */; };
+		00E6609629F2E65F00452873 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E6609529F2E65F00452873 /* LoginViewModel.swift */; };
+		00E6609829F2E6AA00452873 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E6609729F2E6AA00452873 /* User.swift */; };
+		00E6609B29F2FE0C00452873 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E6609A29F2FE0C00452873 /* SignUpViewModel.swift */; };
 		00FECC8E29EA8BB4005DEF5D /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BFE7FE29C3377D00C279FD /* LoginVC.swift */; };
 		DF2959A34F147E70CC85E719 /* libPods-DateCountApp_snapkit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 42073FBC95E00FA1C06CF06F /* libPods-DateCountApp_snapkit.a */; };
 /* End PBXBuildFile section */
@@ -48,13 +50,15 @@
 		00BFE7E729C329F900C279FD /* DateCountApp_snapkit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DateCountApp_snapkit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		00BFE7EA29C329F900C279FD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		00BFE7EC29C329F900C279FD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		00BFE7EE29C329F900C279FD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		00BFE7F329C329FB00C279FD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		00BFE7F629C329FB00C279FD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		00BFE7F829C329FB00C279FD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00BFE7FE29C3377D00C279FD /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		00D9A8B929E319BC004BF6E8 /* KimjungchulMyungjo-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "KimjungchulMyungjo-Bold.otf"; sourceTree = "<group>"; };
 		00D9A8BB29E321BB004BF6E8 /* AddDateVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDateVC.swift; sourceTree = "<group>"; };
+		00E6609529F2E65F00452873 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		00E6609729F2E6AA00452873 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		00E6609A29F2FE0C00452873 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		1D92F8D0A6991CDFE98FC893 /* Pods-DateCountApp_snapkit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DateCountApp_snapkit.release.xcconfig"; path = "Target Support Files/Pods-DateCountApp_snapkit/Pods-DateCountApp_snapkit.release.xcconfig"; sourceTree = "<group>"; };
 		42073FBC95E00FA1C06CF06F /* libPods-DateCountApp_snapkit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DateCountApp_snapkit.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6493818DC1D5FD8BF1F7EDA1 /* Pods-DateCountApp_snapkit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DateCountApp_snapkit.debug.xcconfig"; path = "Target Support Files/Pods-DateCountApp_snapkit/Pods-DateCountApp_snapkit.debug.xcconfig"; sourceTree = "<group>"; };
@@ -105,15 +109,15 @@
 		00BFE7E929C329F900C279FD /* DateCountApp_snapkit */ = {
 			isa = PBXGroup;
 			children = (
+				00E6609929F2FBFC00452873 /* ViewController */,
+				00E6609429F2E64A00452873 /* ViewModel */,
+				00E6609329F2E61100452873 /* Model */,
 				0075C64829F26B62005626F7 /* GoogleService-Info.plist */,
 				00BFE7EA29C329F900C279FD /* AppDelegate.swift */,
 				00BFE7EC29C329F900C279FD /* SceneDelegate.swift */,
-				00BFE7EE29C329F900C279FD /* ViewController.swift */,
 				00BFE7F329C329FB00C279FD /* Assets.xcassets */,
 				00BFE7F529C329FB00C279FD /* LaunchScreen.storyboard */,
 				00BFE7F829C329FB00C279FD /* Info.plist */,
-				00BFE7FE29C3377D00C279FD /* LoginVC.swift */,
-				00B45C3129CC29740030CD02 /* SignUpVC.swift */,
 				00AD82A229D5721B00059928 /* MainVC.swift */,
 				00AD82A029D56AB200059928 /* HomeVC.swift */,
 				00AD82A429D599CD00059928 /* ListVC.swift */,
@@ -125,6 +129,32 @@
 				0081615429EEA838003E3D19 /* TextData.swift */,
 			);
 			path = DateCountApp_snapkit;
+			sourceTree = "<group>";
+		};
+		00E6609329F2E61100452873 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				00E6609729F2E6AA00452873 /* User.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		00E6609429F2E64A00452873 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				00E6609529F2E65F00452873 /* LoginViewModel.swift */,
+				00E6609A29F2FE0C00452873 /* SignUpViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		00E6609929F2FBFC00452873 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				00B45C3129CC29740030CD02 /* SignUpVC.swift */,
+				00BFE7FE29C3377D00C279FD /* LoginVC.swift */,
+			);
+			path = ViewController;
 			sourceTree = "<group>";
 		};
 		49C6227438E1A9D9EF5E27C8 /* Pods */ = {
@@ -263,14 +293,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				00BFE7EF29C329F900C279FD /* ViewController.swift in Sources */,
+				00E6609B29F2FE0C00452873 /* SignUpViewModel.swift in Sources */,
 				00AD82A729D599E300059928 /* SettingVC.swift in Sources */,
 				00BFE7EB29C329F900C279FD /* AppDelegate.swift in Sources */,
 				00AD82A329D5721B00059928 /* MainVC.swift in Sources */,
+				00E6609829F2E6AA00452873 /* User.swift in Sources */,
 				005F16B829E7FDCA006CBEA7 /* TestData.swift in Sources */,
 				0068707729D9EA66001330FA /* DateTableViewCell.swift in Sources */,
 				0081615529EEA838003E3D19 /* TextData.swift in Sources */,
 				00AD82A529D599CD00059928 /* ListVC.swift in Sources */,
+				00E6609629F2E65F00452873 /* LoginViewModel.swift in Sources */,
 				0068707929D9EAE1001330FA /* DateModel.swift in Sources */,
 				00AD82A129D56AB200059928 /* HomeVC.swift in Sources */,
 				00FECC8E29EA8BB4005DEF5D /* LoginVC.swift in Sources */,
