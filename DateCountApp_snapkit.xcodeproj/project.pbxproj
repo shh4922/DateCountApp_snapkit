@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0050205529F3C78800D88281 /* Quote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0050205429F3C78800D88281 /* Quote.swift */; };
+		0050205929F3C7D200D88281 /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0050205829F3C7D200D88281 /* ListViewModel.swift */; };
 		005F16B829E7FDCA006CBEA7 /* TestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005F16B729E7FDCA006CBEA7 /* TestData.swift */; };
 		0068707729D9EA66001330FA /* DateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0068707629D9EA66001330FA /* DateTableViewCell.swift */; };
 		0068707929D9EAE1001330FA /* DateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0068707829D9EAE1001330FA /* DateModel.swift */; };
@@ -34,6 +36,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0050205429F3C78800D88281 /* Quote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quote.swift; sourceTree = "<group>"; };
+		0050205829F3C7D200D88281 /* ListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
 		005F16B729E7FDCA006CBEA7 /* TestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestData.swift; sourceTree = "<group>"; };
 		0068707629D9EA66001330FA /* DateTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTableViewCell.swift; sourceTree = "<group>"; };
 		0068707829D9EAE1001330FA /* DateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateModel.swift; sourceTree = "<group>"; };
@@ -135,6 +139,7 @@
 			isa = PBXGroup;
 			children = (
 				00E6609729F2E6AA00452873 /* User.swift */,
+				0050205429F3C78800D88281 /* Quote.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -144,6 +149,7 @@
 			children = (
 				00E6609529F2E65F00452873 /* LoginViewModel.swift */,
 				00E6609A29F2FE0C00452873 /* SignUpViewModel.swift */,
+				0050205829F3C7D200D88281 /* ListViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -304,8 +310,10 @@
 				00AD82A529D599CD00059928 /* ListVC.swift in Sources */,
 				00E6609629F2E65F00452873 /* LoginViewModel.swift in Sources */,
 				0068707929D9EAE1001330FA /* DateModel.swift in Sources */,
+				0050205529F3C78800D88281 /* Quote.swift in Sources */,
 				00AD82A129D56AB200059928 /* HomeVC.swift in Sources */,
 				00FECC8E29EA8BB4005DEF5D /* LoginVC.swift in Sources */,
+				0050205929F3C7D200D88281 /* ListViewModel.swift in Sources */,
 				00D9A8BC29E321BB004BF6E8 /* AddDateVC.swift in Sources */,
 				00B45C3229CC29740030CD02 /* SignUpVC.swift in Sources */,
 				00BFE7ED29C329F900C279FD /* SceneDelegate.swift in Sources */,

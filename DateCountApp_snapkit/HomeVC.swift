@@ -32,19 +32,10 @@ class HomeVC: UIViewController{
         textLabel.text = "장고끝에 악수 둔다."
         return textLabel
     }()
-//    private lazy var rightButton: UIButton = {
-//        let button = UIButton()
-//        button.setTitle("add", for: .normal)
-//        button.setTitleColor(.systemBlue, for: .normal)
-//        button.addTarget(self, action: #selector(onClickPlusBtn), for: .touchUpInside)
-//
-//        return button
-//    }()
     private lazy var navBar : UINavigationBar = {
         let navBar = UINavigationBar()
         navBar.translatesAutoresizingMaskIntoConstraints = false
         navBar.barTintColor = .systemGray5
-//        navBar.backgroundColor = .
         return navBar
     }()
     private lazy var navItem : UINavigationItem = {
@@ -212,28 +203,3 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
         return cell
     }
 }
-
-
-#if DEBUG
-struct HomeView: UIViewControllerRepresentable {
-    // update
-    func updateUIViewController(_ uiViewController: UIViewController, context: Context){
-
-    }
-    // makeui
-    @available(iOS 13.0, *)
-    func makeUIViewController(context: Context) -> UIViewController {
-        HomeVC()
-    }
-}
-@available(iOS 13.0, *)
-struct HomeView_Previews: PreviewProvider {
-    static var previews: some View{
-        Group{
-            HomeView()
-                .ignoresSafeArea(.all)//미리보기의 safeArea 이외의 부분도 채워서 보여주게됌.
-                .previewDisplayName("iphone 11")
-        }
-    }
-}
-#endif

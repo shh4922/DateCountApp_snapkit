@@ -7,7 +7,7 @@ import os.log
 class ListVC: UIViewController , UNUserNotificationCenterDelegate {
     
     var myData : Set<[String:String]> = Set()
-    
+    let listViewModel = ListViewModel()
     private lazy var loginVC : UINavigationController = {
         let loginVC = LoginVC()
         let navLoginVC = UINavigationController(rootViewController: loginVC)
@@ -101,9 +101,7 @@ class ListVC: UIViewController , UNUserNotificationCenterDelegate {
             }
             print("투루아님..")
         }
-        
         UserDefaults.standard.set(false, forKey: "isSendedText")
-        print("false로 바꿈")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -164,90 +162,76 @@ class ListVC: UIViewController , UNUserNotificationCenterDelegate {
     //밑에 두 observeSingleEvent가 비동기로 작업해서, 명언 데이터를 받아오기전에 UI를 그려버려서  데이터를 보여주지못한다
     @objc private func getTextOnFirebase(){
         
-        guard let uid : String = Auth.auth().currentUser?.uid else{return}
+        let allQuote = listViewModel.getAllQuote()
+        let showedQoute = listViewModel.getShowedQuote()
         
-        let DeleveredDB = Database.database().reference().child("Users").child(uid).child("info").child("deleveredData")
-        let TextDB = Database.database().reference().child("textdata")
-        let group = DispatchGroup() // DispatchGroup 생성
-        
-        
-        group.enter()
-        TextDB.observeSingleEvent(of: .value){ snapshot in
-            for child in snapshot.children {
-                guard let snap = child as? DataSnapshot else { return }
-                guard let text = snap.childSnapshot(forPath: "text").value as? String else { return }
-                guard let author = snap.childSnapshot(forPath: "author").value as? String else { return }
-                let decodeText = text.applyingTransform(.init("Any-Hex/Java"), reverse: true) ?? text
-                let decodeAuthor = author.applyingTransform(.init("Any-Hex/Java"), reverse: true) ?? author
-                self.myData.insert([
-                    "text": decodeText,
-                    "author" : decodeAuthor
-                ])
-                print("들어간 데이터는 \(self.myData)")
-            }
-            group.leave()
+        //보여줄 데이터가 있을경우
+        if listViewModel.checkQouteData(fullData: allQuote, showedData: showedQoute){
+            listViewModel.saveToFirebase()
+            listViewModel.saveToLoacl()
+        }else{
+            //보여줄데이터가 없을경우.
+            //
         }
-        
-        group.enter()
-        DeleveredDB.observeSingleEvent(of: .value) { snapshot in
-            for child in snapshot.children{
-                guard let snap = child as? DataSnapshot else { return }
-                guard let text = snap.childSnapshot(forPath: "text").value as? String else { return }
-                guard let author = snap.childSnapshot(forPath: "author").value as? String else { return }
-                self.myData.remove([
-                    "text": text,
-                    "author" : author
-                ])
-                print("남은 데이터는 \(self.myData)")
-            }
-            
-            group.leave()
-        }
-        
-        group.notify(queue: .main) { // 모든 작업이 완료된 후 실행될 클로저
-            let randomData = self.myData.randomElement()
-            self.text1.text = randomData?["text"]
-            self.author.text = randomData?["author"]
-            
-            DeleveredDB.childByAutoId().setValue([
-                "text" : randomData?["text"],
-                "author" : randomData?["author"]
-            ])
-            UserDefaults.standard.set(
-                [
-                "text" : randomData?["text"],
-                "author" : randomData?["author"]
-                ],
-                forKey: "myDictionary"
-            )
-            
-        }
+//        guard let uid : String = Auth.auth().currentUser?.uid else{return}
+//
+//        let DeleveredDB = Database.database().reference().child("Users").child(uid).child("info").child("deleveredData")
+//        let TextDB = Database.database().reference().child("textdata")
+//        let group = DispatchGroup() // DispatchGroup 생성
+//
+//
+//        group.enter()
+//        TextDB.observeSingleEvent(of: .value){ snapshot in
+//            for child in snapshot.children {
+//                guard let snap = child as? DataSnapshot else { return }
+//                guard let text = snap.childSnapshot(forPath: "text").value as? String else { return }
+//                guard let author = snap.childSnapshot(forPath: "author").value as? String else { return }
+//                let decodeText = text.applyingTransform(.init("Any-Hex/Java"), reverse: true) ?? text
+//                let decodeAuthor = author.applyingTransform(.init("Any-Hex/Java"), reverse: true) ?? author
+//                self.myData.insert([
+//                    "text": decodeText,
+//                    "author" : decodeAuthor
+//                ])
+//                print("들어간 데이터는 \(self.myData)")
+//            }
+//            group.leave()
+//        }
+//
+//        group.enter()
+//        DeleveredDB.observeSingleEvent(of: .value) { snapshot in
+//            for child in snapshot.children{
+//                guard let snap = child as? DataSnapshot else { return }
+//                guard let text = snap.childSnapshot(forPath: "text").value as? String else { return }
+//                guard let author = snap.childSnapshot(forPath: "author").value as? String else { return }
+//                self.myData.remove([
+//                    "text": text,
+//                    "author" : author
+//                ])
+//                print("남은 데이터는 \(self.myData)")
+//            }
+//
+//            group.leave()
+//        }
+//
+//        group.notify(queue: .main) { // 모든 작업이 완료된 후 실행될 클로저
+//            let randomData = self.myData.randomElement()
+//            self.text1.text = randomData?["text"]
+//            self.author.text = randomData?["author"]
+//
+//            DeleveredDB.childByAutoId().setValue([
+//                "text" : randomData?["text"],
+//                "author" : randomData?["author"]
+//            ])
+//            UserDefaults.standard.set(
+//                [
+//                "text" : randomData?["text"],
+//                "author" : randomData?["author"]
+//                ],
+//                forKey: "myDictionary"
+//            )
+//
+//        }
     }
     
     
 }
-
-#if DEBUG
-struct ListView: UIViewControllerRepresentable {
-    // update
-    func updateUIViewController(_ uiViewController: UIViewController, context: Context){
-        
-    }
-    // makeui
-    @available(iOS 13.0, *)
-    func makeUIViewController(context: Context) -> UIViewController {
-        ListVC()
-    }
-}
-@available(iOS 13.0, *)
-struct ListView_Previews: PreviewProvider {
-    static var previews: some View{
-        Group{
-            ListView()
-                .ignoresSafeArea(.all)//미리보기의 safeArea 이외의 부분도 채워서 보여주게됌.
-                .previewDisplayName("iphone 11")
-        }
-    }
-}
-
-#endif

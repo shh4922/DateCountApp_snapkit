@@ -21,13 +21,10 @@ class MainVC : UITabBarController {
         return logoutButton
     }()
 
-
-    
-    private func setTabBar(){
+    private func setUp(){
         self.tabBar.backgroundColor = .white
         self.tabBar.tintColor = .systemBlue
         self.tabBar.itemPositioning = .centered
-//        self.tabBar.layer.cornerRadius = 10
         self.tabBar.unselectedItemTintColor = .lightGray
         
         homeVC.title = "home"
@@ -42,12 +39,11 @@ class MainVC : UITabBarController {
         for x in 0...2 {
             items[x].image = UIImage(systemName: images[x])
         }
-        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setTabBar()
+        setUp()
     }
 }
 
