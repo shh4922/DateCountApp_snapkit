@@ -2,91 +2,93 @@ import Foundation
 import Firebase
 
 class ListViewModel {
-    var random : Quote? = nil
     
-    //모든 명언을 가져오는 함수
-    func getAllQuote() -> [Quote] {
-        var fullData : [Quote] = []
-        
+    func returnRandomQuote(_ allQuote:[Quote],_ showedQuote:[Quote]) -> Quote?{
+        let allQuote_ = Set(allQuote)
+        let showedQuote_ = Set(showedQuote)
+        let result = allQuote_.subtracting(showedQuote_).randomElement()
+        return result
+    }
+    
+    func loadQuoteData(competition : @escaping ([Quote],[Quote])->Void){
+        guard let uid : String = Auth.auth().currentUser?.uid else { return}
+        let DeleveredDB = Database.database().reference().child("Users").child(uid).child("info").child("deleveredData")
         let TextDB = Database.database().reference().child("textdata")
         
+        
+        //전체명언 데이터를 받아서 담을 곳
+        var fullData : [Quote] = []
+        //이미봤던 명언 데이터를 받아서 담을곳
+        var showedData : [Quote] = []
+        
+        //비동기처리할 애들을 그룹으로묶어서 마지막에  두 데이터를 비교하기위해
+        let group = DispatchGroup()
+        
+        group.enter()
+        //AllData
         TextDB.observeSingleEvent(of: .value){ snapshot in
-            var Data = Quote(author: nil, quote: nil)
             for child in snapshot.children {
                 
                 guard let snap = child as? DataSnapshot else { return }
-                guard let text = snap.childSnapshot(forPath: "text").value as? String else { return }
+                guard let quote = snap.childSnapshot(forPath: "quote").value as? String else { return }
                 guard let author = snap.childSnapshot(forPath: "author").value as? String else { return }
                 
-                Data.quote = text.applyingTransform(.init("Any-Hex/Java"), reverse: true) ?? text
-                Data.author = author.applyingTransform(.init("Any-Hex/Java"), reverse: true) ?? author
+                let data1 = Quote(author: author, quote: quote)
                 
-                fullData.append(Data)
+                //                Data.quote = text.applyingTransform(.init("Any-Hex/Java"), reverse: true) ?? text
+                //                Data.author = author.applyingTransform(.init("Any-Hex/Java"), reverse: true) ?? author
+                
+                fullData.append(data1)
             }
+            
+            group.leave()
         }
-        return fullData
+        
+        group.enter()
+        //showedData
+        DeleveredDB.observeSingleEvent(of: .value) { snapshot in
+            for child in snapshot.children{
+                guard let snap = child as? DataSnapshot else { return }
+                
+                guard let text = snap.childSnapshot(forPath: "quote").value as? String else { return }
+                guard let author = snap.childSnapshot(forPath: "author").value as? String else { return }
+                let data2 = Quote(author: author, quote: text)
+                
+                //author: author.applyingTransform(.init("Any-Hex/Java"), reverse: true) ?? author, quote: text.applyingTransform(.init("Any-Hex/Java"), reverse: true) ?? text
+                showedData.append(data2)
+                
+            }
+            group.leave()
+            
+        }
+        
+        group.notify(queue: .main) { competition(fullData,showedData) }
+        
     }
     
-    func checkQouteData(fullData:[Quote],showedData : [Quote]) -> Bool {
-        let firstSet = Set(fullData)
-        let secondSet = Set(showedData)
-        let randomData = firstSet.subtracting(secondSet).randomElement()
-        
-        guard let uid : String = Auth.auth().currentUser?.uid else{return false}
-        let DeleveredDB = Database.database().reference().child("Users").child(uid).child("info").child("deleveredData")
-        
-        if randomData == nil{
-            return false
-        }else{
-            random =  randomData
-            return true
-        }
-    }
     
-    func saveToFirebase(){
+    func saveToFirebase(quoteData : Quote){
         guard let uid : String = Auth.auth().currentUser?.uid else { return }
         let DeleveredDB = Database.database().reference().child("Users").child(uid).child("info").child("deleveredData")
         
         DeleveredDB.childByAutoId().setValue([
-            "text" : random?.quote,
-            "author" : random?.author
+            "quote" : quoteData.quote,
+            "author" : quoteData.author
         ])
     }
     
-    func saveToLoacl(){
+    func saveToLoacl(quoteData : Quote){
         UserDefaults.standard.set(
             [
-                "text" : random?.quote,
-                "author" : random?.author
+                "text" : quoteData.quote,
+                "author" : quoteData.author
             ],
             forKey: "myDictionary"
         )
     }
     
-    //기존에 봤던 명언을 가져오는 함수
-    func getShowedQuote() -> [Quote]{
-        var Data = Quote(author: nil, quote: nil)
-        guard let uid : String = Auth.auth().currentUser?.uid else { return []}
-        
-        let DeleveredDB = Database.database().reference().child("Users").child(uid).child("info").child("deleveredData")
-        var showedData : [Quote] = []
-        
-        DeleveredDB.observeSingleEvent(of: .value) { snapshot in
-           
-            
-            for child in snapshot.children{
-                guard let snap = child as? DataSnapshot else { return }
-                guard let text = snap.childSnapshot(forPath: "text").value as? String else { return }
-                guard let author = snap.childSnapshot(forPath: "author").value as? String else { return }
-                
-                Data.quote = text.applyingTransform(.init("Any-Hex/Java"), reverse: true) ?? text
-                Data.author = author.applyingTransform(.init("Any-Hex/Java"), reverse: true) ?? author
-                showedData.append(Data)
-            }
-        }
-        return showedData
-    }
     
 }
+
 
 

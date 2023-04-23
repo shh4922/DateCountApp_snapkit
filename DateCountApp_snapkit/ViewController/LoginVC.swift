@@ -120,17 +120,23 @@ class LoginVC: UIViewController {
    
     //MARK: - loginAction
     @objc private func loginAction(){
+        
         let user : User = User(email: idField.text, password: passField.text)
+        
         loginViewModel.loginAction(user: user){ result in
             switch result{
+                
             case "NoAccount":
                 self.showDialog(msg: "아이디 또는 비밀번호를 잘못 입력하였습니다!")
+                
             case "success":
                 self.showDialog(msg: "로그인 성공 ㅎ")
                 UserDefaults.standard.set(true, forKey: "isLogin")
                 (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(self.mainVC)
+                
             default:
                 self.showDialog(msg: "아이디 비밀번호를 모두 입력해세요!")
+                
             }
         }
     }

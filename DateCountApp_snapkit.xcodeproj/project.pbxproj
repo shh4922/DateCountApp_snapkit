@@ -124,7 +124,6 @@
 				00BFE7F829C329FB00C279FD /* Info.plist */,
 				00AD82A229D5721B00059928 /* MainVC.swift */,
 				00AD82A029D56AB200059928 /* HomeVC.swift */,
-				00AD82A429D599CD00059928 /* ListVC.swift */,
 				00AD82A629D599E300059928 /* SettingVC.swift */,
 				0068707629D9EA66001330FA /* DateTableViewCell.swift */,
 				0068707829D9EAE1001330FA /* DateModel.swift */,
@@ -157,6 +156,7 @@
 		00E6609929F2FBFC00452873 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				00AD82A429D599CD00059928 /* ListVC.swift */,
 				00B45C3129CC29740030CD02 /* SignUpVC.swift */,
 				00BFE7FE29C3377D00C279FD /* LoginVC.swift */,
 			);

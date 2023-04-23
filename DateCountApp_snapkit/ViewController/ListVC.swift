@@ -2,11 +2,11 @@ import SnapKit
 import SwiftUI
 import UIKit
 import Firebase
-import os.log
+
 
 class ListVC: UIViewController , UNUserNotificationCenterDelegate {
     
-    var myData : Set<[String:String]> = Set()
+    
     let listViewModel = ListViewModel()
     private lazy var loginVC : UINavigationController = {
         let loginVC = LoginVC()
@@ -89,45 +89,45 @@ class ListVC: UIViewController , UNUserNotificationCenterDelegate {
         return author
     }()
     
+    //MARK: - lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //명언을 전송 받았다면 true
         if UserDefaults.standard.bool(forKey: "isSendedText") {
             getTextOnFirebase()
-            print("투루임!!")
-        }else{
-            if let loadedDic = UserDefaults.standard.dictionary(forKey: "myDictionary"){
-                text1.text = loadedDic["text"] as? String ?? ""
-                author.text = loadedDic["author"] as? String ?? ""
-            }
-            print("투루아님..")
         }
+    
+        setQuoteUpdate()
+//        하루에한번씩 true가 요청되기에, 확인후 false로 변경
         UserDefaults.standard.set(false, forKey: "isSendedText")
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        addView()
         setLayout()
         navBar.setItems([navItem], animated: true)
         
     }
-    @objc private func onClickPlusBtn(){
-        print("sd")
-    }
-    private func saveUserDefaultTextData(){
-        
-    }
     
-    private func setLayout(){
-        
-        view.backgroundColor = .black
-        
-        //        view.addSubview(navBar)
+    
+    //MARK: - init
+    
+    private func addView(){
         view.addSubview(imgView)
         imgView.addSubview(text1)
         imgView.addSubview(author)
         imgView.addSubview(hstack)
         hstack.addArrangedSubview(changeImageButton)
         hstack.addArrangedSubview(subscriveButton)
+    }
+    private func setLayout(){
+        
+        view.backgroundColor = .black
+        
+        //        view.addSubview(navBar)
+        
         
         
         imgView.snp.makeConstraints { make in
@@ -159,78 +159,34 @@ class ListVC: UIViewController , UNUserNotificationCenterDelegate {
         }
     }
     
-    //밑에 두 observeSingleEvent가 비동기로 작업해서, 명언 데이터를 받아오기전에 UI를 그려버려서  데이터를 보여주지못한다
+    
+    //MARK: - Method
+    @objc private func onClickPlusBtn(){
+        print("testOnClick")
+    }
+
     @objc private func getTextOnFirebase(){
-        
-        let allQuote = listViewModel.getAllQuote()
-        let showedQoute = listViewModel.getShowedQuote()
-        
-        //보여줄 데이터가 있을경우
-        if listViewModel.checkQouteData(fullData: allQuote, showedData: showedQoute){
-            listViewModel.saveToFirebase()
-            listViewModel.saveToLoacl()
-        }else{
-            //보여줄데이터가 없을경우.
-            //
+        listViewModel.loadQuoteData() { allQuote, showedQuote in
+            let random = self.listViewModel.returnRandomQuote(allQuote, showedQuote)
+            
+            if random != nil {
+                guard let random else {return}
+                self.listViewModel.saveToFirebase(quoteData: random)
+                self.listViewModel.saveToLoacl(quoteData: random)
+                return
+            }
+            
+            return
         }
-//        guard let uid : String = Auth.auth().currentUser?.uid else{return}
-//
-//        let DeleveredDB = Database.database().reference().child("Users").child(uid).child("info").child("deleveredData")
-//        let TextDB = Database.database().reference().child("textdata")
-//        let group = DispatchGroup() // DispatchGroup 생성
-//
-//
-//        group.enter()
-//        TextDB.observeSingleEvent(of: .value){ snapshot in
-//            for child in snapshot.children {
-//                guard let snap = child as? DataSnapshot else { return }
-//                guard let text = snap.childSnapshot(forPath: "text").value as? String else { return }
-//                guard let author = snap.childSnapshot(forPath: "author").value as? String else { return }
-//                let decodeText = text.applyingTransform(.init("Any-Hex/Java"), reverse: true) ?? text
-//                let decodeAuthor = author.applyingTransform(.init("Any-Hex/Java"), reverse: true) ?? author
-//                self.myData.insert([
-//                    "text": decodeText,
-//                    "author" : decodeAuthor
-//                ])
-//                print("들어간 데이터는 \(self.myData)")
-//            }
-//            group.leave()
-//        }
-//
-//        group.enter()
-//        DeleveredDB.observeSingleEvent(of: .value) { snapshot in
-//            for child in snapshot.children{
-//                guard let snap = child as? DataSnapshot else { return }
-//                guard let text = snap.childSnapshot(forPath: "text").value as? String else { return }
-//                guard let author = snap.childSnapshot(forPath: "author").value as? String else { return }
-//                self.myData.remove([
-//                    "text": text,
-//                    "author" : author
-//                ])
-//                print("남은 데이터는 \(self.myData)")
-//            }
-//
-//            group.leave()
-//        }
-//
-//        group.notify(queue: .main) { // 모든 작업이 완료된 후 실행될 클로저
-//            let randomData = self.myData.randomElement()
-//            self.text1.text = randomData?["text"]
-//            self.author.text = randomData?["author"]
-//
-//            DeleveredDB.childByAutoId().setValue([
-//                "text" : randomData?["text"],
-//                "author" : randomData?["author"]
-//            ])
-//            UserDefaults.standard.set(
-//                [
-//                "text" : randomData?["text"],
-//                "author" : randomData?["author"]
-//                ],
-//                forKey: "myDictionary"
-//            )
-//
-//        }
+        
+    }
+    
+    //MARK: - ViewMethod
+    private func setQuoteUpdate(){
+        guard let loadedDic = UserDefaults.standard.dictionary(forKey: "myDictionary") else {return}
+        text1.text = loadedDic["text"] as? String ?? ""
+        author.text = loadedDic["author"] as? String ?? ""
+        
     }
     
     
