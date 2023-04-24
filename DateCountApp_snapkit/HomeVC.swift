@@ -9,6 +9,7 @@ class HomeVC: UIViewController{
     var userDataAry = [DateModel]()
     let decoder = JSONDecoder()
     let dateFormatter = DateFormatter()
+    let homeViewModel = HomeViewModel()
     
     private lazy var dateTableView : UITableView = {
         let dateTableView = UITableView(frame: view.safeAreaLayoutGuide.layoutFrame, style: .insetGrouped)
@@ -112,12 +113,23 @@ class HomeVC: UIViewController{
     
     //MARK: - 테스트코드
     private func loadTestData(){
+        
+        homeViewModel.loadTestData {
+            if $0 != nil{
+                
+            }
+        }
+        
+        
         guard let uid : String = Auth.auth().currentUser?.uid else{return}
         let db = Database.database().reference().child("Users").child(uid).child("MyTests")
         
+        //비동기로 DB에서 데이터 가져옴.
         db.observeSingleEvent(of: .value){snapshot in
             //snapshot의 값을 딕셔너리 형태로 변경해줍니다.
+            
             guard let snapData = snapshot.value as? [String:Any] else {return}
+            
             print(snapData)
             let data = try! JSONSerialization.data(withJSONObject: Array(snapData.values), options: [])
             do{
