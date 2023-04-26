@@ -27,9 +27,9 @@ class MainVC : UITabBarController {
         self.tabBar.itemPositioning = .centered
         self.tabBar.unselectedItemTintColor = .lightGray
         
-        homeVC.title = "home"
-        listVC.title = "list"
-        settingVC.title = "setting"
+//        homeVC.title = "home"
+//        listVC.title = "list"
+//        settingVC.title = "setting"
         self.setViewControllers([listVC,homeVC,settingVC], animated: false)
         
         guard let items = self.tabBar.items else {

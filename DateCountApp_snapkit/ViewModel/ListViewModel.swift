@@ -35,9 +35,6 @@ class ListViewModel {
                 
                 let data1 = Quote(author: author, quote: quote)
                 
-                //                Data.quote = text.applyingTransform(.init("Any-Hex/Java"), reverse: true) ?? text
-                //                Data.author = author.applyingTransform(.init("Any-Hex/Java"), reverse: true) ?? author
-                
                 fullData.append(data1)
             }
             
@@ -53,8 +50,6 @@ class ListViewModel {
                 guard let text = snap.childSnapshot(forPath: "quote").value as? String else { return }
                 guard let author = snap.childSnapshot(forPath: "author").value as? String else { return }
                 let data2 = Quote(author: author, quote: text)
-                
-                //author: author.applyingTransform(.init("Any-Hex/Java"), reverse: true) ?? author, quote: text.applyingTransform(.init("Any-Hex/Java"), reverse: true) ?? text
                 showedData.append(data2)
                 
             }
@@ -75,6 +70,7 @@ class ListViewModel {
             "quote" : quoteData.quote,
             "author" : quoteData.author
         ])
+        print("파베에 저장할 명언은 \(quoteData)")
     }
     
     func saveToLoacl(quoteData : Quote){
@@ -85,6 +81,7 @@ class ListViewModel {
             ],
             forKey: "myDictionary"
         )
+        print("로컬에 저장할 명언은 \(quoteData)")
     }
     
     

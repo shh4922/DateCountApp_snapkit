@@ -16,7 +16,6 @@ class ListVC: UIViewController , UNUserNotificationCenterDelegate {
     private lazy var imgView : UIImageView = {
         let imgView = UIImageView()
         imgView.backgroundColor = .black
-        //        imgView.image = .checkmark
         return imgView
     }()
     private lazy var titleLabel : UILabel = {
@@ -72,7 +71,7 @@ class ListVC: UIViewController , UNUserNotificationCenterDelegate {
     }()
     private lazy var text1 : UILabel = {
         let text1 = UILabel()
-        text1.text = "젠이츠 관철해내거라 \n 울어도 좋아 도망쳐도 좋아 \n 다만 포기만은 하지 말거라. \n 믿는거다 \n 극한까지 벼려내어 누구보다도 강인한 칼날이 되는거다"
+        text1.text = ""
         text1.textColor = .white
         text1.numberOfLines = .zero
         text1.textAlignment = .center
@@ -81,7 +80,7 @@ class ListVC: UIViewController , UNUserNotificationCenterDelegate {
     }()
     private lazy var author : UILabel = {
         let author = UILabel()
-        author.text = "작가임"
+        author.text = ""
         author.textColor = .white
         author.numberOfLines = .zero
         author.textAlignment = .center
@@ -93,14 +92,6 @@ class ListVC: UIViewController , UNUserNotificationCenterDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //명언을 전송 받았다면 true
-        if UserDefaults.standard.bool(forKey: "isSendedText") {
-            getTextOnFirebase()
-        }
-    
-        setQuoteUpdate()
-//        하루에한번씩 true가 요청되기에, 확인후 false로 변경
-        UserDefaults.standard.set(false, forKey: "isSendedText")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -108,6 +99,17 @@ class ListVC: UIViewController , UNUserNotificationCenterDelegate {
         addView()
         setLayout()
         navBar.setItems([navItem], animated: true)
+        
+        if UserDefaults.standard.bool(forKey: "isSendedText") {
+            print("getTextOnFirebase호출")
+            getTextOnFirebase()
+            
+            UserDefaults.standard.set(false, forKey: "isSendedText")
+            
+        }
+        
+        print("false로 변경됌")
+        setQuoteUpdate()
         
     }
     
@@ -118,17 +120,10 @@ class ListVC: UIViewController , UNUserNotificationCenterDelegate {
         view.addSubview(imgView)
         imgView.addSubview(text1)
         imgView.addSubview(author)
-        imgView.addSubview(hstack)
-        hstack.addArrangedSubview(changeImageButton)
-        hstack.addArrangedSubview(subscriveButton)
+        imgView.addSubview(subscriveButton)
     }
     private func setLayout(){
-        
         view.backgroundColor = .black
-        
-        //        view.addSubview(navBar)
-        
-        
         
         imgView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
@@ -143,19 +138,13 @@ class ListVC: UIViewController , UNUserNotificationCenterDelegate {
             make.left.equalToSuperview().offset(50)
             make.top.equalTo(text1.snp.bottom).offset(10)
         }
-        hstack.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.width.equalTo(150)
-            make.bottom.equalTo(imgView.snp.bottom).offset(-100)
-            make.left.greaterThanOrEqualTo(100)
-        }
-        changeImageButton.snp.makeConstraints { make in
-            make.width.equalTo(50)
-            make.height.equalTo(50)
-        }
+
         subscriveButton.snp.makeConstraints { make in
             make.width.equalTo(50)
             make.height.equalTo(50)
+            make.centerX.equalToSuperview()
+            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-100)
+            make.left.greaterThanOrEqualToSuperview().offset(100)
         }
     }
     
@@ -166,6 +155,7 @@ class ListVC: UIViewController , UNUserNotificationCenterDelegate {
     }
 
     @objc private func getTextOnFirebase(){
+        
         listViewModel.loadQuoteData() { allQuote, showedQuote in
             let random = self.listViewModel.returnRandomQuote(allQuote, showedQuote)
             
@@ -174,6 +164,8 @@ class ListVC: UIViewController , UNUserNotificationCenterDelegate {
                 self.listViewModel.saveToFirebase(quoteData: random)
                 self.listViewModel.saveToLoacl(quoteData: random)
                 return
+            }else{
+                print("random널이래 ㅋㅋ")
             }
             
             return

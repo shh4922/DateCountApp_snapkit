@@ -1,4 +1,4 @@
-# Uncomment the next line to define a global platform for your project
+
 platform :ios, '14.0'
 
 target 'DateCountApp_snapkit' do
@@ -6,16 +6,17 @@ target 'DateCountApp_snapkit' do
 pod 'SnapKit', '~> 5.0.0'
 
 pod 'FirebaseAnalytics'
-pod 'Firebase/Analytics'
-
 pod 'FirebaseAuth'
 pod 'FirebaseFirestore'
-
+pod 'Firebase'
 pod 'Firebase/Core'
 pod 'Firebase/Database'
+
+#pod 'Firebase/Analytics'
+#pod 'Firebase/Auth'
 #firebase가 설치가 안되서 밑에작성해주니까 됌.. ㅋ
 pod 'GoogleUtilities', :modular_headers => true
-pod 'FirebaseCore', :modular_headers => true
+#pod 'FirebaseCore', :modular_headers => true
 end
 
 post_install do |installer|

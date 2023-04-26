@@ -148,7 +148,5 @@ extension DateTableViewCell {
     public func bind(model: DateModel) {
         testName.text = model.testName
         selectedDate.text = model.selectedDate
-//        dateCount_default.text = model.dateCount_default
-//        dateCount.text = "\(model.dateCount)"
     }
 }

@@ -1,14 +1,14 @@
 import Foundation
+import FirebaseAnalytics
 import Firebase
 
 class SignUpViewModel {
     let db = Firestore.firestore()
     var ref : DatabaseReference!
-    
     func signUpAction(userData : User, completion : @escaping (String)-> Void){
         guard let email = userData.email else {return}
         guard let password = userData.password else {return}
-        
+
         Auth.auth().createUser(withEmail: email, password: password){ (user,error) in
             if user == nil{
                 //입력을 하지 않은경우

@@ -50,13 +50,15 @@ class HomeVC: UIViewController{
     //MARK: - lifecycle
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        loadTestData()
+        
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        setNotification()
         setupView()
         addView()
         setAutoLayout()
+        loadTestData()
         
     }
     
@@ -76,10 +78,8 @@ class HomeVC: UIViewController{
             make.height.equalTo(100)
         }
         textLabel.snp.makeConstraints { make in
-//            make.top.equalToSuperview().inset(20)
             make.centerX.equalToSuperview()
             make.centerY.equalToSuperview()
-//            make.leading.equalToSuperview().offset(10)
         }
         dateTableView.snp.makeConstraints { make in
             make.top.equalTo(topView.snp.bottom).offset(15)
@@ -110,47 +110,23 @@ class HomeVC: UIViewController{
         
     }
     
+    private func reloadTableView(){
+        DispatchQueue.main.async {
+            self.dateTableView.reloadData()
+        }
+    }
     
     //MARK: - 테스트코드
-    private func loadTestData(){
-        
-        homeViewModel.loadTestData {
-            if $0 != nil{
-                
+    @objc private func loadTestData(){
+        print("호출!")
+        homeViewModel.loadTestData { result in
+            if result.isEmpty {
+                return
             }
-        }
-        
-        
-        guard let uid : String = Auth.auth().currentUser?.uid else{return}
-        let db = Database.database().reference().child("Users").child(uid).child("MyTests")
-        
-        //비동기로 DB에서 데이터 가져옴.
-        db.observeSingleEvent(of: .value){snapshot in
-            //snapshot의 값을 딕셔너리 형태로 변경해줍니다.
-            
-            guard let snapData = snapshot.value as? [String:Any] else {return}
-            
-            print(snapData)
-            let data = try! JSONSerialization.data(withJSONObject: Array(snapData.values), options: [])
-            do{
-                //데이터가 정렬되지않아있음. 선택날짜 순서로 오름차순으로 정렬후에 넣어주는걸로
-                let dataList = try self.decoder.decode([DateModel].self, from: data)
-                
-                //sorted()에서 사용할 매개변수를 잡아주지못해서 오류가났던거같넹
-                self.userDataAry = dataList.sorted(by: { $0.selectedDate < $1.selectedDate })
-                
-                DispatchQueue.main.async {
-                    self.dateTableView.reloadData()
-                }
-            }catch let error {
-                print(error)
-            }
-            
+            self.reloadTableView()
         }
         
     }
-    
-
     // ShowAddView
     @objc private func onClickPlusBtn(){
         print("onClick!!!!")
@@ -159,9 +135,16 @@ class HomeVC: UIViewController{
         pushVC.modalPresentationStyle = .automatic
         //일부러 present로 함, nav로 하면 좀 생동감이없어서,
         self.present(pushVC, animated: true, completion: nil)
-
+        
     }
+    
+    
+}
 
+extension HomeVC {
+    private func setNotification(){
+        NotificationCenter.default.addObserver(self, selector: #selector(loadTestData), name: Notification.Name("newDataAdded"), object: nil)
+    }
     
 }
 
@@ -172,13 +155,13 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
     //셀의 개수를 리턴해주는것.
     //셀의개수 = dataSource의 개수 -> dataSource에 샐들이 들어있으니깐.
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return userDataAry.count
+        return homeViewModel.returnCellCount()
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: DateTableViewCell.identifier) as? DateTableViewCell ?? DateTableViewCell()
         
-        cell.bind(model: userDataAry[indexPath.row])
+        cell.bind(model: homeViewModel.userDataAry[indexPath.row])
         cell.dateCount_default.text = "D - "
         
         if let selectedDate = cell.selectedDate.text {
@@ -192,7 +175,7 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
                 //아래코드는 시간차로 인한 날짜오류가 생겨서, 달력날짜를 기준으로 두 날의 차이를 계산하기위해 만들어줌.
                 let stactOfselectedDate = calendar.startOfDay(for: selectedDate_)
                 let stactOfcurrentDate = calendar.startOfDay(for: currentDate)
-
+                
                 
                 let dateComponents = calendar.dateComponents([.day], from: stactOfcurrentDate, to: stactOfselectedDate)
                 
@@ -213,5 +196,14 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
         //셀 선택시, 색상나오는거 안보이게 함.
         cell.selectionStyle = .none
         return cell
+    }
+    
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            homeViewModel.userDataAry.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        } else if editingStyle == .insert {
+        }
     }
 }

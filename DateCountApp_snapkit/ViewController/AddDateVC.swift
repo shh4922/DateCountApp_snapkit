@@ -8,9 +8,8 @@ import Firebase
 class AddDateVC : UIViewController {
     private var selectedDate : String? = nil
     let formatDate = DateFormatter()
+    let addDateViewModel = AddDateViewModel()
     
-    //이걸 이렇게 강제로 ! 하는게 맞을까..?
-    private var ref : DatabaseReference!
     
     //MARK: - createUI
     private lazy var scrollView : UIScrollView = {
@@ -41,7 +40,7 @@ class AddDateVC : UIViewController {
         picker.calendar.locale = Locale(identifier: "ko_KR")
         picker.timeZone = .autoupdatingCurrent
         picker.sizeToFit()
-//        picker.date = Date(timeIntervalSinceNow: -3600 * 24 * 3)
+        //        picker.date = Date(timeIntervalSinceNow: -3600 * 24 * 3)
         picker.addTarget(self, action: #selector(selectDate(_:)), for: .valueChanged)
         picker.minimumDate = Date()
         return picker
@@ -83,7 +82,7 @@ class AddDateVC : UIViewController {
     
     //MARK: - 기본setUp
     private func setUp(){
-
+        
         formatDate.dateFormat = "yyyy-MM-dd"
         selectedDate = formatDate.string(from: Date())
     }
@@ -96,23 +95,25 @@ class AddDateVC : UIViewController {
         }
         contentView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
-            make.width.equalTo(view.frame.width)
+            make.width.equalTo(view.snp.width)
         }
         titleLabel.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
+//            make.centerX.equalToSuperview()
             make.top.equalTo(contentView.snp.top).offset(20)
-            make.leading.equalToSuperview().inset(30)
-            
+            make.leading.equalTo(contentView.snp.leading).offset(30)
+            make.trailing.equalTo(contentView.snp.trailing).offset(-30)
         }
         datePicker.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
+//            make.centerX.equalToSuperview()
             make.top.equalTo(titleLabel.snp.bottom).offset(50)
-            make.leading.equalToSuperview().inset(30)
+            make.leading.equalTo(contentView.snp.leading).offset(30)
+            make.trailing.equalTo(contentView.snp.trailing).offset(-30)
         }
         testName.snp.makeConstraints { make in
             make.top.equalTo(datePicker.snp.bottom).offset(30)
-            make.centerX.equalToSuperview()
+//            make.centerX.equalToSuperview()
             make.leading.equalToSuperview().offset(20)
+            make.trailing.equalToSuperview().offset(-20)
             make.height.equalTo(60)
         }
         okButton.snp.makeConstraints { make in
@@ -136,22 +137,20 @@ class AddDateVC : UIViewController {
     @objc private func selectDate(_ sender: UIDatePicker){
         selectedDate = formatDate.string(from: sender.date)
     }
+    
     @objc private func saveDateData(){
         //만약 날자를 선택하지않고, 바로 저장을 눌렀을경우 -> "" 이 날자에 들어가게됌/
-        if testName.text == "" || selectedDate == nil {
-            print("에러에러 둘다 널이야.")
-        }else{
-            guard let uid : String = Auth.auth().currentUser?.uid else{return}
-            ref = Database.database().reference().child("Users").child(uid).child("MyTests").childByAutoId()
-            let data = [
-                "testName": testName.text,
-                "selectedDate": selectedDate
-            ]
-            ref.setValue(data)
-            
-            //뷰가너무 빨리닫힘.
-            dismiss(animated: true)
+        guard let selectedDate else { return }
+        guard let testname = testName.text else {return}
+        
+        if testname == "" {
+            // 모두 입력하라고 알림
+            return
         }
+        
+        addDateViewModel.saveDateToFirebase(selectedDate: selectedDate, testName: testname)
+        
+        dismiss(animated: true)
     }
     
     //MARK: - setNotification
@@ -160,6 +159,10 @@ class AddDateVC : UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
+
+}
+
+extension AddDateVC {
     //MARK: - 키보드 셋업
     
     //키보드가 보여질시 스크롤이 가능하도록 하기위해서 contentInset 조정
@@ -178,21 +181,21 @@ class AddDateVC : UIViewController {
         scrollView.contentInset = contentInset
         scrollView.scrollIndicatorInsets = contentInset
     }
+    
     //키보드가 사라질시 contentInset.zero
     @objc private func keyboardWillHide(){
         print("signUpVC keyboardWillHide()-run")
         let contentInset = UIEdgeInsets.zero
         scrollView.contentInset = contentInset
         scrollView.scrollIndicatorInsets = contentInset
-
+        
     }
     
     //MARK: - Keyboard tabAtction
-    
-    //키보드팝업창에서 탭할시 , 키보드 내려가게하기위해 setUp과, run할 메서드 추가.
     @objc private func RunTapMethod(){
         self.view.endEditing(true)
     }
+    
     private func setTapMethod(){
         let singleTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(RunTapMethod))
         singleTapGestureRecognizer.numberOfTapsRequired = 1
@@ -201,30 +204,3 @@ class AddDateVC : UIViewController {
         scrollView.addGestureRecognizer(singleTapGestureRecognizer)
     }
 }
-
-
-//MARK: - preview
-#if DEBUG
-struct addDateVC : UIViewControllerRepresentable {
-    // update
-    func updateUIViewController(_ uiViewController: UIViewController, context: Context){
-
-    }
-    // makeui
-    @available(iOS 13.0, *)
-    func makeUIViewController(context: Context) -> UIViewController {
-        AddDateVC()
-    }
-}
-@available(iOS 13.0, *)
-struct addDateVC_Previews: PreviewProvider {
-    static var previews: some View{
-        Group{
-            addDateVC()
-                .ignoresSafeArea(.all)//미리보기의 safeArea 이외의 부분도 채워서 보여주게됌.
-                .previewDisplayName("iphone 11")
-        }
-    }
-}
-#endif
-
