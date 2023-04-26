@@ -7,7 +7,7 @@ import Firebase
 class HomeVC: UIViewController , UNUserNotificationCenterDelegate {
     
     
-    let listViewModel = HomeViewModel()
+    let homeViewmodel = HomeViewModel()
     private lazy var loginVC : UINavigationController = {
         let loginVC = LoginVC()
         let navLoginVC = UINavigationController(rootViewController: loginVC)
@@ -17,14 +17,6 @@ class HomeVC: UIViewController , UNUserNotificationCenterDelegate {
         let imgView = UIImageView()
         imgView.backgroundColor = .black
         return imgView
-    }()
-    private lazy var titleLabel : UILabel = {
-        let titleLabel = UILabel()
-        titleLabel.text = "오늘의 글귀"
-        titleLabel.textColor = .white
-        titleLabel.textAlignment = .center
-        titleLabel.font = UIFont(name: "KimjungchulMyungjo-Bold", size: 35)
-        return titleLabel
     }()
     private lazy var hstack : UIStackView = {
         let hstack = UIStackView()
@@ -106,7 +98,6 @@ class HomeVC: UIViewController , UNUserNotificationCenterDelegate {
             UserDefaults.standard.set(false, forKey: "isSendedText")
             
         }
-        
         print("false로 변경됌")
         setQuoteUpdate()
         
@@ -155,13 +146,13 @@ class HomeVC: UIViewController , UNUserNotificationCenterDelegate {
 
     @objc private func getTextOnFirebase(){
         
-        listViewModel.loadQuoteData() { allQuote, showedQuote in
-            let random = self.listViewModel.returnRandomQuote(allQuote, showedQuote)
-            
+        homeViewmodel.loadQuoteData() { allQuote, showedQuote in
+            let random = self.homeViewmodel.returnRandomQuote(allQuote, showedQuote)
+            print(showedQuote)
             if random != nil {
                 guard let random else {return}
-                self.listViewModel.saveToFirebase(quoteData: random)
-                self.listViewModel.saveToLoacl(quoteData: random)
+                self.homeViewmodel.saveToFirebase(quoteData: random)
+                self.homeViewmodel.saveToLoacl(quoteData: random)
                 return
             }else{
                 print("random널이래 ㅋㅋ")

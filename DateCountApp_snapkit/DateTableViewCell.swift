@@ -105,6 +105,7 @@ class DateTableViewCell: UITableViewCell {
             make.width.equalToSuperview().multipliedBy(0.3)
         }
     }
+    
     override func layoutSubviews() {
         // 테이블 뷰 셀 사이의 간격
         super.layoutSubviews()

@@ -6,7 +6,6 @@ import SwiftUI
 
 class ListVC: UIViewController{
     //MARK: - 데이터 생성.
-    var userDataAry = [Testmodel]()
     let decoder = JSONDecoder()
     let dateFormatter = DateFormatter()
     let homeViewModel = ListViewModel()

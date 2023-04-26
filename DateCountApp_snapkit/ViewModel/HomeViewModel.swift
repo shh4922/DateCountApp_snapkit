@@ -1,7 +1,12 @@
 import Foundation
 import Firebase
-
+import FirebaseDatabase
 class HomeViewModel {
+    
+    //전체명언 데이터를 받아서 담을 곳
+    var fullData : [Quote] = []
+    //이미봤던 명언 데이터를 받아서 담을곳
+    var showedData : [Quote] = []
     
     func returnRandomQuote(_ allQuote:[Quote],_ showedQuote:[Quote]) -> Quote?{
         let allQuote_ = Set(allQuote)
@@ -16,10 +21,7 @@ class HomeViewModel {
         let TextDB = Database.database().reference().child("quoteData")
         
         
-        //전체명언 데이터를 받아서 담을 곳
-        var fullData : [Quote] = []
-        //이미봤던 명언 데이터를 받아서 담을곳
-        var showedData : [Quote] = []
+        
         
         //비동기처리할 애들을 그룹으로묶어서 마지막에  두 데이터를 비교하기위해
         let group = DispatchGroup()
@@ -35,7 +37,7 @@ class HomeViewModel {
                 
                 let data1 = Quote(author: author, quote: quote)
                 
-                fullData.append(data1)
+                self.fullData.append(data1)
             }
             
             group.leave()
@@ -50,14 +52,14 @@ class HomeViewModel {
                 guard let text = snap.childSnapshot(forPath: "quote").value as? String else { return }
                 guard let author = snap.childSnapshot(forPath: "author").value as? String else { return }
                 let data2 = Quote(author: author, quote: text)
-                showedData.append(data2)
+                self.showedData.append(data2)
                 
             }
             group.leave()
             
         }
         
-        group.notify(queue: .main) { competition(fullData,showedData) }
+        group.notify(queue: .main) { competition(self.fullData,self.showedData) }
         
     }
     

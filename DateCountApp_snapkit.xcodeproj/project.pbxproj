@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0027000C29F71C7E007DF84F /* AddDateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0027000B29F71C7E007DF84F /* AddDateViewModel.swift */; };
+		00372C9829F98BC7002284E8 /* AllQuoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00372C9729F98BC7002284E8 /* AllQuoteTableViewCell.swift */; };
+		00372C9A29F9914D002284E8 /* AllQuoteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00372C9929F9914D002284E8 /* AllQuoteViewModel.swift */; };
 		0050205529F3C78800D88281 /* Quote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0050205429F3C78800D88281 /* Quote.swift */; };
 		0050205929F3C7D200D88281 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0050205829F3C7D200D88281 /* HomeViewModel.swift */; };
 		0050EAC929F95CA900540AC3 /* AllQuoteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0050EAC829F95CA900540AC3 /* AllQuoteVC.swift */; };
@@ -33,11 +35,13 @@
 		00E6609829F2E6AA00452873 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E6609729F2E6AA00452873 /* User.swift */; };
 		00E6609B29F2FE0C00452873 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E6609A29F2FE0C00452873 /* SignUpViewModel.swift */; };
 		00FECC8E29EA8BB4005DEF5D /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BFE7FE29C3377D00C279FD /* LoginVC.swift */; };
-		DF2959A34F147E70CC85E719 /* libPods-DateCountApp_snapkit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 42073FBC95E00FA1C06CF06F /* libPods-DateCountApp_snapkit.a */; };
+		EBC36F95FE7CA283D2DFC41B /* Pods_DateCountApp_snapkit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B6D9DBFF2BC62EC23BF70C4 /* Pods_DateCountApp_snapkit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		0027000B29F71C7E007DF84F /* AddDateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDateViewModel.swift; sourceTree = "<group>"; };
+		00372C9729F98BC7002284E8 /* AllQuoteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllQuoteTableViewCell.swift; sourceTree = "<group>"; };
+		00372C9929F9914D002284E8 /* AllQuoteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllQuoteViewModel.swift; sourceTree = "<group>"; };
 		0050205429F3C78800D88281 /* Quote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quote.swift; sourceTree = "<group>"; };
 		0050205829F3C7D200D88281 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		0050EAC829F95CA900540AC3 /* AllQuoteVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllQuoteVC.swift; sourceTree = "<group>"; };
@@ -65,9 +69,9 @@
 		00E6609529F2E65F00452873 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		00E6609729F2E6AA00452873 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		00E6609A29F2FE0C00452873 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
-		1D92F8D0A6991CDFE98FC893 /* Pods-DateCountApp_snapkit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DateCountApp_snapkit.release.xcconfig"; path = "Target Support Files/Pods-DateCountApp_snapkit/Pods-DateCountApp_snapkit.release.xcconfig"; sourceTree = "<group>"; };
-		42073FBC95E00FA1C06CF06F /* libPods-DateCountApp_snapkit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DateCountApp_snapkit.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		6493818DC1D5FD8BF1F7EDA1 /* Pods-DateCountApp_snapkit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DateCountApp_snapkit.debug.xcconfig"; path = "Target Support Files/Pods-DateCountApp_snapkit/Pods-DateCountApp_snapkit.debug.xcconfig"; sourceTree = "<group>"; };
+		2B6D9DBFF2BC62EC23BF70C4 /* Pods_DateCountApp_snapkit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DateCountApp_snapkit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		424D34E012A4A6681755AEBA /* Pods-DateCountApp_snapkit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DateCountApp_snapkit.release.xcconfig"; path = "Target Support Files/Pods-DateCountApp_snapkit/Pods-DateCountApp_snapkit.release.xcconfig"; sourceTree = "<group>"; };
+		935F32D6BEBBF1875EE85A7C /* Pods-DateCountApp_snapkit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DateCountApp_snapkit.debug.xcconfig"; path = "Target Support Files/Pods-DateCountApp_snapkit/Pods-DateCountApp_snapkit.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,7 +79,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DF2959A34F147E70CC85E719 /* libPods-DateCountApp_snapkit.a in Frameworks */,
+				EBC36F95FE7CA283D2DFC41B /* Pods_DateCountApp_snapkit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -99,8 +103,8 @@
 				0099BC9529E1F73B00404D7E /* Font */,
 				00BFE7E929C329F900C279FD /* DateCountApp_snapkit */,
 				00BFE7E829C329F900C279FD /* Products */,
-				49C6227438E1A9D9EF5E27C8 /* Pods */,
-				65AD847CB551737E10CA7AB5 /* Frameworks */,
+				CA9DFF90518913B6BC8E2396 /* Pods */,
+				F4198569EBC3E578C1CAB35D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -125,6 +129,7 @@
 				00BFE7F529C329FB00C279FD /* LaunchScreen.storyboard */,
 				00BFE7F829C329FB00C279FD /* Info.plist */,
 				0068707629D9EA66001330FA /* DateTableViewCell.swift */,
+				00372C9729F98BC7002284E8 /* AllQuoteTableViewCell.swift */,
 			);
 			path = DateCountApp_snapkit;
 			sourceTree = "<group>";
@@ -147,6 +152,7 @@
 				0050205829F3C7D200D88281 /* HomeViewModel.swift */,
 				00E29C5729F6A33000404DA0 /* ListViewModel.swift */,
 				0027000B29F71C7E007DF84F /* AddDateViewModel.swift */,
+				00372C9929F9914D002284E8 /* AllQuoteViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -166,19 +172,19 @@
 			path = ViewController;
 			sourceTree = "<group>";
 		};
-		49C6227438E1A9D9EF5E27C8 /* Pods */ = {
+		CA9DFF90518913B6BC8E2396 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				6493818DC1D5FD8BF1F7EDA1 /* Pods-DateCountApp_snapkit.debug.xcconfig */,
-				1D92F8D0A6991CDFE98FC893 /* Pods-DateCountApp_snapkit.release.xcconfig */,
+				935F32D6BEBBF1875EE85A7C /* Pods-DateCountApp_snapkit.debug.xcconfig */,
+				424D34E012A4A6681755AEBA /* Pods-DateCountApp_snapkit.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		65AD847CB551737E10CA7AB5 /* Frameworks */ = {
+		F4198569EBC3E578C1CAB35D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				42073FBC95E00FA1C06CF06F /* libPods-DateCountApp_snapkit.a */,
+				2B6D9DBFF2BC62EC23BF70C4 /* Pods_DateCountApp_snapkit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -190,11 +196,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00BFE7FB29C329FB00C279FD /* Build configuration list for PBXNativeTarget "DateCountApp_snapkit" */;
 			buildPhases = (
-				EDFB4C02D82499879CE4C788 /* [CP] Check Pods Manifest.lock */,
+				5A9DD6F56BC225A1CB36FEE4 /* [CP] Check Pods Manifest.lock */,
 				00BFE7E329C329F900C279FD /* Sources */,
 				00BFE7E429C329F900C279FD /* Frameworks */,
 				00BFE7E529C329F900C279FD /* Resources */,
-				6410C7B6C949F567F1FD372F /* [CP] Copy Pods Resources */,
+				F671773EAB3125B00A149DDD /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -256,24 +262,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		6410C7B6C949F567F1FD372F /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-DateCountApp_snapkit/Pods-DateCountApp_snapkit-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-DateCountApp_snapkit/Pods-DateCountApp_snapkit-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DateCountApp_snapkit/Pods-DateCountApp_snapkit-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		EDFB4C02D82499879CE4C788 /* [CP] Check Pods Manifest.lock */ = {
+		5A9DD6F56BC225A1CB36FEE4 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -295,6 +284,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		F671773EAB3125B00A149DDD /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-DateCountApp_snapkit/Pods-DateCountApp_snapkit-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-DateCountApp_snapkit/Pods-DateCountApp_snapkit-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DateCountApp_snapkit/Pods-DateCountApp_snapkit-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -305,7 +311,9 @@
 				00E29C5829F6A33000404DA0 /* ListViewModel.swift in Sources */,
 				00E6609B29F2FE0C00452873 /* SignUpViewModel.swift in Sources */,
 				00AD82A729D599E300059928 /* SettingVC.swift in Sources */,
+				00372C9A29F9914D002284E8 /* AllQuoteViewModel.swift in Sources */,
 				00E29C5A29F6A57C00404DA0 /* TestModel.swift in Sources */,
+				00372C9829F98BC7002284E8 /* AllQuoteTableViewCell.swift in Sources */,
 				00BFE7EB29C329F900C279FD /* AppDelegate.swift in Sources */,
 				00AD82A329D5721B00059928 /* MainVC.swift in Sources */,
 				00E6609829F2E6AA00452873 /* User.swift in Sources */,
@@ -454,7 +462,7 @@
 		};
 		00BFE7FC29C329FB00C279FD /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6493818DC1D5FD8BF1F7EDA1 /* Pods-DateCountApp_snapkit.debug.xcconfig */;
+			baseConfigurationReference = 935F32D6BEBBF1875EE85A7C /* Pods-DateCountApp_snapkit.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -483,7 +491,7 @@
 		};
 		00BFE7FD29C329FB00C279FD /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1D92F8D0A6991CDFE98FC893 /* Pods-DateCountApp_snapkit.release.xcconfig */;
+			baseConfigurationReference = 424D34E012A4A6681755AEBA /* Pods-DateCountApp_snapkit.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

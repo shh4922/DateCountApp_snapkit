@@ -10,6 +10,7 @@ class LoginViewModel{
         //아이디 패스워드 비어있는값
         Auth.auth().signIn(withEmail: email, password: password){ authResult,error in
             if let e = error{
+                print(e)
                 completion("NoAccount")
             }else{
                 completion("success")

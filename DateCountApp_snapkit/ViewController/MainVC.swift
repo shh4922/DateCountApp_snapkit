@@ -1,3 +1,4 @@
+import SwiftUI
 import UIKit
 import SnapKit
 
@@ -28,8 +29,10 @@ class MainVC : UITabBarController {
     private func setUp(){
         self.tabBar.backgroundColor = .white
         self.tabBar.tintColor = .systemBlue
-        self.tabBar.itemPositioning = .centered
         self.tabBar.unselectedItemTintColor = .lightGray
+        self.tabBar.itemPositioning = .centered
+        self.tabBar.itemSpacing = 5
+        
         
         homeVC.title = "home"
         listVC.title = "list"
@@ -43,6 +46,7 @@ class MainVC : UITabBarController {
         let images = ["house.fill","list.bullet","text.book.closed","gearshape.fill"]
         for x in 0...3 {
             items[x].image = UIImage(systemName: images[x])
+
         }
     }
     
@@ -52,3 +56,26 @@ class MainVC : UITabBarController {
     }
 }
 
+#if DEBUG
+struct mainVC : UIViewControllerRepresentable {
+    // update
+    func updateUIViewController(_ uiViewController: UIViewController, context: Context){
+        
+    }
+    // makeui
+    @available(iOS 13.0, *)
+    func makeUIViewController(context: Context) -> UIViewController {
+        MainVC()
+    }
+}
+@available(iOS 13.0, *)
+struct mainVC_Previews: PreviewProvider {
+    static var previews: some View{
+        Group{
+            mainVC()
+                .ignoresSafeArea(.all)//미리보기의 safeArea 이외의 부분도 채워서 보여주게됌.
+                .previewDisplayName("iphone 11")
+        }
+    }
+}
+#endif
