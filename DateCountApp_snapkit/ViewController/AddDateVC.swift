@@ -2,8 +2,7 @@ import Foundation
 import UIKit
 import SnapKit
 import SwiftUI
-import FirebaseCore
-import Firebase
+
 
 class AddDateVC : UIViewController {
     private var selectedDate : String? = nil

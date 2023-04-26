@@ -3,39 +3,87 @@ import Firebase
 
 class HomeViewModel {
     
-    let decoder = JSONDecoder()
-    var userDataAry = [DateModel]()
+    func returnRandomQuote(_ allQuote:[Quote],_ showedQuote:[Quote]) -> Quote?{
+        let allQuote_ = Set(allQuote)
+        let showedQuote_ = Set(showedQuote)
+        let result = allQuote_.subtracting(showedQuote_).randomElement()
+        return result
+    }
     
-    func loadTestData(completion : @escaping ([DateModel]) -> Void){
-        guard let uid : String = Auth.auth().currentUser?.uid else{return}
-        let db = Database.database().reference().child("Users").child(uid).child("MyTests")
+    func loadQuoteData(competition : @escaping ([Quote],[Quote])->Void){
+        guard let uid : String = Auth.auth().currentUser?.uid else { return}
+        let DeleveredDB = Database.database().reference().child("Users").child(uid).child("showedQuote")
+        let TextDB = Database.database().reference().child("quoteData")
         
         
-        db.observeSingleEvent(of: .value){snapshot  in
-            guard let test = snapshot.key as? String else {return}
-            print(test)
-            guard let snapData = snapshot.value as? [String:[String:String]] else {return}
-            guard let data = try? JSONSerialization.data(withJSONObject: Array(snapData.values), options: []) else { return }
-            do {
+        //전체명언 데이터를 받아서 담을 곳
+        var fullData : [Quote] = []
+        //이미봤던 명언 데이터를 받아서 담을곳
+        var showedData : [Quote] = []
+        
+        //비동기처리할 애들을 그룹으로묶어서 마지막에  두 데이터를 비교하기위해
+        let group = DispatchGroup()
+        
+        group.enter()
+        //AllData
+        TextDB.observeSingleEvent(of: .value){ snapshot in
+            for child in snapshot.children {
                 
-                self.userDataAry = try self.decoder.decode([DateModel].self, from: data)
-                self.userDataAry = self.userDataAry.sorted(by: { $0.selectedDate < $1.selectedDate })
-                completion(self.userDataAry)
-            }catch{
-                return
+                guard let snap = child as? DataSnapshot else { return }
+                guard let quote = snap.childSnapshot(forPath: "quote").value as? String else { return }
+                guard let author = snap.childSnapshot(forPath: "author").value as? String else { return }
+                
+                let data1 = Quote(author: author, quote: quote)
+                
+                fullData.append(data1)
             }
+            
+            group.leave()
         }
-    }
-    
-    func returnCellCount() -> Int{
-        return userDataAry.count
-    }
-    
-    
-    func removeFromFirebase(){
-//        let rootRef = Database.database().reference().child("Users").child(uid).child("MyTests")
+        
+        group.enter()
+        //showedData
+        DeleveredDB.observeSingleEvent(of: .value) { snapshot in
+            for child in snapshot.children{
+                guard let snap = child as? DataSnapshot else { return }
+                
+                guard let text = snap.childSnapshot(forPath: "quote").value as? String else { return }
+                guard let author = snap.childSnapshot(forPath: "author").value as? String else { return }
+                let data2 = Quote(author: author, quote: text)
+                showedData.append(data2)
+                
+            }
+            group.leave()
+            
+        }
+        
+        group.notify(queue: .main) { competition(fullData,showedData) }
         
     }
+    
+    
+    func saveToFirebase(quoteData : Quote){
+        guard let uid : String = Auth.auth().currentUser?.uid else { return }
+        let DeleveredDB = Database.database().reference().child("Users").child(uid).child("showedQuote")
+        
+        DeleveredDB.childByAutoId().setValue([
+            "quote" : quoteData.quote,
+            "author" : quoteData.author
+        ])
+    }
+    
+    func saveToLoacl(quoteData : Quote){
+        UserDefaults.standard.set(
+            [
+                "quote" : quoteData.quote,
+                "author" : quoteData.author
+            ],
+            forKey: "myDictionary"
+        )
+    }
+    
+    
 }
+
 
 

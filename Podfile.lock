@@ -609,9 +609,6 @@ PODS:
     - FirebaseAnalytics (~> 10.8.0)
   - Firebase/CoreOnly (10.8.0):
     - FirebaseCore (= 10.8.0)
-  - Firebase/Database (10.8.0):
-    - Firebase/CoreOnly
-    - FirebaseDatabase (~> 10.8.0)
   - FirebaseAnalytics (10.8.0):
     - FirebaseAnalytics/AdIdSupport (= 10.8.0)
     - FirebaseCore (~> 10.0)
@@ -643,7 +640,7 @@ PODS:
     - GoogleUtilities/Logger (~> 7.8)
   - FirebaseCoreInternal (10.9.0):
     - "GoogleUtilities/NSData+zlib (~> 7.8)"
-  - FirebaseDatabase (10.8.0):
+  - FirebaseDatabase (10.9.0):
     - FirebaseCore (~> 10.0)
     - leveldb-library (~> 1.22)
   - FirebaseFirestore (10.8.0):
@@ -786,10 +783,10 @@ PODS:
 
 DEPENDENCIES:
   - Firebase
-  - Firebase/Core
-  - Firebase/Database
   - FirebaseAnalytics
   - FirebaseAuth
+  - FirebaseCore
+  - FirebaseDatabase
   - FirebaseFirestore
   - GoogleUtilities
   - SnapKit (~> 5.0.0)
@@ -827,7 +824,7 @@ SPEC CHECKSUMS:
   FirebaseAuth: 28e6fff787467cd15ab51c8c7aa904003b2f57aa
   FirebaseCore: e78636a990b54be427ce300aa09a0e359f4e0e87
   FirebaseCoreInternal: d2b4acb827908e72eca47a9fd896767c3053921e
-  FirebaseDatabase: e9415a93447361b65e312186b169812acfb75acc
+  FirebaseDatabase: 0abe52c2b687e05f76e19f94248730187f83d48a
   FirebaseFirestore: 45b8ac2def7e9b6c4c10c09521b1e0b410d211fc
   FirebaseInstallations: b2a05a3fe707df764345d68685534d07d0664af3
   GoogleAppMeasurement: 0ba93018e916f7badf915c2337d43cc1fa96b3f9
@@ -841,6 +838,6 @@ SPEC CHECKSUMS:
   PromisesObjC: 09985d6d70fbe7878040aa746d78236e6946d2ef
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
 
-PODFILE CHECKSUM: 663b9d77c15d16ecb036476712c4874398c8a855
+PODFILE CHECKSUM: 483a246469468cf3f4ff9e9ef58cb67faff46843
 
 COCOAPODS: 1.12.1

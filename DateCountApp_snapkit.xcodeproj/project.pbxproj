@@ -9,16 +9,16 @@
 /* Begin PBXBuildFile section */
 		0027000C29F71C7E007DF84F /* AddDateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0027000B29F71C7E007DF84F /* AddDateViewModel.swift */; };
 		0050205529F3C78800D88281 /* Quote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0050205429F3C78800D88281 /* Quote.swift */; };
-		0050205929F3C7D200D88281 /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0050205829F3C7D200D88281 /* ListViewModel.swift */; };
+		0050205929F3C7D200D88281 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0050205829F3C7D200D88281 /* HomeViewModel.swift */; };
+		0050EAC929F95CA900540AC3 /* AllQuoteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0050EAC829F95CA900540AC3 /* AllQuoteVC.swift */; };
 		0068707729D9EA66001330FA /* DateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0068707629D9EA66001330FA /* DateTableViewCell.swift */; };
-		0068707929D9EAE1001330FA /* DateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0068707829D9EAE1001330FA /* DateModel.swift */; };
 		0075C64929F26B62005626F7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0075C64829F26B62005626F7 /* GoogleService-Info.plist */; };
 		0099BC9929E1F87C00404D7E /* The Jamsil OTF 6 ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0099BC9829E1F87C00404D7E /* The Jamsil OTF 6 ExtraBold.otf */; };
 		00ACCBC529E293F3001A45A5 /* ChosunCentennial_otf.otf in Resources */ = {isa = PBXBuildFile; fileRef = 00ACCBC429E293F3001A45A5 /* ChosunCentennial_otf.otf */; };
 		00ACCBC729E29555001A45A5 /* Dovemayo_gothic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 00ACCBC629E29555001A45A5 /* Dovemayo_gothic.ttf */; };
-		00AD82A129D56AB200059928 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AD82A029D56AB200059928 /* HomeVC.swift */; };
+		00AD82A129D56AB200059928 /* ListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AD82A029D56AB200059928 /* ListVC.swift */; };
 		00AD82A329D5721B00059928 /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AD82A229D5721B00059928 /* MainVC.swift */; };
-		00AD82A529D599CD00059928 /* ListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AD82A429D599CD00059928 /* ListVC.swift */; };
+		00AD82A529D599CD00059928 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AD82A429D599CD00059928 /* HomeVC.swift */; };
 		00AD82A729D599E300059928 /* SettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AD82A629D599E300059928 /* SettingVC.swift */; };
 		00B45C3229CC29740030CD02 /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B45C3129CC29740030CD02 /* SignUpVC.swift */; };
 		00BFE7EB29C329F900C279FD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BFE7EA29C329F900C279FD /* AppDelegate.swift */; };
@@ -27,7 +27,7 @@
 		00BFE7F729C329FB00C279FD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 00BFE7F529C329FB00C279FD /* LaunchScreen.storyboard */; };
 		00D9A8BA29E319BD004BF6E8 /* KimjungchulMyungjo-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 00D9A8B929E319BC004BF6E8 /* KimjungchulMyungjo-Bold.otf */; };
 		00D9A8BC29E321BB004BF6E8 /* AddDateVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D9A8BB29E321BB004BF6E8 /* AddDateVC.swift */; };
-		00E29C5829F6A33000404DA0 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E29C5729F6A33000404DA0 /* HomeViewModel.swift */; };
+		00E29C5829F6A33000404DA0 /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E29C5729F6A33000404DA0 /* ListViewModel.swift */; };
 		00E29C5A29F6A57C00404DA0 /* TestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E29C5929F6A57C00404DA0 /* TestModel.swift */; };
 		00E6609629F2E65F00452873 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E6609529F2E65F00452873 /* LoginViewModel.swift */; };
 		00E6609829F2E6AA00452873 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E6609729F2E6AA00452873 /* User.swift */; };
@@ -39,16 +39,16 @@
 /* Begin PBXFileReference section */
 		0027000B29F71C7E007DF84F /* AddDateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDateViewModel.swift; sourceTree = "<group>"; };
 		0050205429F3C78800D88281 /* Quote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quote.swift; sourceTree = "<group>"; };
-		0050205829F3C7D200D88281 /* ListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
+		0050205829F3C7D200D88281 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		0050EAC829F95CA900540AC3 /* AllQuoteVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllQuoteVC.swift; sourceTree = "<group>"; };
 		0068707629D9EA66001330FA /* DateTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTableViewCell.swift; sourceTree = "<group>"; };
-		0068707829D9EAE1001330FA /* DateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateModel.swift; sourceTree = "<group>"; };
 		0075C64829F26B62005626F7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0099BC9829E1F87C00404D7E /* The Jamsil OTF 6 ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "The Jamsil OTF 6 ExtraBold.otf"; sourceTree = "<group>"; };
 		00ACCBC429E293F3001A45A5 /* ChosunCentennial_otf.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ChosunCentennial_otf.otf; sourceTree = "<group>"; };
 		00ACCBC629E29555001A45A5 /* Dovemayo_gothic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Dovemayo_gothic.ttf; sourceTree = "<group>"; };
-		00AD82A029D56AB200059928 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
+		00AD82A029D56AB200059928 /* ListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListVC.swift; sourceTree = "<group>"; };
 		00AD82A229D5721B00059928 /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
-		00AD82A429D599CD00059928 /* ListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListVC.swift; sourceTree = "<group>"; };
+		00AD82A429D599CD00059928 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		00AD82A629D599E300059928 /* SettingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingVC.swift; sourceTree = "<group>"; };
 		00B45C3129CC29740030CD02 /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
 		00BFE7E729C329F900C279FD /* DateCountApp_snapkit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DateCountApp_snapkit.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -60,7 +60,7 @@
 		00BFE7FE29C3377D00C279FD /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		00D9A8B929E319BC004BF6E8 /* KimjungchulMyungjo-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "KimjungchulMyungjo-Bold.otf"; sourceTree = "<group>"; };
 		00D9A8BB29E321BB004BF6E8 /* AddDateVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDateVC.swift; sourceTree = "<group>"; };
-		00E29C5729F6A33000404DA0 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		00E29C5729F6A33000404DA0 /* ListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
 		00E29C5929F6A57C00404DA0 /* TestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestModel.swift; sourceTree = "<group>"; };
 		00E6609529F2E65F00452873 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		00E6609729F2E6AA00452873 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -124,10 +124,7 @@
 				00BFE7F329C329FB00C279FD /* Assets.xcassets */,
 				00BFE7F529C329FB00C279FD /* LaunchScreen.storyboard */,
 				00BFE7F829C329FB00C279FD /* Info.plist */,
-				00AD82A229D5721B00059928 /* MainVC.swift */,
-				00AD82A629D599E300059928 /* SettingVC.swift */,
 				0068707629D9EA66001330FA /* DateTableViewCell.swift */,
-				0068707829D9EAE1001330FA /* DateModel.swift */,
 			);
 			path = DateCountApp_snapkit;
 			sourceTree = "<group>";
@@ -147,8 +144,8 @@
 			children = (
 				00E6609529F2E65F00452873 /* LoginViewModel.swift */,
 				00E6609A29F2FE0C00452873 /* SignUpViewModel.swift */,
-				0050205829F3C7D200D88281 /* ListViewModel.swift */,
-				00E29C5729F6A33000404DA0 /* HomeViewModel.swift */,
+				0050205829F3C7D200D88281 /* HomeViewModel.swift */,
+				00E29C5729F6A33000404DA0 /* ListViewModel.swift */,
 				0027000B29F71C7E007DF84F /* AddDateViewModel.swift */,
 			);
 			path = ViewModel;
@@ -157,11 +154,14 @@
 		00E6609929F2FBFC00452873 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				00AD82A029D56AB200059928 /* HomeVC.swift */,
+				00AD82A629D599E300059928 /* SettingVC.swift */,
+				00AD82A229D5721B00059928 /* MainVC.swift */,
+				00AD82A029D56AB200059928 /* ListVC.swift */,
 				00D9A8BB29E321BB004BF6E8 /* AddDateVC.swift */,
-				00AD82A429D599CD00059928 /* ListVC.swift */,
+				00AD82A429D599CD00059928 /* HomeVC.swift */,
 				00B45C3129CC29740030CD02 /* SignUpVC.swift */,
 				00BFE7FE29C3377D00C279FD /* LoginVC.swift */,
+				0050EAC829F95CA900540AC3 /* AllQuoteVC.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -302,22 +302,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				00E29C5829F6A33000404DA0 /* HomeViewModel.swift in Sources */,
+				00E29C5829F6A33000404DA0 /* ListViewModel.swift in Sources */,
 				00E6609B29F2FE0C00452873 /* SignUpViewModel.swift in Sources */,
 				00AD82A729D599E300059928 /* SettingVC.swift in Sources */,
 				00E29C5A29F6A57C00404DA0 /* TestModel.swift in Sources */,
 				00BFE7EB29C329F900C279FD /* AppDelegate.swift in Sources */,
 				00AD82A329D5721B00059928 /* MainVC.swift in Sources */,
 				00E6609829F2E6AA00452873 /* User.swift in Sources */,
+				0050EAC929F95CA900540AC3 /* AllQuoteVC.swift in Sources */,
 				0068707729D9EA66001330FA /* DateTableViewCell.swift in Sources */,
-				00AD82A529D599CD00059928 /* ListVC.swift in Sources */,
+				00AD82A529D599CD00059928 /* HomeVC.swift in Sources */,
 				00E6609629F2E65F00452873 /* LoginViewModel.swift in Sources */,
-				0068707929D9EAE1001330FA /* DateModel.swift in Sources */,
 				0050205529F3C78800D88281 /* Quote.swift in Sources */,
-				00AD82A129D56AB200059928 /* HomeVC.swift in Sources */,
+				00AD82A129D56AB200059928 /* ListVC.swift in Sources */,
 				00FECC8E29EA8BB4005DEF5D /* LoginVC.swift in Sources */,
 				0027000C29F71C7E007DF84F /* AddDateViewModel.swift in Sources */,
-				0050205929F3C7D200D88281 /* ListViewModel.swift in Sources */,
+				0050205929F3C7D200D88281 /* HomeViewModel.swift in Sources */,
 				00D9A8BC29E321BB004BF6E8 /* AddDateVC.swift in Sources */,
 				00B45C3229CC29740030CD02 /* SignUpVC.swift in Sources */,
 				00BFE7ED29C329F900C279FD /* SceneDelegate.swift in Sources */,

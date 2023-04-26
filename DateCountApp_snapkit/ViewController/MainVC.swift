@@ -3,13 +3,17 @@ import SnapKit
 
 class MainVC : UITabBarController {
     
+    private lazy var homeVC : UIViewController = {
+        let homeVC = HomeVC()
+        return homeVC
+    }()
     private lazy var listVC : UIViewController = {
         let listVC = ListVC()
         return listVC
     }()
-    private lazy var homeVC : UIViewController = {
-        let homeVC = HomeVC()
-        return homeVC
+    private lazy var allQuoteVC : UIViewController = {
+        let allQuoteVC = AllQuoteVC()
+        return allQuoteVC
     }()
     private lazy var settingVC : UINavigationController = {
         let settingVC = UINavigationController(rootViewController: SettingVC())
@@ -27,16 +31,17 @@ class MainVC : UITabBarController {
         self.tabBar.itemPositioning = .centered
         self.tabBar.unselectedItemTintColor = .lightGray
         
-//        homeVC.title = "home"
-//        listVC.title = "list"
-//        settingVC.title = "setting"
-        self.setViewControllers([listVC,homeVC,settingVC], animated: false)
+        homeVC.title = "home"
+        listVC.title = "list"
+        allQuoteVC.title = "quote"
+        settingVC.title = "setting"
+        self.setViewControllers([homeVC,listVC,allQuoteVC,settingVC], animated: false)
         
         guard let items = self.tabBar.items else {
             return
         }
-        let images = ["list.bullet","house.fill","gearshape.fill"]
-        for x in 0...2 {
+        let images = ["house.fill","list.bullet","text.book.closed","gearshape.fill"]
+        for x in 0...3 {
             items[x].image = UIImage(systemName: images[x])
         }
     }

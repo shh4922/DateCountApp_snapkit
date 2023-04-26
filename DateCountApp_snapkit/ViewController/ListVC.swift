@@ -1,185 +1,211 @@
-import SnapKit
-import SwiftUI
-import UIKit
 import Firebase
 
+import UIKit
+import SnapKit
+import SwiftUI
 
-class ListVC: UIViewController , UNUserNotificationCenterDelegate {
+class ListVC: UIViewController{
+    //MARK: - 데이터 생성.
+    var userDataAry = [Testmodel]()
+    let decoder = JSONDecoder()
+    let dateFormatter = DateFormatter()
+    let homeViewModel = ListViewModel()
     
-    
-    let listViewModel = ListViewModel()
-    private lazy var loginVC : UINavigationController = {
-        let loginVC = LoginVC()
-        let navLoginVC = UINavigationController(rootViewController: loginVC)
-        return navLoginVC
+    private lazy var dateTableView : UITableView = {
+        let dateTableView = UITableView(frame: view.safeAreaLayoutGuide.layoutFrame, style: .insetGrouped)
+        dateTableView.layer.cornerRadius = 10
+        dateTableView.backgroundColor = .white
+        dateTableView.separatorStyle = .none
+        return dateTableView
     }()
-    private lazy var imgView : UIImageView = {
-        let imgView = UIImageView()
-        imgView.backgroundColor = .black
-        return imgView
+    private lazy var topView : UIView = {
+        let topview = UIView()
+        topview.layer.cornerRadius = 10
+        topview.backgroundColor = .systemGray5
+        return topview
     }()
-    private lazy var titleLabel : UILabel = {
-        let titleLabel = UILabel()
-        titleLabel.text = "오늘의 글귀"
-        titleLabel.textColor = .white
-        titleLabel.textAlignment = .center
-        titleLabel.font = UIFont(name: "KimjungchulMyungjo-Bold", size: 35)
-        
-        return titleLabel
-    }()
-    private lazy var hstack : UIStackView = {
-        let hstack = UIStackView()
-        hstack.spacing = 50
-        hstack.axis = .horizontal
-        hstack.distribution = .fillEqually
-        hstack.alignment = .fill
-        return hstack
+    private lazy var textLabel : UILabel = {
+        let textLabel = UILabel()
+        textLabel.textAlignment = .center
+        textLabel.textColor = .black
+        textLabel.font = UIFont(name: "KimjungchulMyungjo-Bold", size: 30)
+        textLabel.numberOfLines = 0
+        textLabel.text = "장고끝에 악수 둔다."
+        return textLabel
     }()
     private lazy var navBar : UINavigationBar = {
-        let appearance = UINavigationBarAppearance()
-        appearance.configureWithOpaqueBackground()
-        appearance.backgroundColor = .black
-        
         let navBar = UINavigationBar()
         navBar.translatesAutoresizingMaskIntoConstraints = false
-        navBar.standardAppearance = appearance
-        navBar.scrollEdgeAppearance = navBar.standardAppearance
+        navBar.barTintColor = .systemGray5
         return navBar
     }()
     private lazy var navItem : UINavigationItem = {
-        let navItem = UINavigationItem(title: "text")
-        navItem.titleView?.tintColor = .white
+        let navItem = UINavigationItem(title: "리스트")
         let rightBarButton  = UIBarButtonItem(barButtonSystemItem: .add , target: self, action: #selector(onClickPlusBtn))
         navItem.rightBarButtonItem = rightBarButton
         return  navItem
     }()
-    private lazy var changeImageButton : UIButton = {
-        let icon = UIImage(systemName: "tray")
-        let changeButton = UIButton()
-        changeButton.layer.cornerRadius = 10
-        changeButton.backgroundColor = .white
-        changeButton.setImage(icon, for: .normal)
-        return changeButton
-    }()
-    private lazy var subscriveButton : UIButton = {
-        let icon = UIImage(systemName: "heart")
-        let subscriveButton = UIButton()
-        subscriveButton.layer.cornerRadius = 10
-        subscriveButton.backgroundColor = .white
-        subscriveButton.setImage(icon, for: .normal)
-        return subscriveButton
-    }()
-    private lazy var text1 : UILabel = {
-        let text1 = UILabel()
-        text1.text = ""
-        text1.textColor = .white
-        text1.numberOfLines = .zero
-        text1.textAlignment = .center
-        text1.font = UIFont(name: "KimjungchulMyungjo-Bold", size: 20)
-        return text1
-    }()
-    private lazy var author : UILabel = {
-        let author = UILabel()
-        author.text = ""
-        author.textColor = .white
-        author.numberOfLines = .zero
-        author.textAlignment = .center
-        author.font = UIFont(name: "KimjungchulMyungjo-Bold", size: 15)
-        return author
-    }()
+    
     
     //MARK: - lifecycle
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+    }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setNotification()
+        setupView()
         addView()
-        setLayout()
+        setAutoLayout()
+        loadTestData()
+        
+    }
+    
+    //MARK: - setUpView
+    //layout제약조건 및 설정
+    private func setAutoLayout(){
+        navBar.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+            make.left.equalToSuperview()
+            make.right.equalToSuperview()
+            
+        }
+        topView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(navBar.snp.bottom).offset(30)
+            make.left.equalToSuperview().offset(30)
+            make.height.equalTo(100)
+        }
+        textLabel.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.centerY.equalToSuperview()
+        }
+        dateTableView.snp.makeConstraints { make in
+            make.top.equalTo(topView.snp.bottom).offset(15)
+            make.left.equalTo(view.safeAreaLayoutGuide.snp.left).inset(10)
+            make.right.equalTo(view.safeAreaLayoutGuide.snp.right).inset(10)
+            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(40)
+        }
+    }
+    //뷰에 추가해야할 하위뷰들 넣어주는곳.
+    private func addView(){
+        view.addSubview(navBar)
+        view.addSubview(topView)
+        topView.addSubview(textLabel)
+        view.addSubview(dateTableView)
+        
+    }
+    //특정기능을 위한 setup
+    private func setupView(){
+        view.backgroundColor = .systemGray5
         navBar.setItems([navItem], animated: true)
         
-        if UserDefaults.standard.bool(forKey: "isSendedText") {
-            print("getTextOnFirebase호출")
-            getTextOnFirebase()
-            
-            UserDefaults.standard.set(false, forKey: "isSendedText")
-            
-        }
-        
-        print("false로 변경됌")
-        setQuoteUpdate()
+        //어떤 셀을 가져올지 정해줘야함.
+        dateTableView.register(DateTableViewCell.self, forCellReuseIdentifier: DateTableViewCell.identifier)
+        //tableview의 델리게잇 지정.
+        dateTableView.delegate = self
+        dateTableView.dataSource = self
+        dateTableView.rowHeight = 100
         
     }
     
-    
-    //MARK: - init
-    
-    private func addView(){
-        view.addSubview(imgView)
-        imgView.addSubview(text1)
-        imgView.addSubview(author)
-        imgView.addSubview(subscriveButton)
-    }
-    private func setLayout(){
-        view.backgroundColor = .black
-        
-        imgView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-        }
-        text1.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.left.equalToSuperview().offset(30)
-            make.top.equalTo(imgView.snp.top).offset(100)
-        }
-        author.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.left.equalToSuperview().offset(50)
-            make.top.equalTo(text1.snp.bottom).offset(10)
-        }
-
-        subscriveButton.snp.makeConstraints { make in
-            make.width.equalTo(50)
-            make.height.equalTo(50)
-            make.centerX.equalToSuperview()
-            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-100)
-            make.left.greaterThanOrEqualToSuperview().offset(100)
+    private func reloadTableView(){
+        DispatchQueue.main.async {
+            self.dateTableView.reloadData()
         }
     }
     
-    
-    //MARK: - Method
-    @objc private func onClickPlusBtn(){
-        print("testOnClick")
-    }
-
-    @objc private func getTextOnFirebase(){
-        
-        listViewModel.loadQuoteData() { allQuote, showedQuote in
-            let random = self.listViewModel.returnRandomQuote(allQuote, showedQuote)
-            
-            if random != nil {
-                guard let random else {return}
-                self.listViewModel.saveToFirebase(quoteData: random)
-                self.listViewModel.saveToLoacl(quoteData: random)
+    //MARK: - 테스트코드
+    @objc private func loadTestData(){
+        homeViewModel.loadTestData { result in
+            if result.isEmpty {
                 return
-            }else{
-                print("random널이래 ㅋㅋ")
             }
-            
-            return
+            self.reloadTableView()
         }
         
     }
-    
-    //MARK: - ViewMethod
-    private func setQuoteUpdate(){
-        guard let loadedDic = UserDefaults.standard.dictionary(forKey: "myDictionary") else {return}
-        text1.text = loadedDic["text"] as? String ?? ""
-        author.text = loadedDic["author"] as? String ?? ""
+    // ShowAddView
+    @objc private func onClickPlusBtn(){
+        print("onClick!!!!")
+        let pushVC = AddDateVC()
+        pushVC.modalTransitionStyle = .coverVertical
+        pushVC.modalPresentationStyle = .automatic
+        //일부러 present로 함, nav로 하면 좀 생동감이없어서,
+        self.present(pushVC, animated: true, completion: nil)
         
     }
     
     
+}
+
+extension ListVC {
+    private func setNotification(){
+        NotificationCenter.default.addObserver(self, selector: #selector(loadTestData), name: Notification.Name("newDataAdded"), object: nil)
+    }
+    
+}
+
+//MARK: - tableViewSetUp
+// TableView를 위해 추가한 것들.
+extension ListVC : UITableViewDelegate, UITableViewDataSource {
+    
+    //셀의 개수를 리턴해주는것.
+    //셀의개수 = dataSource의 개수 -> dataSource에 샐들이 들어있으니깐.
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return homeViewModel.returnCellCount()
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: DateTableViewCell.identifier) as? DateTableViewCell ?? DateTableViewCell()
+        
+        cell.bind(model: homeViewModel.userDataAry[indexPath.row])
+        cell.dateCount_default.text = "D - "
+        
+        if let selectedDate = cell.selectedDate.text {
+            dateFormatter.dateFormat = "yyyy-MM-dd"
+            
+            if let selectedDate_ = dateFormatter.date(from: selectedDate){
+                
+                let currentDate = Date()
+                let calendar = Calendar.current
+                
+                //아래코드는 시간차로 인한 날짜오류가 생겨서, 달력날짜를 기준으로 두 날의 차이를 계산하기위해 만들어줌.
+                let stactOfselectedDate = calendar.startOfDay(for: selectedDate_)
+                let stactOfcurrentDate = calendar.startOfDay(for: currentDate)
+                
+                
+                let dateComponents = calendar.dateComponents([.day], from: stactOfcurrentDate, to: stactOfselectedDate)
+                
+                if let dayDifference = dateComponents.day {
+                    if dayDifference == 0{
+                        cell.dateCount.text = " day"
+                    }else if dayDifference > 0 {
+                        cell.dateCount.text = "\(dayDifference)"
+                    }else{
+                        cell.dateCount.text = " 마감"
+                    }
+                    
+                }
+                
+            }
+        }
+        
+        //셀 선택시, 색상나오는거 안보이게 함.
+        cell.selectionStyle = .none
+        return cell
+    }
+    
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            homeViewModel.removeFromFirebase(index: indexPath.row)
+            homeViewModel.userDataAry.remove(at: indexPath.row)
+            
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            
+        } else if editingStyle == .insert {
+        }
+    }
 }

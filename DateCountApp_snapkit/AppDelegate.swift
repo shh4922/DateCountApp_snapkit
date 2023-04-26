@@ -1,5 +1,5 @@
-
 import UIKit
+import Firebase
 import FirebaseCore
 
 @main
@@ -10,10 +10,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
         
-        // 앱이 처음 실행될 때만 isSendedText를 true로 설정
-        //        if UserDefaults.standard.object(forKey: "isSendedText") == nil {
-        //            UserDefaults.standard.set(true, forKey: "isSendedText")
-        //        }
+        //         앱이 처음 실행될 때만 isSendedText를 true로 설정
+        if UserDefaults.standard.object(forKey: "isSendedText") == nil {
+            UserDefaults.standard.set(true, forKey: "isSendedText")
+        }
         setUpAlter()
         Alter()
         

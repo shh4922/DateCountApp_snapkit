@@ -145,8 +145,9 @@ class DateTableViewCell: UITableViewCell {
 
 //MARK: - extention
 extension DateTableViewCell {
-    public func bind(model: DateModel) {
+    public func bind(model: Testmodel) {
         testName.text = model.testName
         selectedDate.text = model.selectedDate
+        
     }
 }
