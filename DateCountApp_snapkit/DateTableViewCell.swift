@@ -14,7 +14,7 @@ class DateTableViewCell: UITableViewCell {
         vstack.spacing = 5
         vstack.axis = .vertical
         vstack.backgroundColor = .systemBackground
-        vstack.setContentCompressionResistancePriority(.init(751), for: .horizontal)
+//        vstack.setContentCompressionResistancePriority(.init(751), for: .horizontal)
         vstack.layoutMargins = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 0)
         vstack.isLayoutMarginsRelativeArrangement = true
         return vstack
@@ -23,9 +23,9 @@ class DateTableViewCell: UITableViewCell {
         let label = UILabel()
         label.textColor = .black
         label.textAlignment = .left
-        label.font = .boldSystemFont(ofSize: 25)
+        label.font = .boldSystemFont(ofSize: 22)
         label.backgroundColor = .systemBackground
-        label.setContentCompressionResistancePriority(.init(750), for: .horizontal)
+//        label.setContentCompressionResistancePriority(.init(750), for: .horizontal)
         label.numberOfLines = 1
         return label
     }()
@@ -35,7 +35,7 @@ class DateTableViewCell: UITableViewCell {
         label.textColor = .lightGray
         label.textAlignment = .left
         label.backgroundColor = .systemBackground
-        label.setContentCompressionResistancePriority(.init(750), for: .horizontal)
+//        label.setContentCompressionResistancePriority(.init(750), for: .horizontal)
         return label
     }()
     lazy var dateCount_default: UILabel = {
@@ -44,8 +44,8 @@ class DateTableViewCell: UITableViewCell {
         label.textColor = .black
         label.textAlignment = .right
         label.backgroundColor = .systemBackground
-        label.setContentHuggingPriority(.init(252), for: .horizontal)
-        label.setContentCompressionResistancePriority(.init(752), for: .horizontal)
+//        label.setContentHuggingPriority(.init(252), for: .horizontal)
+//        label.setContentCompressionResistancePriority(.init(752), for: .horizontal)
         return label
     }()
     lazy var dateCount: UILabel = {
@@ -88,13 +88,11 @@ class DateTableViewCell: UITableViewCell {
             make.bottom.equalToSuperview()
             make.left.equalToSuperview()
             make.right.greaterThanOrEqualTo(dateCount_default.snp.left).offset(-20)
-            make.width.equalToSuperview().multipliedBy(0.5)
+            make.width.equalToSuperview().multipliedBy(0.6)
         }
-        
         dateCount_default.snp.makeConstraints { make in
             make.top.equalToSuperview()
             make.centerY.equalToSuperview()
-
             make.right.equalTo(dateCount.snp.left).offset(5)
             make.width.equalToSuperview().multipliedBy(0.2)
         }
@@ -102,7 +100,7 @@ class DateTableViewCell: UITableViewCell {
             make.centerY.equalToSuperview()
             make.top.equalToSuperview()
             make.right.equalTo(contentView.snp.right).inset(10)
-            make.width.equalToSuperview().multipliedBy(0.3)
+            make.width.equalToSuperview().multipliedBy(0.2)
         }
     }
     

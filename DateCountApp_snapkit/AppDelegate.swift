@@ -55,7 +55,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     //문제가 20초정도 딜레이가 있음.
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         if response.notification.request.identifier == "dailyNotification" {
-            print("나 실행해서 true로 변경됬엉 ㅎㅎㅎ")
             UserDefaults.standard.set(true, forKey: "isSendedText")
         }
         completionHandler()

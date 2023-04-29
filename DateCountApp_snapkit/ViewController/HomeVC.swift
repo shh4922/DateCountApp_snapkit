@@ -26,32 +26,6 @@ class HomeVC: UIViewController , UNUserNotificationCenterDelegate {
         hstack.alignment = .fill
         return hstack
     }()
-    private lazy var navBar : UINavigationBar = {
-        let appearance = UINavigationBarAppearance()
-        appearance.configureWithOpaqueBackground()
-        appearance.backgroundColor = .black
-        
-        let navBar = UINavigationBar()
-        navBar.translatesAutoresizingMaskIntoConstraints = false
-        navBar.standardAppearance = appearance
-        navBar.scrollEdgeAppearance = navBar.standardAppearance
-        return navBar
-    }()
-    private lazy var navItem : UINavigationItem = {
-        let navItem = UINavigationItem(title: "text")
-        navItem.titleView?.tintColor = .white
-        let rightBarButton  = UIBarButtonItem(barButtonSystemItem: .add , target: self, action: #selector(onClickPlusBtn))
-        navItem.rightBarButtonItem = rightBarButton
-        return  navItem
-    }()
-    private lazy var changeImageButton : UIButton = {
-        let icon = UIImage(systemName: "tray")
-        let changeButton = UIButton()
-        changeButton.layer.cornerRadius = 10
-        changeButton.backgroundColor = .white
-        changeButton.setImage(icon, for: .normal)
-        return changeButton
-    }()
     private lazy var subscriveButton : UIButton = {
         let icon = UIImage(systemName: "heart")
         let subscriveButton = UIButton()
@@ -82,23 +56,16 @@ class HomeVC: UIViewController , UNUserNotificationCenterDelegate {
     //MARK: - lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        addView()
+        setLayout()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        addView()
-        setLayout()
-        navBar.setItems([navItem], animated: true)
-        
         if UserDefaults.standard.bool(forKey: "isSendedText") {
-            print("getTextOnFirebase호출")
             getTextOnFirebase()
-            
             UserDefaults.standard.set(false, forKey: "isSendedText")
-            
         }
-        print("false로 변경됌")
         setQuoteUpdate()
         
     }
@@ -114,14 +81,13 @@ class HomeVC: UIViewController , UNUserNotificationCenterDelegate {
     }
     private func setLayout(){
         view.backgroundColor = .black
-        
         imgView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
         text1.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.left.equalToSuperview().offset(30)
-            make.top.equalTo(imgView.snp.top).offset(100)
+            make.top.equalTo(imgView.snp.top).offset(250)
         }
         author.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
@@ -140,24 +106,16 @@ class HomeVC: UIViewController , UNUserNotificationCenterDelegate {
     
     
     //MARK: - Method
-    @objc private func onClickPlusBtn(){
-        print("testOnClick")
-    }
 
     @objc private func getTextOnFirebase(){
-        
         homeViewmodel.loadQuoteData() { allQuote, showedQuote in
             let random = self.homeViewmodel.returnRandomQuote(allQuote, showedQuote)
-            print(showedQuote)
             if random != nil {
                 guard let random else {return}
                 self.homeViewmodel.saveToFirebase(quoteData: random)
                 self.homeViewmodel.saveToLoacl(quoteData: random)
                 return
-            }else{
-                print("random널이래 ㅋㅋ")
             }
-            
             return
         }
         
@@ -167,9 +125,10 @@ class HomeVC: UIViewController , UNUserNotificationCenterDelegate {
     private func setQuoteUpdate(){
         guard let loadedDic = UserDefaults.standard.dictionary(forKey: "myDictionary") else {return}
         text1.text = loadedDic["quote"] as? String ?? ""
-        author.text = loadedDic["author"] as? String ?? ""
-        
+        author.text =  loadedDic["author"] as? String ?? "" 
     }
     
     
 }
+
+

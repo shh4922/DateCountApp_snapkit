@@ -3,7 +3,7 @@ import Firebase
 
 
 class SignUpViewModel {
-    let db = Firestore.firestore()
+    
     var ref : DatabaseReference!
     
     func signUpAction(userData : User, completion : @escaping (String)-> Void){

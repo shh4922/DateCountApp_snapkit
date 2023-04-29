@@ -22,6 +22,7 @@
 		00AD82A329D5721B00059928 /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AD82A229D5721B00059928 /* MainVC.swift */; };
 		00AD82A529D599CD00059928 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AD82A429D599CD00059928 /* HomeVC.swift */; };
 		00AD82A729D599E300059928 /* SettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AD82A629D599E300059928 /* SettingVC.swift */; };
+		00AFA8F729FCF682002B390A /* ChangeTitleTextVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AFA8F629FCF682002B390A /* ChangeTitleTextVC.swift */; };
 		00B45C3229CC29740030CD02 /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B45C3129CC29740030CD02 /* SignUpVC.swift */; };
 		00BFE7EB29C329F900C279FD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BFE7EA29C329F900C279FD /* AppDelegate.swift */; };
 		00BFE7ED29C329F900C279FD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BFE7EC29C329F900C279FD /* SceneDelegate.swift */; };
@@ -54,6 +55,7 @@
 		00AD82A229D5721B00059928 /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
 		00AD82A429D599CD00059928 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		00AD82A629D599E300059928 /* SettingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingVC.swift; sourceTree = "<group>"; };
+		00AFA8F629FCF682002B390A /* ChangeTitleTextVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeTitleTextVC.swift; sourceTree = "<group>"; };
 		00B45C3129CC29740030CD02 /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
 		00BFE7E729C329F900C279FD /* DateCountApp_snapkit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DateCountApp_snapkit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		00BFE7EA29C329F900C279FD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -168,6 +170,7 @@
 				00B45C3129CC29740030CD02 /* SignUpVC.swift */,
 				00BFE7FE29C3377D00C279FD /* LoginVC.swift */,
 				0050EAC829F95CA900540AC3 /* AllQuoteVC.swift */,
+				00AFA8F629FCF682002B390A /* ChangeTitleTextVC.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -314,6 +317,7 @@
 				00372C9A29F9914D002284E8 /* AllQuoteViewModel.swift in Sources */,
 				00E29C5A29F6A57C00404DA0 /* TestModel.swift in Sources */,
 				00372C9829F98BC7002284E8 /* AllQuoteTableViewCell.swift in Sources */,
+				00AFA8F729FCF682002B390A /* ChangeTitleTextVC.swift in Sources */,
 				00BFE7EB29C329F900C279FD /* AppDelegate.swift in Sources */,
 				00AD82A329D5721B00059928 /* MainVC.swift in Sources */,
 				00E6609829F2E6AA00452873 /* User.swift in Sources */,
