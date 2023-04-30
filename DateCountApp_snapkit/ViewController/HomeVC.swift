@@ -8,32 +8,14 @@ class HomeVC: UIViewController , UNUserNotificationCenterDelegate {
     
     
     let homeViewmodel = HomeViewModel()
+    var isLikeOn : Bool = false
+    
     private lazy var loginVC : UINavigationController = {
         let loginVC = LoginVC()
         let navLoginVC = UINavigationController(rootViewController: loginVC)
         return navLoginVC
     }()
-    private lazy var imgView : UIImageView = {
-        let imgView = UIImageView()
-        imgView.backgroundColor = .black
-        return imgView
-    }()
-    private lazy var hstack : UIStackView = {
-        let hstack = UIStackView()
-        hstack.spacing = 50
-        hstack.axis = .horizontal
-        hstack.distribution = .fillEqually
-        hstack.alignment = .fill
-        return hstack
-    }()
-    private lazy var subscriveButton : UIButton = {
-        let icon = UIImage(systemName: "heart")
-        let subscriveButton = UIButton()
-        subscriveButton.layer.cornerRadius = 10
-        subscriveButton.backgroundColor = .white
-        subscriveButton.setImage(icon, for: .normal)
-        return subscriveButton
-    }()
+   
     private lazy var text1 : UILabel = {
         let text1 = UILabel()
         text1.text = ""
@@ -56,6 +38,7 @@ class HomeVC: UIViewController , UNUserNotificationCenterDelegate {
     //MARK: - lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         addView()
         setLayout()
     }
@@ -66,28 +49,24 @@ class HomeVC: UIViewController , UNUserNotificationCenterDelegate {
             getTextOnFirebase()
             UserDefaults.standard.set(false, forKey: "isSendedText")
         }
+        //지워야할코드
+        getTextOnFirebase()
         setQuoteUpdate()
         
     }
     
     
     //MARK: - init
-    
     private func addView(){
-        view.addSubview(imgView)
-        imgView.addSubview(text1)
-        imgView.addSubview(author)
-        imgView.addSubview(subscriveButton)
+        view.addSubview(text1)
+        view.addSubview(author)
     }
     private func setLayout(){
         view.backgroundColor = .black
-        imgView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-        }
         text1.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.left.equalToSuperview().offset(30)
-            make.top.equalTo(imgView.snp.top).offset(250)
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(250)
         }
         author.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
@@ -95,13 +74,6 @@ class HomeVC: UIViewController , UNUserNotificationCenterDelegate {
             make.top.equalTo(text1.snp.bottom).offset(10)
         }
 
-        subscriveButton.snp.makeConstraints { make in
-            make.width.equalTo(50)
-            make.height.equalTo(50)
-            make.centerX.equalToSuperview()
-            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-100)
-            make.left.greaterThanOrEqualToSuperview().offset(100)
-        }
     }
     
     
@@ -128,7 +100,7 @@ class HomeVC: UIViewController , UNUserNotificationCenterDelegate {
         author.text =  loadedDic["author"] as? String ?? "" 
     }
     
-    
+ 
 }
 
 

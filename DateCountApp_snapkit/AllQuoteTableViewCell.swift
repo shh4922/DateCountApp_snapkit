@@ -7,9 +7,15 @@
 
 import UIKit
 
+protocol allQuoteCellDelegate: AnyObject {
+    // 위임해줄 기능
+    func onClickLikeButton(cell : AllQuoteTableViewCell)
+}
+
 class AllQuoteTableViewCell: UITableViewCell {
     static let identifier = "allQuoteTableViewCell"
- 
+    
+    var cellDelegate: allQuoteCellDelegate?
     
     lazy var quoteLabel : UILabel = {
         let quoteLabel = UILabel()
@@ -26,16 +32,21 @@ class AllQuoteTableViewCell: UITableViewCell {
         authorLabel.numberOfLines = 0
         return authorLabel
     }()
-    
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-//        contentView.layer.cornerRadius = 10
-//        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5))
-        contentView.layer.masksToBounds = true
-    }
+    lazy var likeButton : UIButton = {
+        let icon = UIImage(systemName: "heart")
+        let subscriveButton = UIButton()
+        subscriveButton.layer.cornerRadius = 10
+        subscriveButton.backgroundColor = .white
+        subscriveButton.setImage(icon, for: .normal)
+        
+        return subscriveButton
+    }()
+    @objc func onClickLike() {
+        cellDelegate?.onClickLikeButton(cell: self)
+     }
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        self.likeButton.addTarget(self, action: #selector(onClickLike), for: .touchUpInside)
         addView()
         setAutoLayout()
     }
@@ -45,37 +56,44 @@ class AllQuoteTableViewCell: UITableViewCell {
     
     
     private func addView(){
-//        contentView.backgroundColor = .lightGray
+        contentView.addSubview(likeButton)
         contentView.addSubview(quoteLabel)
         contentView.addSubview(authorLabel)
         
-//        view.addSubview(quoteLabel)
-//        view.addSubview(authorLabel)
-        
     }
     private func setAutoLayout(){
-        
+        likeButton.snp.makeConstraints { make in
+            make.top.greaterThanOrEqualTo(contentView.snp.top).offset(5)
+            make.left.equalTo(contentView.snp.left).offset(15)
+            make.width.equalTo(50)
+            make.height.equalTo(50)
+            make.centerY.equalToSuperview()
+        }
         quoteLabel.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
             make.top.equalTo(contentView.snp.top).offset(5)
-            make.leading.greaterThanOrEqualTo(contentView.snp.leading).offset(10)
-
+            make.leading.equalTo(likeButton.snp.trailing).offset(5)
+            make.right.lessThanOrEqualTo(contentView.snp.right).offset(-5)
+            make.centerX.equalToSuperview()
         }
         authorLabel.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
             make.top.equalTo(quoteLabel.snp.bottom).offset(5)
-            make.leading.greaterThanOrEqualTo(contentView.snp.leading).offset(10)
+            make.leading.equalTo(likeButton.snp.trailing).offset(5)
+            make.right.lessThanOrEqualTo(contentView.snp.right).offset(-5)
             make.bottom.equalTo(contentView.snp.bottom).offset(-15)
+            make.centerX.equalToSuperview()
             
         }
     }
+    
+    
 }
 
 
 extension AllQuoteTableViewCell {
-    public func bind(model: Quote) {
+    public func bind(model: ShowedQuote) {
         quoteLabel.text = model.quote
         authorLabel.text =  "- " + model.author! + " -"
-        
     }
+    
+    
 }

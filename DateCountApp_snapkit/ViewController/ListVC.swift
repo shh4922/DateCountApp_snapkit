@@ -8,7 +8,7 @@ class ListVC: UIViewController{
     //MARK: - 데이터 생성.
     let decoder = JSONDecoder()
     let listViewModel = ListViewModel()
-    let titleQuote : String = UserDefaults.standard.string(forKey: "titleQuote") ?? ""
+    var titleQuote : String = UserDefaults.standard.string(forKey: "titleQuote") ?? ""
     
     private lazy var dateTableView : UITableView = {
         let dateTableView = UITableView(frame: view.safeAreaLayoutGuide.layoutFrame, style: .insetGrouped)
@@ -128,21 +128,23 @@ class ListVC: UIViewController{
             }
             self.reloadTableView()
         }
-        
+    }
+    @objc private func loadTitleQuote(){
+        self.titleQuote = UserDefaults.standard.string(forKey: "titleQuote") ?? ""
+        DispatchQueue.main.async{
+            self.textLabel.text = self.titleQuote
+        }
     }
     // ShowAddView
     @objc private func onClickPlusBtn(){
         let pushVC = AddDateVC()
         pushVC.modalTransitionStyle = .coverVertical
         pushVC.modalPresentationStyle = .automatic
-        //일부러 present로 함, nav로 하면 좀 생동감이없어서,
         self.present(pushVC, animated: true, completion: nil)
         
     }
     
-    @objc private func loadTitleQuote(){
-//        textLabel.text = titleQuote
-    }
+    
     
 }
 

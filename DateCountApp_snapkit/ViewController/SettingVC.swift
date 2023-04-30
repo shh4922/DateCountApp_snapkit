@@ -1,84 +1,83 @@
 import SwiftUI
 import UIKit
 import SnapKit
-import Firebase
+import FirebaseAuth
 
 class SettingVC: UIViewController {
     
-    private lazy var logoutButton : UIButton = {
-        let myButton = UIButton()
-        myButton.addTarget(self,action: #selector(logout),for: .touchUpInside)
-        myButton.backgroundColor = .systemBlue
-        myButton.setTitle("logout", for: .normal)
-        myButton.tintColor = .white
-        return myButton
+    let settingViewModel = SettingViewModel()
+    let sections = ["first","seccond","third"]
+    let items = [
+        ["1-one","1-two","1-three"],
+        ["2-one","2-two","2-three"],
+        ["3-one","3-two","3-three"]
+    ]
+    private lazy var tableview : UITableView = {
+        let tableview = UITableView(frame: .zero, style: .insetGrouped)
+        tableview.register(SettingCell.self, forCellReuseIdentifier: SettingCell.identifier)
+        return tableview
     }()
+    
     private lazy var loginVC : UINavigationController = {
         let loginvc = UINavigationController(rootViewController: LoginVC())
         return loginvc
     }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        view.backgroundColor = .white
+        setUp()
         addView()
         setLayout()
-        self.navigationItem.title = "테스트임"
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(test))
+        
         
     }
-    @objc private func test(){
-        print("onclick")
+    private func setUp(){
+        self.navigationItem.title = "설정"
+        view.backgroundColor = .white
+        
+        tableview.dataSource = self
+        tableview.delegate = self
     }
+    
     private func setLayout(){
-        logoutButton.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.centerY.equalToSuperview()
-            make.height.equalTo(100)
-            make.width.equalTo(200)
+        tableview.snp.makeConstraints { make in
+            make.top.left.right.equalTo(view.safeAreaLayoutGuide)
+            make.bottom.equalToSuperview()
         }
     }
     private func addView(){
-        view.addSubview(logoutButton)
+        view.addSubview(tableview)
     }
     
-    @objc func logout(){
-        let auth = Auth.auth()
-        print("logout!!")
-        do {
-            try auth.signOut()
-            UserDefaults.standard.set(false, forKey: "isLogin")
-            (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(loginVC)
-        }catch let signOutError {
-            print("로그아웃에러!!!!!!!!!!!!!@@@@@@@@@@@@@@@@!!@!@!@!@")
-            print(signOutError)
-        }
-        
+    
+}
+extension SettingVC : UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return items[section].count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: SettingCell.identifier) as? SettingCell ?? SettingCell()
+        cell.label.text = items[indexPath.section][indexPath.row]
+        return cell
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return sections.count
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return self.sections[section]
     }
 }
 
 
-#if DEBUG
-struct settingVC : UIViewControllerRepresentable {
-    // update
-    func updateUIViewController(_ uiViewController: UIViewController, context: Context){
-        
-    }
-    // makeui
-    @available(iOS 13.0, *)
-    func makeUIViewController(context: Context) -> UIViewController {
-        SettingVC()
-    }
-}
-@available(iOS 13.0, *)
-struct SettingVC_Previews: PreviewProvider {
-    static var previews: some View{
-        Group{
-            settingVC()
-                .ignoresSafeArea(.all)//미리보기의 safeArea 이외의 부분도 채워서 보여주게됌.
-                .previewDisplayName("iphone 11")
-        }
-    }
-}
-#endif
-
+//
+//@objc func logout() {
+//    if settingViewModel.onClickLogout() {
+//        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(loginVC)
+//    }else{
+//        //실패알림
+//    }
+//
+//}

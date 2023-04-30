@@ -11,7 +11,8 @@ class HomeViewModel {
     func returnRandomQuote(_ allQuote:[Quote],_ showedQuote:[Quote]) -> Quote?{
         let allQuote_ = Set(allQuote)
         let showedQuote_ = Set(showedQuote)
-        let result = allQuote_.subtracting(showedQuote_).randomElement()
+        var result = allQuote_.subtracting(showedQuote_).randomElement()
+//        result?.isLike = false
         return result
     }
     
@@ -59,7 +60,8 @@ class HomeViewModel {
         let DeleveredDB = Database.database().reference().child("Users").child(uid).child("showedQuote")
         DeleveredDB.childByAutoId().setValue([
             "quote" : quoteData.quote,
-            "author" : quoteData.author
+            "author" : quoteData.author,
+            "isLike" : 0
         ])
     }
     
@@ -72,6 +74,8 @@ class HomeViewModel {
             forKey: "myDictionary"
         )
     }
+    
+
     
 }
 
