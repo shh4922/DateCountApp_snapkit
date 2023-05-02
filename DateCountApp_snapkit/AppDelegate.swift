@@ -1,5 +1,5 @@
 import UIKit
-import Firebase
+import FirebaseAuth
 import FirebaseCore
 
 @main
@@ -10,9 +10,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
         
-        //         앱이 처음 실행될 때만 isSendedText를 true로 설정
+        //앱을 처음 다운받고 처음 실행했을때
         if UserDefaults.standard.object(forKey: "isSendedText") == nil {
             UserDefaults.standard.set(true, forKey: "isSendedText")
+            UserDefaults.standard.set("09", forKey: "hour")
+            UserDefaults.standard.set("00", forKey: "minute")
         }
         setUpAlter()
         Alter()
@@ -32,7 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             if granted {
                 print("알림 권한이 승인되었습니다.")
             } else {
-                print("알림 권한이 거부되었습니다.")
+
             }
         }
     }
@@ -43,8 +45,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         content.sound = .default
         
         var dateComponents = DateComponents()
-        dateComponents.hour = 22
-        dateComponents.minute = 10
+        guard let hour = UserDefaults.standard.string(forKey: "hour") else { return }
+        guard let minute = UserDefaults.standard.string(forKey: "minute") else { return }
+        
+        dateComponents.hour = Int(hour)
+        dateComponents.minute = Int(minute)
         
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
         let request = UNNotificationRequest(identifier: "dailyNotification", content: content, trigger: trigger)

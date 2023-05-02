@@ -1,7 +1,7 @@
 import UIKit
 import SwiftUI
 import SnapKit
-import Firebase
+import FirebaseAuth
 
 class LoginVC: UIViewController {
     //MARK: - 필요한뷰 create
@@ -33,7 +33,7 @@ class LoginVC: UIViewController {
     }()
     private lazy var idField : UITextField = {
         let idField = UITextField()
-        idField.placeholder = "id"
+        idField.placeholder = "email"
         idField.delegate = self
         idField.textContentType = .emailAddress
         idField.keyboardType = .emailAddress
@@ -127,10 +127,9 @@ class LoginVC: UIViewController {
             switch result{
                 
             case "NoAccount":
-                self.showDialog(msg: "아이디 또는 비밀번호를 잘못 입력하였습니다!")
+                self.showDialog(msg: "이메일 또는 비밀번호를 잘못 입력하였습니다!")
                 
             case "success":
-                self.showDialog(msg: "로그인 성공 ㅎ")
                 UserDefaults.standard.set(true, forKey: "isLogin")
                 (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(self.mainVC)
                 

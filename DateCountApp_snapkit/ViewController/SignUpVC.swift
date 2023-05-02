@@ -35,12 +35,14 @@ class SignUpVC: UIViewController {
     }()
     private lazy var IdField : UITextField = {
         let IdField = UITextField()
-        IdField.placeholder = "사용하실아이디를 입력하세요"
+        IdField.placeholder = "사용하실 이메일을 입력하세요"
         IdField.delegate = self
         IdField.textColor = .black
         IdField.textAlignment = .center
-        IdField.font = .systemFont(ofSize: 23)
-        IdField.layer.cornerRadius = 3
+        IdField.textContentType = .emailAddress
+        IdField.keyboardType = .emailAddress
+        IdField.font = .systemFont(ofSize: 22)
+        IdField.layer.cornerRadius = 4
         IdField.backgroundColor = UIColor(named: "textFieldColor")
         IdField.addLeftPadding()
         return IdField
@@ -51,8 +53,8 @@ class SignUpVC: UIViewController {
         passwordField.delegate = self
         passwordField.textAlignment = .center
         passwordField.textColor = .black
-        passwordField.font = .systemFont(ofSize: 23)
-        passwordField.layer.cornerRadius = 3
+        passwordField.font = .systemFont(ofSize: 22)
+        passwordField.layer.cornerRadius = 4
         passwordField.backgroundColor = UIColor(named: "textFieldColor")
         passwordField.isSecureTextEntry = true
         passwordField.addLeftPadding()
@@ -119,12 +121,14 @@ class SignUpVC: UIViewController {
             make.centerX.equalToSuperview()
             make.top.equalTo(subLabel.snp.bottom).offset(70)
             make.left.right.equalTo(view).inset(30)
+            make.height.equalTo(50)
         }
         
         passwordField.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalTo(IdField.snp.bottom).offset(30)
             make.left.right.equalTo(view).inset(30)
+            make.height.equalTo(50)
         }
 
         Btn_createAccount.snp.makeConstraints { make in
@@ -159,7 +163,7 @@ class SignUpVC: UIViewController {
         signUpViewModel.signUpAction(userData: user) { result in
             switch result{
             case "success":
-                self.showDialog(msg: "성공")
+                self.showDialog(msg: "가입이 완료되었습니다! \n 로그인후 화면으로 돌아가주세요")
             case "SameAccount":
                 self.showDialog(msg: "중복된 계정이 있습니다!")
             default :
@@ -174,10 +178,8 @@ class SignUpVC: UIViewController {
 extension SignUpVC: UITextFieldDelegate {
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
     if textField == IdField {
-        print("id - return")
       passwordField.becomeFirstResponder()
     } else {
-        print("password - return")
       passwordField.resignFirstResponder()
     }
     return true

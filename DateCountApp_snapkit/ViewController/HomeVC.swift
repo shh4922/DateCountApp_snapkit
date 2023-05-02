@@ -1,14 +1,12 @@
 import SnapKit
 import SwiftUI
 import UIKit
-import Firebase
+import FirebaseAuth
 
 
 class HomeVC: UIViewController , UNUserNotificationCenterDelegate {
     
-    
     let homeViewmodel = HomeViewModel()
-    var isLikeOn : Bool = false
     
     private lazy var loginVC : UINavigationController = {
         let loginVC = LoginVC()
@@ -38,19 +36,18 @@ class HomeVC: UIViewController , UNUserNotificationCenterDelegate {
     //MARK: - lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         addView()
         setLayout()
+        showDialogMassage()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         if UserDefaults.standard.bool(forKey: "isSendedText") {
             getTextOnFirebase()
             UserDefaults.standard.set(false, forKey: "isSendedText")
         }
-        //지워야할코드
-        getTextOnFirebase()
         setQuoteUpdate()
         
     }
@@ -80,14 +77,17 @@ class HomeVC: UIViewController , UNUserNotificationCenterDelegate {
     //MARK: - Method
 
     @objc private func getTextOnFirebase(){
+        print("getTextOnFirebase run")
         homeViewmodel.loadQuoteData() { allQuote, showedQuote in
             let random = self.homeViewmodel.returnRandomQuote(allQuote, showedQuote)
             if random != nil {
+                print("random not nil")
                 guard let random else {return}
                 self.homeViewmodel.saveToFirebase(quoteData: random)
                 self.homeViewmodel.saveToLoacl(quoteData: random)
                 return
             }
+            print("random nil")
             return
         }
         
@@ -100,7 +100,12 @@ class HomeVC: UIViewController , UNUserNotificationCenterDelegate {
         author.text =  loadedDic["author"] as? String ?? "" 
     }
     
+    @objc func showDialogMassage(){
+        let alert = UIAlertController(title: "경고!", message: "알람을 거부하면 멍언이 오지않습니다ㅠㅠㅠ \n 설정에서 권한을 승인해주세요!", preferredStyle: UIAlertController.Style.alert)
+        let action = UIAlertAction(title: "OK", style: UIAlertAction.Style.default)
+        alert.addAction(action)
+        self.present(alert, animated: true)
+    }
  
 }
-
 

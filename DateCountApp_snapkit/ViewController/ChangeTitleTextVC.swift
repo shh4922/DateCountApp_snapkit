@@ -3,6 +3,16 @@ import UIKit
 
 class ChangeTitleTextVC: UIViewController {
 
+    
+    private lazy var titleLabel : UILabel = {
+        let titleLabel =  UILabel()
+        titleLabel.textColor = .black
+        titleLabel.textAlignment = .center
+        titleLabel.text = "자신만의 명언을 입력해보세요!"
+        titleLabel.font = .boldSystemFont(ofSize: 30)
+        return titleLabel
+    }()
+    
     private lazy var titleQuote : UITextField = {
         let titleQuote = UITextField()
         titleQuote.placeholder = "변경할 명언을 입력하세요"
@@ -30,19 +40,25 @@ class ChangeTitleTextVC: UIViewController {
         setAutoLayout()
     }
     private func addView(){
+        view.addSubview(titleLabel)
         view.addSubview(titleQuote)
         view.addSubview(saveButton)
     }
     private func setAutoLayout(){
+        titleLabel.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(30)
+            make.leading.equalTo(view.safeAreaLayoutGuide.snp.leading).offset(10)
+        }
         titleQuote.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalToSuperview().inset(100)
+            make.top.equalTo(titleLabel.snp.bottom).offset(100)
             make.left.equalTo(view.snp.left).offset(30)
-            make.height.equalTo(100)
+            make.height.equalTo(70)
         }
         saveButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(titleQuote.snp.bottom).offset(100)
+            make.top.equalTo(titleQuote.snp.bottom).offset(70)
             make.left.greaterThanOrEqualTo(view.snp.left).offset(50)
             make.width.equalTo(100)
             make.height.equalTo(50)

@@ -10,6 +10,7 @@ class AllQuoteVC : UIViewController, allQuoteCellDelegate{
         quoteTableView.backgroundColor = .white
         quoteTableView.rowHeight = UITableView.automaticDimension
         quoteTableView.estimatedRowHeight = 200
+        
         return quoteTableView
     }()
     override func viewDidLoad() {
@@ -21,7 +22,7 @@ class AllQuoteVC : UIViewController, allQuoteCellDelegate{
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        //        reloadTableView()
+        reloadTableView()
     }
     
     private func setUp(){
@@ -71,10 +72,15 @@ extension AllQuoteVC : UITableViewDelegate, UITableViewDataSource {
         cell.cellDelegate = self
         cell.tag = indexPath.row
         if allQuoteViewModel.showedData[indexPath.row].isLike == 1 {
+            let icon = UIImage(systemName: "heart.fill")
             cell.likeButton.tintColor = .red
+            cell.likeButton.setImage(icon, for: .normal)
         }else{
-            cell.likeButton.tintColor = .blue
+            let icon = UIImage(systemName: "heart")
+            cell.likeButton.tintColor = .gray
+            cell.likeButton.setImage(icon, for: .normal)
         }
+        cell.selectionStyle = .none
         return cell
     }
     

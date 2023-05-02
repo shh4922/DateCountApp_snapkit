@@ -39,7 +39,6 @@ class AddDateVC : UIViewController {
         picker.calendar.locale = Locale(identifier: "ko_KR")
         picker.timeZone = .autoupdatingCurrent
         picker.sizeToFit()
-        //        picker.date = Date(timeIntervalSinceNow: -3600 * 24 * 3)
         picker.addTarget(self, action: #selector(selectDate(_:)), for: .valueChanged)
         picker.minimumDate = Date()
         return picker
@@ -51,7 +50,6 @@ class AddDateVC : UIViewController {
         testName.backgroundColor = UIColor(named: "textFieldColor")
         testName.layer.cornerRadius = 4
         testName.addLeftPadding()
-        //        testName.delegate = self
         return testName
     }()
     private lazy var okButton : UIButton = {

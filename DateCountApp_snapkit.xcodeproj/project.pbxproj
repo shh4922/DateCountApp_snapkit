@@ -20,6 +20,9 @@
 		0075C64929F26B62005626F7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0075C64829F26B62005626F7 /* GoogleService-Info.plist */; };
 		0099BC9929E1F87C00404D7E /* The Jamsil OTF 6 ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0099BC9829E1F87C00404D7E /* The Jamsil OTF 6 ExtraBold.otf */; };
 		00A3AE8C29FD29400013A2BC /* ShowedQuote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A3AE8B29FD29400013A2BC /* ShowedQuote.swift */; };
+		00A9E97829FFF01F008FB944 /* ReviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A9E97729FFF01F008FB944 /* ReviewCell.swift */; };
+		00A9E97A29FFF05B008FB944 /* SettingSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A9E97929FFF05B008FB944 /* SettingSection.swift */; };
+		00A9E97C2A0042E2008FB944 /* SetTimeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A9E97B2A0042E2008FB944 /* SetTimeVC.swift */; };
 		00ACCBC529E293F3001A45A5 /* ChosunCentennial_otf.otf in Resources */ = {isa = PBXBuildFile; fileRef = 00ACCBC429E293F3001A45A5 /* ChosunCentennial_otf.otf */; };
 		00ACCBC729E29555001A45A5 /* Dovemayo_gothic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 00ACCBC629E29555001A45A5 /* Dovemayo_gothic.ttf */; };
 		00AD82A129D56AB200059928 /* ListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AD82A029D56AB200059928 /* ListVC.swift */; };
@@ -57,6 +60,9 @@
 		0075C64829F26B62005626F7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0099BC9829E1F87C00404D7E /* The Jamsil OTF 6 ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "The Jamsil OTF 6 ExtraBold.otf"; sourceTree = "<group>"; };
 		00A3AE8B29FD29400013A2BC /* ShowedQuote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowedQuote.swift; sourceTree = "<group>"; };
+		00A9E97729FFF01F008FB944 /* ReviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewCell.swift; sourceTree = "<group>"; };
+		00A9E97929FFF05B008FB944 /* SettingSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingSection.swift; sourceTree = "<group>"; };
+		00A9E97B2A0042E2008FB944 /* SetTimeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetTimeVC.swift; sourceTree = "<group>"; };
 		00ACCBC429E293F3001A45A5 /* ChosunCentennial_otf.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ChosunCentennial_otf.otf; sourceTree = "<group>"; };
 		00ACCBC629E29555001A45A5 /* Dovemayo_gothic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Dovemayo_gothic.ttf; sourceTree = "<group>"; };
 		00AD82A029D56AB200059928 /* ListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListVC.swift; sourceTree = "<group>"; };
@@ -107,6 +113,18 @@
 			path = Font;
 			sourceTree = "<group>";
 		};
+		00A9E97629FFEFDD008FB944 /* CustomCell */ = {
+			isa = PBXGroup;
+			children = (
+				00372C9729F98BC7002284E8 /* AllQuoteTableViewCell.swift */,
+				0068707629D9EA66001330FA /* DateTableViewCell.swift */,
+				000599A729FE420C00E8E223 /* SettingCell.swift */,
+				00A9E97729FFF01F008FB944 /* ReviewCell.swift */,
+				000599A929FE421C00E8E223 /* SupportCell.swift */,
+			);
+			path = CustomCell;
+			sourceTree = "<group>";
+		};
 		00BFE7DE29C329F900C279FD = {
 			isa = PBXGroup;
 			children = (
@@ -129,6 +147,7 @@
 		00BFE7E929C329F900C279FD /* DateCountApp_snapkit */ = {
 			isa = PBXGroup;
 			children = (
+				00A9E97629FFEFDD008FB944 /* CustomCell */,
 				00E6609929F2FBFC00452873 /* ViewController */,
 				00E6609429F2E64A00452873 /* ViewModel */,
 				00E6609329F2E61100452873 /* Model */,
@@ -138,10 +157,6 @@
 				00BFE7F329C329FB00C279FD /* Assets.xcassets */,
 				00BFE7F529C329FB00C279FD /* LaunchScreen.storyboard */,
 				00BFE7F829C329FB00C279FD /* Info.plist */,
-				0068707629D9EA66001330FA /* DateTableViewCell.swift */,
-				00372C9729F98BC7002284E8 /* AllQuoteTableViewCell.swift */,
-				000599A729FE420C00E8E223 /* SettingCell.swift */,
-				000599A929FE421C00E8E223 /* SupportCell.swift */,
 			);
 			path = DateCountApp_snapkit;
 			sourceTree = "<group>";
@@ -153,6 +168,7 @@
 				0050205429F3C78800D88281 /* Quote.swift */,
 				00E29C5929F6A57C00404DA0 /* TestModel.swift */,
 				00A3AE8B29FD29400013A2BC /* ShowedQuote.swift */,
+				00A9E97929FFF05B008FB944 /* SettingSection.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -183,6 +199,7 @@
 				00BFE7FE29C3377D00C279FD /* LoginVC.swift */,
 				0050EAC829F95CA900540AC3 /* AllQuoteVC.swift */,
 				00AFA8F629FCF682002B390A /* ChangeTitleTextVC.swift */,
+				00A9E97B2A0042E2008FB944 /* SetTimeVC.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -327,6 +344,7 @@
 				00E6609B29F2FE0C00452873 /* SignUpViewModel.swift in Sources */,
 				00AD82A729D599E300059928 /* SettingVC.swift in Sources */,
 				00372C9A29F9914D002284E8 /* AllQuoteViewModel.swift in Sources */,
+				00A9E97829FFF01F008FB944 /* ReviewCell.swift in Sources */,
 				00E29C5A29F6A57C00404DA0 /* TestModel.swift in Sources */,
 				00372C9829F98BC7002284E8 /* AllQuoteTableViewCell.swift in Sources */,
 				00AFA8F729FCF682002B390A /* ChangeTitleTextVC.swift in Sources */,
@@ -342,8 +360,10 @@
 				00AD82A129D56AB200059928 /* ListVC.swift in Sources */,
 				000599AA29FE421C00E8E223 /* SupportCell.swift in Sources */,
 				00FECC8E29EA8BB4005DEF5D /* LoginVC.swift in Sources */,
+				00A9E97C2A0042E2008FB944 /* SetTimeVC.swift in Sources */,
 				000599A829FE420C00E8E223 /* SettingCell.swift in Sources */,
 				0027000C29F71C7E007DF84F /* AddDateViewModel.swift in Sources */,
+				00A9E97A29FFF05B008FB944 /* SettingSection.swift in Sources */,
 				000599A629FE371900E8E223 /* SettingViewModel.swift in Sources */,
 				0050205929F3C7D200D88281 /* HomeViewModel.swift in Sources */,
 				00D9A8BC29E321BB004BF6E8 /* AddDateVC.swift in Sources */,

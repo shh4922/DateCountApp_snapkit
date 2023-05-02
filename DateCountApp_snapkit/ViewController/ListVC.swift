@@ -1,5 +1,4 @@
-import Firebase
-
+import FirebaseAuth
 import UIKit
 import SnapKit
 import SwiftUI
@@ -105,6 +104,9 @@ class ListVC: UIViewController{
         dateTableView.rowHeight = 100
         
     }
+    private func resetTitleQuote(){
+        textLabel
+    }
     
     @objc private func changeTopQuote(){
         let pushVC = ChangeTitleTextVC()
@@ -132,6 +134,7 @@ class ListVC: UIViewController{
     @objc private func loadTitleQuote(){
         self.titleQuote = UserDefaults.standard.string(forKey: "titleQuote") ?? ""
         DispatchQueue.main.async{
+            print("loadTitleQuote run")
             self.textLabel.text = self.titleQuote
         }
     }

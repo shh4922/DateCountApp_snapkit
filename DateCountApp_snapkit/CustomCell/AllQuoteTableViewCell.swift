@@ -63,8 +63,8 @@ class AllQuoteTableViewCell: UITableViewCell {
     }
     private func setAutoLayout(){
         likeButton.snp.makeConstraints { make in
-            make.top.greaterThanOrEqualTo(contentView.snp.top).offset(5)
-            make.left.equalTo(contentView.snp.left).offset(15)
+            make.top.greaterThanOrEqualTo(contentView.snp.top).offset(1)
+            make.leading.equalTo(contentView.snp.leading).offset(15)
             make.width.equalTo(50)
             make.height.equalTo(50)
             make.centerY.equalToSuperview()
@@ -72,15 +72,14 @@ class AllQuoteTableViewCell: UITableViewCell {
         quoteLabel.snp.makeConstraints { make in
             make.top.equalTo(contentView.snp.top).offset(5)
             make.leading.equalTo(likeButton.snp.trailing).offset(5)
-            make.right.lessThanOrEqualTo(contentView.snp.right).offset(-5)
-            make.centerX.equalToSuperview()
+            make.trailing.equalTo(contentView.snp.trailing).offset(-5)
         }
         authorLabel.snp.makeConstraints { make in
             make.top.equalTo(quoteLabel.snp.bottom).offset(5)
             make.leading.equalTo(likeButton.snp.trailing).offset(5)
-            make.right.lessThanOrEqualTo(contentView.snp.right).offset(-5)
+            make.trailing.equalTo(contentView.snp.trailing).offset(-5)
             make.bottom.equalTo(contentView.snp.bottom).offset(-15)
-            make.centerX.equalToSuperview()
+            
             
         }
     }

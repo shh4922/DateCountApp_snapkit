@@ -1,16 +1,17 @@
 import Foundation
 import UIKit
 
-class SettingCell : UITableViewCell {
-    
-    static let identifier = "SettingCell"
+class SupportCell : UITableViewCell {
+    static let identifier = "SupportCell"
     
     lazy var label : UILabel = {
        let label = UILabel()
         label.textColor = .black
-        label.font = .systemFont(ofSize: 20)
+        label.font = .systemFont(ofSize: 22)
+        
         return label
     }()
+    
     
     override func layoutSubviews() {
         // 테이블 뷰 셀 사이의 간격
@@ -19,13 +20,17 @@ class SettingCell : UITableViewCell {
     }
     private func addView(){
         contentView.addSubview(label)
+    
     }
     private func setAutoLayout(){
+        
+        
         label.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
             make.centerY.equalToSuperview()
-            make.width.equalTo(100)
-            make.height.equalTo(40)
+            make.top.equalTo(contentView.snp.top).offset(10)
+            make.left.equalTo(contentView.snp.left).offset(20)
+            make.right.equalTo(contentView.snp.right).offset(-20)
+            
         }
     }
     
@@ -41,5 +46,10 @@ class SettingCell : UITableViewCell {
     //MARK: - required init?
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+    }
+    
+    func bind(model : SupportModel){
+        self.label.text = model.title
+        
     }
 }

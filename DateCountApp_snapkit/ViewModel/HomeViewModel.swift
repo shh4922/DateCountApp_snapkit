@@ -57,6 +57,7 @@ class HomeViewModel {
     
     func saveToFirebase(quoteData : Quote){
         guard let uid : String = Auth.auth().currentUser?.uid else { return }
+        print("saveFirebase run")
         let DeleveredDB = Database.database().reference().child("Users").child(uid).child("showedQuote")
         DeleveredDB.childByAutoId().setValue([
             "quote" : quoteData.quote,
