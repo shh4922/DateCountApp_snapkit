@@ -48,6 +48,7 @@ class HomeVC: UIViewController , UNUserNotificationCenterDelegate {
             getTextOnFirebase()
             UserDefaults.standard.set(false, forKey: "isSendedText")
         }
+        getTextOnFirebase()
         setQuoteUpdate()
         
     }

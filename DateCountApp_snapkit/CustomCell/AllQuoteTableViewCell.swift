@@ -22,7 +22,7 @@ class AllQuoteTableViewCell: UITableViewCell {
         quoteLabel.textColor = .black
         quoteLabel.textAlignment = .center
         quoteLabel.numberOfLines = 0
-        quoteLabel.font = UIFont(name: "KimjungchulMyungjo-Bold", size: 20)
+        quoteLabel.font = UIFont(name: "KimjungchulMyungjo-Bold", size: 17)
         return quoteLabel
     }()
     lazy var authorLabel : UILabel = {
@@ -70,14 +70,14 @@ class AllQuoteTableViewCell: UITableViewCell {
             make.centerY.equalToSuperview()
         }
         quoteLabel.snp.makeConstraints { make in
-            make.top.equalTo(contentView.snp.top).offset(5)
-            make.leading.equalTo(likeButton.snp.trailing).offset(5)
-            make.trailing.equalTo(contentView.snp.trailing).offset(-5)
+            make.top.equalTo(contentView.snp.top).offset(10)
+            make.leading.equalTo(likeButton.snp.trailing).offset(3)
+            make.trailing.equalTo(contentView.snp.trailing).offset(-10)
         }
         authorLabel.snp.makeConstraints { make in
             make.top.equalTo(quoteLabel.snp.bottom).offset(5)
-            make.leading.equalTo(likeButton.snp.trailing).offset(5)
-            make.trailing.equalTo(contentView.snp.trailing).offset(-5)
+            make.leading.equalTo(likeButton.snp.trailing).offset(3)
+            make.trailing.equalTo(contentView.snp.trailing).offset(-10)
             make.bottom.equalTo(contentView.snp.bottom).offset(-15)
             
             

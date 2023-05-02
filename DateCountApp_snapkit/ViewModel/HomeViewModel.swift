@@ -1,5 +1,5 @@
 import Foundation
-import Firebase
+import FirebaseAuth
 import FirebaseDatabase
 class HomeViewModel {
     
@@ -11,8 +11,7 @@ class HomeViewModel {
     func returnRandomQuote(_ allQuote:[Quote],_ showedQuote:[Quote]) -> Quote?{
         let allQuote_ = Set(allQuote)
         let showedQuote_ = Set(showedQuote)
-        var result = allQuote_.subtracting(showedQuote_).randomElement()
-//        result?.isLike = false
+        let result = allQuote_.subtracting(showedQuote_).randomElement()
         return result
     }
     
@@ -57,13 +56,16 @@ class HomeViewModel {
     
     func saveToFirebase(quoteData : Quote){
         guard let uid : String = Auth.auth().currentUser?.uid else { return }
-        print("saveFirebase run")
+        
         let DeleveredDB = Database.database().reference().child("Users").child(uid).child("showedQuote")
+        guard let quote = quoteData.quote else {return}
+        guard let author = quoteData.author else {return}
+        
         DeleveredDB.childByAutoId().setValue([
-            "quote" : quoteData.quote,
-            "author" : quoteData.author,
+            "quote" : quote,
+            "author" : author,
             "isLike" : 0
-        ])
+        ] as [String : Any])
     }
     
     func saveToLoacl(quoteData : Quote){
