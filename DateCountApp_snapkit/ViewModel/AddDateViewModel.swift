@@ -18,4 +18,5 @@ class AddDateViewModel {
         ref.setValue(data)
         NotificationCenter.default.post(name: Notification.Name("newDataAdded"), object: nil)
     }
+    
 }

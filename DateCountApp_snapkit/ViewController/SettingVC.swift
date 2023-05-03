@@ -7,7 +7,6 @@ class SettingVC: UIViewController {
     
     let settingViewModel = SettingViewModel()
     var dataSource = [SettingSection]()
-    
     private lazy var loginVC : UINavigationController = {
         let loginvc = UINavigationController(rootViewController: LoginVC())
         return loginvc
@@ -20,16 +19,13 @@ class SettingVC: UIViewController {
         return tableview
     }()
     
-    
-    
+    //MARK: - lifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpSection()
         setUp()
         addView()
         setLayout()
-        
-        
     }
     private func setUpSection(){
         //settingSection
