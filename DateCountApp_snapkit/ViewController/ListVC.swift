@@ -52,7 +52,6 @@ class ListVC: UIViewController{
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setNotification()
         setTabLabel()
         setupView()
@@ -67,7 +66,6 @@ class ListVC: UIViewController{
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
             make.left.equalToSuperview()
             make.right.equalToSuperview()
-            
         }
         topView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
@@ -96,17 +94,13 @@ class ListVC: UIViewController{
     private func setupView(){
         view.backgroundColor = .systemGray5
         navBar.setItems([navItem], animated: true)
-        //어떤 셀을 가져올지 정해줘야함.
         dateTableView.register(DateTableViewCell.self, forCellReuseIdentifier: DateTableViewCell.identifier)
-        //tableview의 델리게잇 지정.
         dateTableView.delegate = self
         dateTableView.dataSource = self
         dateTableView.rowHeight = 100
         
     }
-    private func resetTitleQuote(){
-        textLabel
-    }
+    
     
     @objc private func changeTopQuote(){
         let pushVC = ChangeTitleTextVC()
@@ -154,6 +148,12 @@ class ListVC: UIViewController{
 extension ListVC {
     private func setNotification(){
         NotificationCenter.default.addObserver(self, selector: #selector(loadTestData), name: Notification.Name("newDataAdded"), object: nil)
+        /**
+         사실 여기가 마음에걸린다.
+         지금내가사용한 방법은 데이터를 추가하면, DB에 데이터를넣고, DB에서 데이터를 다시 받아와서 또 그리도록하였다.
+         굳이 이렇게 해야할까.. 싶다.
+         새로운데이터를 추가하면, DB에추가하고, 리스트에 데이터추가해주고, reload해주면, 데이터를 받아오지않아도되서 개이득아닐까 싶어서 좀 고려중이다.
+         */
         NotificationCenter.default.addObserver(self, selector: #selector(loadTitleQuote), name: Notification.Name("newQuoteInput"), object: nil)
     }
     private func setTabLabel(){
@@ -178,24 +178,19 @@ extension ListVC : UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: DateTableViewCell.identifier) as? DateTableViewCell ?? DateTableViewCell()
         
         cell.bind(model: listViewModel.userDataAry[indexPath.row])
-        
         cell.dateCount_default.text = "D - "
         cell.dateCount.text = self.listViewModel.countDate(selectedDate: self.listViewModel.userDataAry[indexPath.row].selectedDate)
-        
-        
         //셀 선택시, 색상나오는거 안보이게 함.
         cell.selectionStyle = .none
         return cell
     }
     
-    
+    // 셀을 지울때
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             listViewModel.removeFromFirebase(index: indexPath.row)
             listViewModel.userDataAry.remove(at: indexPath.row)
-            
             tableView.deleteRows(at: [indexPath], with: .fade)
-            
         } else if editingStyle == .insert {
         }
     }

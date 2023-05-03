@@ -7,6 +7,7 @@ class ListViewModel {
     let decoder = JSONDecoder()
     var userDataAry = [Testmodel]()
     
+    //DB에서 시험일정 데이터 받아오기.
     func loadTestData(completion : @escaping ([Testmodel]) -> Void){
         guard let uid : String = Auth.auth().currentUser?.uid else{return}
         let db = Database.database().reference().child("Users").child(uid).child("MyTests")
@@ -14,7 +15,6 @@ class ListViewModel {
         db.observeSingleEvent(of: .value){snapshot  in
             guard let snapData = snapshot.value as? [String:[String:String]] else {return}
             guard let data = try? JSONSerialization.data(withJSONObject: Array(snapData.values), options: []) else { return }
-            
             do {
                 self.userDataAry = try self.decoder.decode([Testmodel].self, from: data)
                 self.userDataAry = self.userDataAry.sorted(by: { $0.selectedDate < $1.selectedDate })
@@ -25,11 +25,12 @@ class ListViewModel {
         }
     }
     
+    //셀의 개수 리턴
     func returnCellCount() -> Int{
         return userDataAry.count
     }
     
-    
+    // DB에서 해당데이터 삭제.
     func removeFromFirebase(index : IndexPath.ArrayLiteralElement){
         guard let key = userDataAry[index].key else { return }
         guard let uid : String = Auth.auth().currentUser?.uid else { return }
@@ -37,6 +38,7 @@ class ListViewModel {
         rootRef.removeValue()
     }
     
+    //등록날짜 와 현재날짜를 비교하여, 남은날짜를 계산하는 함수.
     func countDate(selectedDate : String) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
