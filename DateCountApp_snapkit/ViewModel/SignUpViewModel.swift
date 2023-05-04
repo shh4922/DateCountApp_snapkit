@@ -24,8 +24,7 @@ class SignUpViewModel {
                 guard let uid = user?.user.uid else { return }
                 self.ref = Database.database().reference()
                 self.ref.child("Users").child(uid).child("info").setValue([
-                    "email" : userData.email,
-                    "password" : userData.password
+                    "email" : userData.email
                 ])
                 completion("success")
             }

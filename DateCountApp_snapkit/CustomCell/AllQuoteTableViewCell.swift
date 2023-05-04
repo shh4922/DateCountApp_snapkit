@@ -22,7 +22,8 @@ class AllQuoteTableViewCell: UITableViewCell {
         quoteLabel.textColor = .black
         quoteLabel.textAlignment = .center
         quoteLabel.numberOfLines = 0
-        quoteLabel.font = UIFont(name: "KimjungchulMyungjo-Bold", size: 17)
+        quoteLabel.font = .boldSystemFont(ofSize: 17)
+//        quoteLabel.font = UIFont(name: "KimjungchulMyungjo-Bold", size: 17)
         return quoteLabel
     }()
     lazy var authorLabel : UILabel = {

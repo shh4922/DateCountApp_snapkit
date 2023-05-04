@@ -9,7 +9,8 @@ class ChangeTitleTextVC: UIViewController {
         titleLabel.textColor = .black
         titleLabel.textAlignment = .center
         titleLabel.text = "자신만의 명언을 입력해보세요!"
-        titleLabel.font = .boldSystemFont(ofSize: 30)
+        titleLabel.numberOfLines = 0
+        titleLabel.font = .boldSystemFont(ofSize: 25)
         return titleLabel
     }()
     
@@ -52,7 +53,7 @@ class ChangeTitleTextVC: UIViewController {
         }
         titleQuote.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(titleLabel.snp.bottom).offset(100)
+            make.top.equalTo(titleLabel.snp.bottom).offset(110)
             make.left.equalTo(view.snp.left).offset(30)
             make.height.equalTo(70)
         }

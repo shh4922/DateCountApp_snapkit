@@ -15,7 +15,7 @@ class SettingViewModel {
             return false
         }
     }
-    
+                                                                
     //개발자한테 메일 보내기.
     func sendEmail() {
         guard let url = URL(string: "mailto:gusgh4922@gmail.com") else{ return}

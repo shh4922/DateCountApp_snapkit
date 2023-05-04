@@ -19,13 +19,13 @@ class LoginVC: UIViewController {
         let loginLabel = UILabel()
         loginLabel.textColor = .black
         loginLabel.textAlignment = .center
-        loginLabel.text = "오늘의 명언"
+        loginLabel.text = "오늘의 쓴소리"
         loginLabel.font = UIFont(name: "KimjungchulMyungjo-Bold", size: 35)
         return loginLabel
     }()
     private lazy var subLabel : UILabel = {
         let subLabel = UILabel()
-        subLabel.text = "하루명언으로 항상 동기부여받으며 공부해요."
+        subLabel.text = "공부자극 쓴소리 로 항상 동기부여받으며 공부해요."
         subLabel.textAlignment = .center
         subLabel.font = .boldSystemFont(ofSize: 15)
         subLabel.textColor = .lightGray
@@ -68,12 +68,12 @@ class LoginVC: UIViewController {
     }()
     private lazy var signUpButton : UIButton = {
         let signUpButton = UIButton()
-        signUpButton.setTitle("create your account", for: .normal)
-        signUpButton.setTitleColor(.blue, for: .normal)
+        signUpButton.setTitle("create your account!", for: .normal)
+        signUpButton.setTitleColor(.white, for: .normal)
         signUpButton.backgroundColor = .orange
         signUpButton.addTarget(self, action: #selector(moveToSignup), for: .touchUpInside)
-        signUpButton.setContentHuggingPriority(.defaultLow, for: .horizontal)
-        signUpButton.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
+        
+        signUpButton.layer.cornerRadius = 5
         return signUpButton
     }()
     private lazy var mainVC : UIViewController = {

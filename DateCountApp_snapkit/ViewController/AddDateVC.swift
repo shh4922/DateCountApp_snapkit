@@ -25,7 +25,7 @@ class AddDateVC : UIViewController {
         titleLabel.textColor = .black
         titleLabel.textAlignment = .center
         titleLabel.text = "새로운 일정을 추가하세요!"
-        titleLabel.font = .boldSystemFont(ofSize: 30)
+        titleLabel.font = .boldSystemFont(ofSize: 25)
         return titleLabel
     }()
     private lazy var datePicker: UIDatePicker = {
@@ -96,7 +96,7 @@ class AddDateVC : UIViewController {
         }
         titleLabel.snp.makeConstraints { make in
 //            make.centerX.equalToSuperview()
-            make.top.equalTo(contentView.snp.top).offset(20)
+            make.top.equalTo(contentView.snp.top).offset(30)
             make.leading.equalTo(contentView.snp.leading).offset(30)
             make.trailing.equalTo(contentView.snp.trailing).offset(-30)
         }

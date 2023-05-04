@@ -28,7 +28,7 @@ class ListVC: UIViewController{
         textLabel.textColor = .black
         textLabel.font = UIFont(name: "KimjungchulMyungjo-Bold", size: 26)
         textLabel.numberOfLines = 0
-        titleQuote == "" ? (textLabel.text = "자신만의 명언을 입력학세요") : (textLabel.text = titleQuote)
+        titleQuote == "" ? (textLabel.text = "자신만의 명언을 입력하세요") : (textLabel.text = titleQuote)
         return textLabel
     }()
     private lazy var navBar : UINavigationBar = {
@@ -76,6 +76,7 @@ class ListVC: UIViewController{
         textLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.centerY.equalToSuperview()
+            make.leading.equalToSuperview().inset(20)
         }
         dateTableView.snp.makeConstraints { make in
             make.top.equalTo(topView.snp.bottom).offset(15)

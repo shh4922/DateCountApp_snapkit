@@ -6,7 +6,7 @@ class AllQuoteViewModel {
     
     var showedData = [ShowedQuote]()
     
-    func loadQuoteData(competition : @escaping ([ShowedQuote])->Void){
+    func getAllQuoteFromDB(competition : @escaping ([ShowedQuote])->Void){
         guard let uid : String = Auth.auth().currentUser?.uid else { return}
         let DeleveredDB = Database.database().reference().child("Users").child(uid).child("showedQuote")
         

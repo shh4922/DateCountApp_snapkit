@@ -102,9 +102,9 @@ class SetTimeVC : UIViewController {
     @objc private func saveTime(){
         UserDefaults.standard.set(hour, forKey: "hour")
         UserDefaults.standard.set(minute, forKey: "minute")
-        print("설정완료")
+        
         dismiss(animated: true)
-
+        NotificationCenter.default.post(name: Notification.Name("changeTime"), object: nil)
         
         
     }

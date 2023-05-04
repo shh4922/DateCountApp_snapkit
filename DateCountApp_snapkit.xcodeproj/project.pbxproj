@@ -18,13 +18,10 @@
 		0050EAC929F95CA900540AC3 /* AllQuoteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0050EAC829F95CA900540AC3 /* AllQuoteVC.swift */; };
 		0068707729D9EA66001330FA /* DateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0068707629D9EA66001330FA /* DateTableViewCell.swift */; };
 		0075C64929F26B62005626F7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0075C64829F26B62005626F7 /* GoogleService-Info.plist */; };
-		0099BC9929E1F87C00404D7E /* The Jamsil OTF 6 ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0099BC9829E1F87C00404D7E /* The Jamsil OTF 6 ExtraBold.otf */; };
 		00A3AE8C29FD29400013A2BC /* ShowedQuote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A3AE8B29FD29400013A2BC /* ShowedQuote.swift */; };
 		00A9E97829FFF01F008FB944 /* ReviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A9E97729FFF01F008FB944 /* ReviewCell.swift */; };
 		00A9E97A29FFF05B008FB944 /* SettingSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A9E97929FFF05B008FB944 /* SettingSection.swift */; };
 		00A9E97C2A0042E2008FB944 /* SetTimeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A9E97B2A0042E2008FB944 /* SetTimeVC.swift */; };
-		00ACCBC529E293F3001A45A5 /* ChosunCentennial_otf.otf in Resources */ = {isa = PBXBuildFile; fileRef = 00ACCBC429E293F3001A45A5 /* ChosunCentennial_otf.otf */; };
-		00ACCBC729E29555001A45A5 /* Dovemayo_gothic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 00ACCBC629E29555001A45A5 /* Dovemayo_gothic.ttf */; };
 		00AD82A129D56AB200059928 /* ListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AD82A029D56AB200059928 /* ListVC.swift */; };
 		00AD82A329D5721B00059928 /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AD82A229D5721B00059928 /* MainVC.swift */; };
 		00AD82A529D599CD00059928 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AD82A429D599CD00059928 /* HomeVC.swift */; };
@@ -46,6 +43,19 @@
 		EBC36F95FE7CA283D2DFC41B /* Pods_DateCountApp_snapkit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B6D9DBFF2BC62EC23BF70C4 /* Pods_DateCountApp_snapkit.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		00CFED202A02430E00D5F426 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		000599A529FE371900E8E223 /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
 		000599A729FE420C00E8E223 /* SettingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCell.swift; sourceTree = "<group>"; };
@@ -58,13 +68,10 @@
 		0050EAC829F95CA900540AC3 /* AllQuoteVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllQuoteVC.swift; sourceTree = "<group>"; };
 		0068707629D9EA66001330FA /* DateTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTableViewCell.swift; sourceTree = "<group>"; };
 		0075C64829F26B62005626F7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		0099BC9829E1F87C00404D7E /* The Jamsil OTF 6 ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "The Jamsil OTF 6 ExtraBold.otf"; sourceTree = "<group>"; };
 		00A3AE8B29FD29400013A2BC /* ShowedQuote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowedQuote.swift; sourceTree = "<group>"; };
 		00A9E97729FFF01F008FB944 /* ReviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewCell.swift; sourceTree = "<group>"; };
 		00A9E97929FFF05B008FB944 /* SettingSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingSection.swift; sourceTree = "<group>"; };
 		00A9E97B2A0042E2008FB944 /* SetTimeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetTimeVC.swift; sourceTree = "<group>"; };
-		00ACCBC429E293F3001A45A5 /* ChosunCentennial_otf.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ChosunCentennial_otf.otf; sourceTree = "<group>"; };
-		00ACCBC629E29555001A45A5 /* Dovemayo_gothic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Dovemayo_gothic.ttf; sourceTree = "<group>"; };
 		00AD82A029D56AB200059928 /* ListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListVC.swift; sourceTree = "<group>"; };
 		00AD82A229D5721B00059928 /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
 		00AD82A429D599CD00059928 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
@@ -78,6 +85,8 @@
 		00BFE7F629C329FB00C279FD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		00BFE7F829C329FB00C279FD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00BFE7FE29C3377D00C279FD /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
+		00CFED092A02430D00D5F426 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		00CFED0B2A02430D00D5F426 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		00D9A8B929E319BC004BF6E8 /* KimjungchulMyungjo-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "KimjungchulMyungjo-Bold.otf"; sourceTree = "<group>"; };
 		00D9A8BB29E321BB004BF6E8 /* AddDateVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDateVC.swift; sourceTree = "<group>"; };
 		00E29C5729F6A33000404DA0 /* ListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
@@ -106,9 +115,6 @@
 			isa = PBXGroup;
 			children = (
 				00D9A8B929E319BC004BF6E8 /* KimjungchulMyungjo-Bold.otf */,
-				00ACCBC629E29555001A45A5 /* Dovemayo_gothic.ttf */,
-				00ACCBC429E293F3001A45A5 /* ChosunCentennial_otf.otf */,
-				0099BC9829E1F87C00404D7E /* The Jamsil OTF 6 ExtraBold.otf */,
 			);
 			path = Font;
 			sourceTree = "<group>";
@@ -217,6 +223,8 @@
 			isa = PBXGroup;
 			children = (
 				2B6D9DBFF2BC62EC23BF70C4 /* Pods_DateCountApp_snapkit.framework */,
+				00CFED092A02430D00D5F426 /* WidgetKit.framework */,
+				00CFED0B2A02430D00D5F426 /* SwiftUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -233,6 +241,7 @@
 				00BFE7E429C329F900C279FD /* Frameworks */,
 				00BFE7E529C329F900C279FD /* Resources */,
 				F671773EAB3125B00A149DDD /* [CP] Embed Pods Frameworks */,
+				00CFED202A02430E00D5F426 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
@@ -250,7 +259,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1420;
+				LastSwiftUpdateCheck = 1430;
 				LastUpgradeCheck = 1420;
 				TargetAttributes = {
 					00BFE7E629C329F900C279FD = {
@@ -283,11 +292,8 @@
 			files = (
 				00BFE7F729C329FB00C279FD /* LaunchScreen.storyboard in Resources */,
 				0075C64929F26B62005626F7 /* GoogleService-Info.plist in Resources */,
-				0099BC9929E1F87C00404D7E /* The Jamsil OTF 6 ExtraBold.otf in Resources */,
 				00BFE7F429C329FB00C279FD /* Assets.xcassets in Resources */,
-				00ACCBC529E293F3001A45A5 /* ChosunCentennial_otf.otf in Resources */,
 				00D9A8BA29E319BD004BF6E8 /* KimjungchulMyungjo-Bold.otf in Resources */,
-				00ACCBC729E29555001A45A5 /* Dovemayo_gothic.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -436,7 +442,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = "시험공부자극";
+				INFOPLIST_KEY_CFBundleDisplayName = "오늘의 쓴소리";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -491,7 +497,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = "시험공부자극";
+				INFOPLIST_KEY_CFBundleDisplayName = "오늘의 쓴소리";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -517,7 +523,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -546,7 +552,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

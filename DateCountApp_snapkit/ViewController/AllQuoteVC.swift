@@ -18,7 +18,7 @@ class AllQuoteVC : UIViewController, allQuoteCellDelegate{
         addView()
         setAutoLayout()
         setUp()
-        loadShowedQuoteData()
+        getAllQuoteFromDB()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -41,8 +41,8 @@ class AllQuoteVC : UIViewController, allQuoteCellDelegate{
         }
     }
     
-    private func loadShowedQuoteData(){
-        allQuoteViewModel.loadQuoteData { result in
+    private func getAllQuoteFromDB(){
+        allQuoteViewModel.getAllQuoteFromDB { result in
             if result.isEmpty {
                 return
             }
@@ -52,7 +52,6 @@ class AllQuoteVC : UIViewController, allQuoteCellDelegate{
     
     private func reloadTableView(){
         DispatchQueue.main.async {
-            print("run reload")
             self.quoteTableView.reloadData()
         }
     }

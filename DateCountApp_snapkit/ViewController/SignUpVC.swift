@@ -1,7 +1,7 @@
 import SwiftUI
 import UIKit
 import SnapKit
-import Firebase
+
 //asdasd
 class SignUpVC: UIViewController {
     
@@ -21,15 +21,15 @@ class SignUpVC: UIViewController {
         let titleLabel = UILabel()
         titleLabel.textColor = .black
         titleLabel.textAlignment = .center
-        titleLabel.text = "오늘의 명언"
-        titleLabel.font = UIFont(name: "KimjungchulMyungjo-Bold", size: 40)
+        titleLabel.text = "오늘의 쓴소리"
+        titleLabel.font = UIFont(name: "KimjungchulMyungjo-Bold", size: 35)
         return titleLabel
     }()
     private lazy var subLabel : UILabel = {
         let subLabel = UILabel()
         subLabel.textAlignment = .center
         subLabel.textColor = .lightGray
-        subLabel.text = "하루명언으로 항상 동기부여받으며 공부해요."
+        subLabel.text = "공부자극 쓴소리 로 항상 동기부여받으며 공부해요."
         subLabel.font = .systemFont(ofSize: 15)
         return subLabel
     }()

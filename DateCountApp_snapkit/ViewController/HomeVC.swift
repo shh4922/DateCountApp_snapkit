@@ -43,12 +43,10 @@ class HomeVC: UIViewController , UNUserNotificationCenterDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         if UserDefaults.standard.bool(forKey: "isSendedText") {
             getTextOnFirebase()
             UserDefaults.standard.set(false, forKey: "isSendedText")
         }
-        getTextOnFirebase()
         setQuoteUpdate()
         
     }

@@ -23,6 +23,7 @@ class SettingVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpSection()
+        setupNotification()
         setUp()
         addView()
         setLayout()
@@ -71,6 +72,12 @@ class SettingVC: UIViewController {
     //MARK: - UI변경
     private func showDialog(msg: String){
         let alert = UIAlertController(title: "알림", message: msg, preferredStyle: UIAlertController.Style.alert)
+        let action = UIAlertAction(title: "OK", style: UIAlertAction.Style.default)
+        alert.addAction(action)
+        self.present(alert, animated: true)
+    }
+    @objc private func showDialog2(){
+        let alert = UIAlertController(title: "알림!", message: "시간이 재설정되었습니다!\n앱을 백그라운드에서 종료후 다시시작해주세요!!", preferredStyle: UIAlertController.Style.alert)
         let action = UIAlertAction(title: "OK", style: UIAlertAction.Style.default)
         alert.addAction(action)
         self.present(alert, animated: true)
@@ -190,4 +197,10 @@ extension SettingVC : UITableViewDelegate, UITableViewDataSource {
     }
     
     
+}
+
+extension SettingVC {
+    func setupNotification(){
+        NotificationCenter.default.addObserver(self, selector: #selector(showDialog2), name: Notification.Name("changeTime"), object: nil)
+    }
 }

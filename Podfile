@@ -1,4 +1,4 @@
-platform :ios, '14.0'
+platform :ios, '14.1'
 
 target 'DateCountApp_snapkit' do
   use_frameworks!
@@ -11,4 +11,11 @@ target 'DateCountApp_snapkit' do
 	pod 'FirebaseCore'
 	pod 'Firebase'
 	pod 'GoogleUtilities', :modular_headers => true
+end
+post_install do |installer|
+ installer.pods_project.targets.each do |target|
+  target.build_configurations.each do |config|
+   config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '14.1'
+  end
+ end
 end
