@@ -2,8 +2,9 @@ import UIKit
 import SwiftUI
 import SnapKit
 import FirebaseAuth
+import NVActivityIndicatorView
 
-class LoginVC: UIViewController {
+class LoginVC: UIViewController  {
     //MARK: - 필요한뷰 create
     private lazy var containerview : UIView = {
         let containerview = UIView()
@@ -85,6 +86,13 @@ class LoginVC: UIViewController {
         signUpButton.layer.cornerRadius = 5
         return signUpButton
     }()
+    private lazy var lodding : NVActivityIndicatorView = {
+        let lodding = NVActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 50, height: 50) ,type: .ballClipRotate, color: .black,padding: 0)
+        lodding.center = self.view.center
+        
+//        lodding
+        return lodding
+    }()
     private lazy var mainVC : UIViewController = {
        let mainVC = MainVC()
         return mainVC
@@ -147,14 +155,29 @@ class LoginVC: UIViewController {
     }
     
     @objc private func noAccountLoginAction(){
-        loginViewModel.loginNoAccount()
-        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(self.mainVC)
+        lodding.startAnimating()
+        loginViewModel.loginNoAccount(){ result in
+            //에니메이션 멈춤
+            self.lodding.stopAnimating()
+            
+            switch result {
+            case "success" :
+                (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(self.mainVC)
+            case "fail":
+                self.showDialog(msg: "오류가 발생했습니다. 잠시후 다시시도해주세요")
+            default:
+                self.showDialog(msg: "오류가 발생했습니다. 잠시후 다시시도해주세요")
+            }
+            
+        }
     }
     
     //MARK: - setUI
     private func addView(){
         view.addSubview(scrollView)
+        view.addSubview(lodding)
         scrollView.addSubview(containerview)
+        
         containerview.addSubview(loginLabel)
         containerview.addSubview(subLabel)
         containerview.addSubview(idField)

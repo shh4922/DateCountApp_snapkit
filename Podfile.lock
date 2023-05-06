@@ -778,6 +778,9 @@ PODS:
     - nanopb/encode (= 2.30909.0)
   - nanopb/decode (2.30909.0)
   - nanopb/encode (2.30909.0)
+  - NVActivityIndicatorView (5.1.1):
+    - NVActivityIndicatorView/Base (= 5.1.1)
+  - NVActivityIndicatorView/Base (5.1.1)
   - PromisesObjC (2.2.0)
   - SnapKit (5.0.1)
 
@@ -789,6 +792,7 @@ DEPENDENCIES:
   - FirebaseDatabase
   - FirebaseFirestore
   - GoogleUtilities
+  - NVActivityIndicatorView
   - SnapKit (~> 5.0.0)
 
 SPEC REPOS:
@@ -812,6 +816,7 @@ SPEC REPOS:
     - leveldb-library
     - Libuv-gRPC
     - nanopb
+    - NVActivityIndicatorView
     - PromisesObjC
     - SnapKit
 
@@ -835,9 +840,10 @@ SPEC CHECKSUMS:
   leveldb-library: f03246171cce0484482ec291f88b6d563699ee06
   Libuv-gRPC: 55e51798e14ef436ad9bc45d12d43b77b49df378
   nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
+  NVActivityIndicatorView: 1f6c5687f1171810aa27a3296814dc2d7dec3667
   PromisesObjC: 09985d6d70fbe7878040aa746d78236e6946d2ef
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
 
-PODFILE CHECKSUM: f607b58a3cc4027e1a07184aad4c23c0b35a861a
+PODFILE CHECKSUM: 46502782bf6893fce0b852479fe438ca332c346c
 
-COCOAPODS: 1.12.0
+COCOAPODS: 1.12.1

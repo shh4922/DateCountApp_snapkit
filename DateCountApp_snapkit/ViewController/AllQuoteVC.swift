@@ -43,6 +43,7 @@ class AllQuoteVC : UIViewController, allQuoteCellDelegate{
     private func getAllQuoteFromDB(){
         allQuoteViewModel.getAllQuoteFromDB { result in
             if result.isEmpty {
+                print("result is nul")
                 return
             }
             
@@ -52,6 +53,7 @@ class AllQuoteVC : UIViewController, allQuoteCellDelegate{
     
     private func reloadTableView(){
         DispatchQueue.main.async {
+            print("AllQuoteVC - reloadTableview run")
             self.quoteTableView.reloadData()
         }
     }

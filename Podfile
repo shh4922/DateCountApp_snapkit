@@ -11,6 +11,7 @@ target 'DateCountApp_snapkit' do
 	pod 'FirebaseCore'
 	pod 'Firebase'
 	pod 'GoogleUtilities', :modular_headers => true
+	pod 'NVActivityIndicatorView'
 end
 post_install do |installer|
  installer.pods_project.targets.each do |target|

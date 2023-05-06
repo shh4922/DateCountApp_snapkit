@@ -45,9 +45,7 @@ class HomeVC: UIViewController , UNUserNotificationCenterDelegate {
         super.viewWillAppear(animated)
         if UserDefaults.standard.bool(forKey: "isSendedText") {
             getTextOnFirebase()
-            UserDefaults.standard.set(false, forKey: "isSendedText")
         }
-        
         setQuoteUpdate()
         
     }
@@ -83,6 +81,10 @@ class HomeVC: UIViewController , UNUserNotificationCenterDelegate {
                 guard let random else {return}
                 self.homeViewmodel.saveToFirebase(quoteData: random)
                 self.homeViewmodel.saveToLoacl(quoteData: random)
+                UserDefaults.standard.set(false, forKey: "isSendedText")
+                DispatchQueue.main.async {
+                    self.setQuoteUpdate()
+                }
                 return
             }
             return

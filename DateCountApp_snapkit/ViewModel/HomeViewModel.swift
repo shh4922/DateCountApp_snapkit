@@ -16,8 +16,11 @@ class HomeViewModel {
     }
     
     func loadQuoteData(competition : @escaping ([Quote],[Quote])->Void){
+        print("HomeViewModel - loadQuoteData run")
+        
         //비회원로그인일경우에도 currentUser가 적용되는거같음.
         guard let uid : String = Auth.auth().currentUser?.uid else { return}
+        print("HomeViewModel - uid not nil")
         let DeleveredDB = Database.database().reference().child("Users").child(uid).child("showedQuote")
         let TextDB = Database.database().reference().child("quoteData")
         
@@ -27,6 +30,7 @@ class HomeViewModel {
         group.enter()
         
         TextDB.observeSingleEvent(of: .value){ snapshot in
+            print("HomeViewModel - quoteDB snapshot \(snapshot)")
             for child in snapshot.children {
                 guard let snap = child as? DataSnapshot else { return }
                 guard let quote = snap.childSnapshot(forPath: "quote").value as? String else { return }
@@ -41,6 +45,7 @@ class HomeViewModel {
         group.enter()
         //showedData
         DeleveredDB.observeSingleEvent(of: .value) { snapshot in
+            print("HomeViewModel - DeleveredDB snapshot \(snapshot)")
             for child in snapshot.children{
                 guard let snap = child as? DataSnapshot else { return }
                 guard let text = snap.childSnapshot(forPath: "quote").value as? String else { return }
@@ -51,7 +56,12 @@ class HomeViewModel {
             group.leave()
             
         }
-        group.notify(queue: .main) { competition(self.fullData,self.showedData) }
+        group.notify(queue: .main) {
+            print(self.fullData)
+            print(self.showedData)
+            competition(self.fullData,self.showedData)
+            
+        }
     }
     
     

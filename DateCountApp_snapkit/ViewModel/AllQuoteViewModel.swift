@@ -9,7 +9,7 @@ class AllQuoteViewModel {
     func getAllQuoteFromDB(competition : @escaping ([ShowedQuote])->Void){
         guard let uid : String = Auth.auth().currentUser?.uid else { return}
         let DeleveredDB = Database.database().reference().child("Users").child(uid).child("showedQuote")
-        
+        print("AllQuoteViewModel - 현재 사용자uid = \(uid)")
         //비동기 두개를 수행후, 최종적으로 처리를 위해 group을 사용.
         let group = DispatchGroup()
         group.enter()
@@ -29,9 +29,11 @@ class AllQuoteViewModel {
             group.leave()
         }
         group.notify(queue: .main) {
+            print("AllQuoteViewModel - 정렬시작")
             self.showedData = self.showedData.sorted(){
                 $0.isLike! > $1.isLike!
             }
+            print("리턴해줄 데이터는 \(self.showedData)")
             competition(self.showedData)
         }
     }

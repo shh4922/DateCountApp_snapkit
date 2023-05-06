@@ -21,7 +21,7 @@ class LoginViewModel{
         }
     }
     
-    func loginNoAccount(){
+    func loginNoAccount(completion: @escaping (String) -> Void){
         
         Auth.auth().signInAnonymously { result, error in
             //익명계정 생성
@@ -34,11 +34,18 @@ class LoginViewModel{
             userDB.child("info").setValue([
                 "key" : uid
             ])
+            if error == nil{
+                //자동로그인 true
+                UserDefaults.standard.set(true, forKey: "isLogin")
+                //혹여나를 위한 uid 로컬에 저장
+                UserDefaults.standard.set(uid ,forKey: "userKey")
+                completion("success")
+                return
+            }
+            completion("fail")
+            return
             
-            //자동로그인 true
-            UserDefaults.standard.set(true, forKey: "isLogin")
-            //혹여나를 위한 uid 로컬에 저장
-            UserDefaults.standard.set(uid ,forKey: "userKey")
+            
         }
       
     }
