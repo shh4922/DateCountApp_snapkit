@@ -66,6 +66,15 @@ class LoginVC: UIViewController {
         loginButton.addTarget(self, action: #selector(loginAction), for: .touchUpInside)
         return loginButton
     }()
+    private lazy var noAccountLogin : UIButton = {
+        let noAccountButton = UIButton()
+        noAccountButton.backgroundColor = .systemBackground
+        noAccountButton.setTitle("비회원으로 사용하기", for: .normal)
+        noAccountButton.setTitleColor(.gray, for: .normal)
+        noAccountButton.titleLabel?.font = .systemFont(ofSize: 20)
+        noAccountButton.addTarget(self, action: #selector(noAccountLoginAction), for: .touchUpInside)
+        return noAccountButton
+    }()
     private lazy var signUpButton : UIButton = {
         let signUpButton = UIButton()
         signUpButton.setTitle("create your account!", for: .normal)
@@ -120,25 +129,26 @@ class LoginVC: UIViewController {
    
     //MARK: - loginAction
     @objc private func loginAction(){
-        
         let user : User = User(email: idField.text, password: passField.text)
-        
+
         loginViewModel.loginAction(user: user){ result in
             switch result{
-                
+
             case "NoAccount":
                 self.showDialog(msg: "이메일 또는 비밀번호를 잘못 입력하였습니다!")
-                
+
             case "success":
                 UserDefaults.standard.set(true, forKey: "isLogin")
                 (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(self.mainVC)
-                  
-                
             default:
                 self.showDialog(msg: "아이디 비밀번호를 모두 입력해세요!")
-                
             }
         }
+    }
+    
+    @objc private func noAccountLoginAction(){
+        loginViewModel.loginNoAccount()
+        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(self.mainVC)
     }
     
     //MARK: - setUI
@@ -151,6 +161,7 @@ class LoginVC: UIViewController {
         containerview.addSubview(passField)
         containerview.addSubview(loginButton)
         containerview.addSubview(signUpButton)
+        containerview.addSubview(noAccountLogin)
     }
     private func setAutoLayout(){
         scrollView.snp.makeConstraints { make in
@@ -176,7 +187,6 @@ class LoginVC: UIViewController {
             make.top.equalTo(subLabel.snp.bottom).offset(30)
             make.left.equalTo(containerview.snp.left).offset(40)
             make.height.equalTo(50)
-            
         }
         passField.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
@@ -191,8 +201,13 @@ class LoginVC: UIViewController {
         }
         signUpButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(loginButton.snp.bottom).offset(50)
+            make.top.equalTo(loginButton.snp.bottom).offset(20)
             make.left.equalTo(containerview.snp.left).offset(60)
+        }
+        noAccountLogin.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(signUpButton.snp.bottom).offset(30)
+            make.left.greaterThanOrEqualTo(containerview.snp.left).offset(10)
             make.bottom.equalTo(containerview.snp.bottom)
         }
     }
@@ -209,10 +224,8 @@ class LoginVC: UIViewController {
 extension LoginVC: UITextFieldDelegate {
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
     if textField == idField {
-        print("id - return")
       passField.becomeFirstResponder()
     } else {
-        print("password - return")
       passField.resignFirstResponder()
     }
     return true

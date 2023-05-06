@@ -9,7 +9,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
-        
         //앱을 처음 다운받고 처음 실행했을때
         if UserDefaults.standard.object(forKey: "isSendedText") == nil {
             UserDefaults.standard.set(true, forKey: "isSendedText")
@@ -33,8 +32,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             }
             if granted {
                 print("알림 권한이 승인되었습니다.")
-            } else {
-
             }
         }
     }
@@ -63,6 +60,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             UserDefaults.standard.set(true, forKey: "isSendedText")
         }
         completionHandler()
+    }
+    // 앱이 열린 도중에 메시지 받았을 때
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                willPresent notification: UNNotification,
+                                withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        if notification.request.identifier == "dailyNotification" {
+            UserDefaults.standard.set(true, forKey: "isSendedText")
+        }
+        completionHandler([.banner, .badge, .sound])
     }
     // MARK: UISceneSession Lifecycle
     

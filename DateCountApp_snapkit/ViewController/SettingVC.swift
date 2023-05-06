@@ -111,6 +111,25 @@ class SettingVC: UIViewController {
         //메시지 창 컨트롤러를 표시
         self.present(alert, animated: false)
     }
+    private func logoutAlter(){
+        // 메시지창 컨트롤러 인스턴스 생성
+        let alert = UIAlertController(title: "알림", message: "비회원으로 사용시, 기존데이터를 되돌릴수없습니다. 로그아웃하시겠습니까?", preferredStyle: UIAlertController.Style.alert)
+
+        // 메시지 창 컨트롤러에 들어갈 버튼 액션 객체 생성
+        let cancel = UIAlertAction(title: "취소", style: UIAlertAction.Style.cancel, handler: nil)
+        let delete = UIAlertAction(title: "로그아웃", style: UIAlertAction.Style.destructive){(_) in
+            (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(self.loginVC)
+            self.settingViewModel.onClickLogout()
+            
+        }
+
+        //메시지 창 컨트롤러에 버튼 액션을 추가
+        alert.addAction(cancel)
+        alert.addAction(delete)
+
+        //메시지 창 컨트롤러를 표시
+        self.present(alert, animated: false)
+    }
 }
 
 //MARK: - extension Tableview
@@ -175,14 +194,9 @@ extension SettingVC : UITableViewDelegate, UITableViewDataSource {
                 settingViewModel.sendEmail()
                 return
             }
-            
         case 2:
             if indexPath.row == 0 {
-                if settingViewModel.onClickLogout() {
-                    (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(loginVC)
-                }else{
-                    self.showDialog(msg: "오류가 발생했습니다. 문의해주세요.")
-                }
+                logoutAlter()
                 return
             }
             if indexPath.row == 1 {

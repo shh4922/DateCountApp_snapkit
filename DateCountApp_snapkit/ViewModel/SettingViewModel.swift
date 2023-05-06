@@ -9,7 +9,8 @@ class SettingViewModel {
         let auth = Auth.auth()
         do {
             try auth.signOut()
-            UserDefaults.standard.set(false, forKey: "isLogin")
+//            UserDefaults.standard.set(false, forKey: "isLogin")
+            deleteUserDefault()
             return true
         }catch _ {
             return false
@@ -26,15 +27,6 @@ class SettingViewModel {
     func deleteAccount() -> Bool {
        
         let user = Auth.auth().currentUser
-        user?.delete(){ error in
-            if let error = error {
-                // An error happened.
-              } else {
-                // Account deleted.
-              }
-        }
-        
-        
         do{
             try
             deleteUserDefault()
