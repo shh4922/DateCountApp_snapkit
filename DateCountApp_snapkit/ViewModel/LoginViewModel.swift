@@ -1,5 +1,6 @@
 import Foundation
 import FirebaseAuth
+import FirebaseDatabase
 
 class LoginViewModel{
     
@@ -18,6 +19,28 @@ class LoginViewModel{
                 completion("NoAccount")
             }
         }
+    }
+    
+    func loginNoAccount(){
+        
+        Auth.auth().signInAnonymously { result, error in
+            //익명계정 생성
+            guard let user = result?.user else { return }
+            let isAnonymouse = user.isAnonymous
+            let uid = user.uid
+            
+            //realtimeDB 에 저장
+            let userDB = Database.database().reference().child("Users").child(uid)
+            userDB.child("info").setValue([
+                "key" : uid
+            ])
+            
+            //자동로그인 true
+            UserDefaults.standard.set(true, forKey: "isLogin")
+            //혹여나를 위한 uid 로컬에 저장
+            UserDefaults.standard.set(uid ,forKey: "userKey")
+        }
+      
     }
     
     

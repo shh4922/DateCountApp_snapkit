@@ -10,7 +10,6 @@ class AllQuoteVC : UIViewController, allQuoteCellDelegate{
         quoteTableView.backgroundColor = .white
         quoteTableView.rowHeight = UITableView.automaticDimension
         quoteTableView.estimatedRowHeight = 200
-        
         return quoteTableView
     }()
     override func viewDidLoad() {
@@ -46,6 +45,7 @@ class AllQuoteVC : UIViewController, allQuoteCellDelegate{
             if result.isEmpty {
                 return
             }
+            
             self.reloadTableView()
         }
     }

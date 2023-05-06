@@ -47,6 +47,7 @@ class HomeVC: UIViewController , UNUserNotificationCenterDelegate {
             getTextOnFirebase()
             UserDefaults.standard.set(false, forKey: "isSendedText")
         }
+        
         setQuoteUpdate()
         
     }
@@ -76,17 +77,14 @@ class HomeVC: UIViewController , UNUserNotificationCenterDelegate {
     //MARK: - Method
 
     @objc private func getTextOnFirebase(){
-        print("getTextOnFirebase run")
         homeViewmodel.loadQuoteData() { allQuote, showedQuote in
             let random = self.homeViewmodel.returnRandomQuote(allQuote, showedQuote)
             if random != nil {
-                print("random not nil")
                 guard let random else {return}
                 self.homeViewmodel.saveToFirebase(quoteData: random)
                 self.homeViewmodel.saveToLoacl(quoteData: random)
                 return
             }
-            print("random nil")
             return
         }
         

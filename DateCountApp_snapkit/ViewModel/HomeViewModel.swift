@@ -16,6 +16,7 @@ class HomeViewModel {
     }
     
     func loadQuoteData(competition : @escaping ([Quote],[Quote])->Void){
+        //비회원로그인일경우에도 currentUser가 적용되는거같음.
         guard let uid : String = Auth.auth().currentUser?.uid else { return}
         let DeleveredDB = Database.database().reference().child("Users").child(uid).child("showedQuote")
         let TextDB = Database.database().reference().child("quoteData")
@@ -77,8 +78,6 @@ class HomeViewModel {
             forKey: "myDictionary"
         )
     }
-    
-
     
 }
 
