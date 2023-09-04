@@ -18,12 +18,15 @@
 ## 😎결과
 인트로 화면
 <p align="center">
-<img src="https://user-images.githubusercontent.com/83321146/200821600-9ae3b3b6-fea6-407b-b6e2-f50933b34c71.png" width="15%" height="20%">
+<img src= "https://github.com/shh4922/DateCountApp_snapkit/assets/83321146/efb5640b-b621-42c4-b98e-43e2dd1888eb" width="15%" height="20%">
 </p>
-로그인 및 회원가입
+
+각 뷰컨트롤러
 <p align="center">
-<img src="https://user-images.githubusercontent.com/83321146/200821593-d324feae-114e-4663-839b-27ab90643464.png" width="15%" height="20%">
-<img src="https://user-images.githubusercontent.com/83321146/200821597-9b67884a-6ee1-41e8-8af5-8614728136dd.png" width="15%" height="20%">
+<img src= "https://github.com/shh4922/DateCountApp_snapkit/assets/83321146/68bf2d38-bd2d-4b6f-81be-5ff3fa168c50" width="15%" height="20%">
+<img src= "https://github.com/shh4922/DateCountApp_snapkit/assets/83321146/14156b75-87d6-49ee-8265-aa3d2b46da2d" width="15%" height="20%">
+<img src= "https://github.com/shh4922/DateCountApp_snapkit/assets/83321146/cdc64323-4f9e-4c1f-90d3-2bb0859b287d" width="15%" height="20%">
+<img src= "https://github.com/shh4922/DateCountApp_snapkit/assets/83321146/fa4660a9-294f-4496-ab71-c6a14e547ce8" width="15%" height="20%">
 </p>
 재료리스트 및 가능한 레시피
 <p align="center">
